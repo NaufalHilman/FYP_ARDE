@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDE - Membership</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <div id="navbar-slot"></div>
+    
+    <main style="min-height: 600px; padding: 50px; text-align: center;">
+        <h1>Join ARDE</h1>
+        <p>Unlock access to our network of 70+ organizations. Fill out the application form below to start your membership journey.</p>
+        </main>
+
+    <div id="footer-slot"></div>
+
+    <script src="../app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Load Navbar and Footer. Passing null as the 3rd argument 
+            // since this is a CTA page and doesn't need a specific nav-link highlighted.
+            loadComponent("navbar-slot", "../components/navbar.html", null);
+            
+            loadComponent("footer-slot", "../components/footer.html");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDE - About Us</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+    <div id="navbar-slot"></div>
+    
+    <main style="min-height: 600px; padding: 50px; text-align: center;">
+        <h1>About ARDE</h1>
+        <p>Discover our mission, our community network, and the executive teams running our initiatives.</p>
+    </main>
+
+    <div id="footer-slot"></div>
+
+    <script src="../app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Load Navbar and automatically highlight the 'Company' tab
+            loadComponent("navbar-slot", "../components/navbar.html", "nav-about");
+            
+            // Load Footer
+            loadComponent("footer-slot", "../components/footer.html");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* ==========================================================================
+   1. Typography Setup
+   ========================================================================== */
+:root {
+    /* Colors */
+    --primary: #27247B;
+    --secondary: #FFCB05;
+    --accent: #96CDF6;
+    --neutral-1: #465560;
+    --neutral-2: #273036;
+    --neutral-3: #26247B;
+    
+}
+
+body > main {
+    flex: 1;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+@font-face { font-family: 'Proxima Nova'; src: url('/fonts/Proxima-Nova-Thin.ttf'); font-weight: 100; }
+@font-face { font-family: 'Proxima Nova'; src: url('/fonts/Proxima-Nova-Black.ttf'); font-weight: 900; }
+@font-face { font-family: 'Proxima Nova'; src: url('/fonts/Proxima-Nova-Regular.ttf'); font-weight: 400; }
+
+h1, h2, h3 { font-family: 'Proxima Nova', sans-serif; font-weight: 100; color: var(--primary); }
+.column-title { font-family: 'Proxima Nova', sans-serif; font-weight: 900; color: var(--neutral-3); }
+body { font-family: 'Proxima Nova', sans-serif; font-weight: 400; color: var(--neutral-1); }
+.caption { font-family: 'Proxima Nova', sans-serif; font-weight: 400; color: var(--neutral-1); font-size: 0.85em; }
+/* ==========================================================================
+   2. Global Resets & Typography
+   ========================================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Proxima Nova', sans-serif; font-weight: 400; color: #333333; background: #ffffff; }
+a { text-decoration: none; }
+
+/* ==========================================================================
+   3. Navbar Design Framework (Optimized for Specificity)
+   ========================================================================== */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 15px 0;
+    position: relative;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px; 
+    width: 100%;      
+    margin: 0 auto;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px;
+    box-sizing: border-box; /* Crucial to prevent padding from expanding width */
+}
+
+.nav-links { display: flex; align-items: center; gap: 30px; flex: 1; }
+.left-links { justify-content: flex-end; padding-right: 40px; }
+.right-links { justify-content: flex-start; padding-left: 40px; }
+
+/* General Nav Item */
+.nav-item { 
+    color: var(--neutral-2); 
+    font-size: 16px; 
+    transition: color 0.2s; 
+    cursor: pointer; 
+}
+
+.nav-item:hover { color: var(--neutral-3); }
+
+/* High Specificity Rule for Active State */
+/* By repeating the parent (.navbar), we ensure this wins over the generic .nav-item rule */
+.navbar .nav-item.active { 
+    color: var(--secondary) !important; 
+    font-weight: 900 !important; 
+}
+
+.nav-logo img { height: 110px; display: block; }
+
+/* ==========================================================================
+   4. Footer Design Framework
+   ========================================================================== */
+.footer { background-color: #43505c; color: #ffffff; padding: 40px 0 20px 0; width: 100%; }
+.footer-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.footer-main { display: flex; justify-content: space-between; align-items: center; padding-bottom: 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.footer-logo img { height: 100px; opacity: 0.9; }
+.footer-links { display: flex; gap: 25px; }
+.footer-links a { color: #cbd5e1; font-size: 14px; transition: color 0.3s; }
+.footer-links a:hover { color: #ffffff; }
+.footer-bottom { padding-top: 20px; text-align: center; font-size: 12px; color: #94a3b8; }
+
+/* ==========================================================================
+   5. Dropdown & Layover
+   ========================================================================== */
+.dropdown-wrapper { position: static; }
+.mega-dropdown {
+    position: absolute; top: 100%; left: 0; width: 100%;
+    background-color: #ffffff; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: none; padding: 40px 0; z-index: 999;
+}
+.dropdown-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); display: none; z-index: 998;
+}
+.dropdown-wrapper.is-open .mega-dropdown,
+.dropdown-wrapper.is-open .dropdown-overlay { display: block; }
+
+.dropdown-container {
+    max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    display: flex; justify-content: space-between; gap: 50px;
+}
+.dropdown-column { flex: 1; display: flex; flex-direction: column; }
+.feature-column { flex: 1.2; }
+
+/* UI Elements */
+.btn-join-arde {
+    font-weight: 900; background-color: #FFCB05; color: #000;
+    padding: 10px 22px; border-radius: 4px; font-size: 14px; white-space: nowrap;
+}
+.feature-banner {
+    background: #8da4b1; padding: 25px; border-radius: 6px; 
+    min-height: 220px; display: flex; align-items: flex-end;
+}
+
+/* Styling for the icons and titles */
+.column-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--neutral-3);
+    margin-bottom: 15px;
+}
+
+.contact-title { margin-top: 30px; }
+
+/* Social Icons Row */
+.social-row { display: flex; gap: 15px; margin-top: 20px; }
+.social-icon { font-size: 20px; text-decoration: none; transition: transform 0.2s; }
+.social-icon:hover { transform: scale(1.1); }
+
+/* Banner Content */
+.feature-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+}
+.feature-content h4 {
+    font-size: 17px;
+    color: var(--neutral-3);
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   6. Mobile Responsive Adjustments (Screens below 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+    /* Hide the full navigation links on mobile */
+    .nav-links {
+        display: none;
+    }
+
+    /* Adjust the mega-dropdown for mobile stacking */
+    .mega-dropdown {
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+    }
+
+    .dropdown-container {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 20px;
+    }
+
+    .feature-column {
+        display: none; /* Often best to hide large banners on mobile */
+    }
+}
+
+.hamburger-menu {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+    .hamburger-menu {
+        display: block; /* Show on mobile */
+    }
+}

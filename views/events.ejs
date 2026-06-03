@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>ARDE | Events Test</title>
+</head>
+<body>
+    <!-- Including the navbar component and passing the active variable -->
+    <%- include('../components/navbar', { active: 'events' }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main style="padding: 100px 20px; text-align: center;">
+        <h1>Events Page</h1>
+        <p>If the "Events" link in the navigation is now yellow and bold, the test is successful.</p>
+    </main>
+
+    <!-- Including the footer component -->
+    <%- include('../components/footer') %>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-links left-links">
+    <a href="/" class="nav-item <%= active === 'home' ? 'active' : '' %>">Home</a>            <a href="/events" class="nav-item <%= active === 'events' ? 'active' : '' %>">Events</a>
+        </div>
+        <button class="hamburger-menu" id="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-logo">
+            <a href="/"><img src="/images/main_logo.png" alt="ARDE Logo"></a>
+        </div>
+
+        <div class="nav-links right-links">
+            <div class="dropdown-wrapper">
+                    <a href="#" class="nav-item <%= active === 'about' ? 'active' : '' %>" id="nav-about">Company ▼</a>                <div class="mega-dropdown">
+                    <div class="dropdown-container">
+                        <div class="dropdown-container">
+                            <!-- Left Column: Who Are We & Contact -->
+                            <div class="dropdown-column">
+                                <h4 class="column-title">🌐 Who Are We?</h4>
+                                <a href="/about" class="dropdown-link">About Us</a>
+                                <a href="/community" class="dropdown-link">Our Community Says</a>
+
+                                <h4 class="column-title contact-title">📞 Contact</h4>
+                                <a href="/contact" class="dropdown-link">Contact Us</a>
+                                <a href="/support" class="dropdown-link">Contact Support</a>
+                                
+                                <!-- Social Row -->
+                                <div class="social-row">
+                                    <a href="#" class="social-icon">💬</a>
+                                    <a href="#" class="social-icon">📸</a>
+                                    <a href="#" class="social-icon">👤</a>
+                                    <a href="#" class="social-icon">✉️</a>
+                                </div>
+                            </div>
+
+                            <!-- Middle Column: Our Team -->
+                            <div class="dropdown-column">
+                                <h4 class="column-title">👥 Our Team</h4>
+                                <a href="/members" class="dropdown-link">ARDE Members</a>
+                                <a href="/executive" class="dropdown-link">Executive Committee</a>
+                                <a href="/honorary" class="dropdown-link">Honorary Members</a>
+                                <a href="/directory" class="dropdown-link">Members Directory</a>
+                            </div>
+
+                            <!-- Right Column: Feature Banner -->
+                            <div class="feature-column">
+                                <div class="feature-banner" style="background-image: url('/images/feature-bg.jpg');">
+                                    <div class="feature-content">
+                                        <h4>Reach out to over 100 members in more than 70 organisations</h4>
+                                        <a href="/membership" class="btn-join-arde">JOIN ARDE</a>                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="/careers" class="nav-item <%= active === 'careers' ? 'active' : '' %>">Careers</a>
+            <a href="/membership" class="btn-join-arde">JOIN ARDE</a>
+        </div>
+    </div>
+</nav>

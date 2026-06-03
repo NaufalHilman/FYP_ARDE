@@ -1,43 +1,34 @@
-// ==========================================================================
-// Central Component Matrix Loader
-// ==========================================================================
-function loadComponent(elementId, filepath, activeNavId) {
-    fetch(filepath)
-        .then(response => {
-            if (!response.ok) throw new Error("Could not load element layout framework.");
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById(elementId).innerHTML = data;
-            
-            // Apply page active highlighters if an ID rule is explicitly provided
-            if (activeNavId) {
-                const activeTab = document.getElementById(activeNavId);
-                if (activeTab) activeTab.classList.add("active");
-            }
-        })
-        .catch(error => console.error("Error loading component file:", error));
-}
+const express = require('express');
+const app = express();
+const path = require('path');
 
-// ==========================================================================
-// GLOBAL EVENT DELEGATION ENGINE (Strictly Click-Only Dropdowns)
-// ==========================================================================
-window.addEventListener("click", (event) => {
-    const companyLink = event.target.closest("#nav-about");
-    const companyWrapper = document.querySelector(".dropdown-wrapper");
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-    // Toggles menu states instantly if user selects the Company nav item header
-    if (companyLink && companyWrapper) {
-        event.preventDefault();
-        event.stopPropagation();
-        companyWrapper.classList.toggle("is-open");
-        return; 
-    }
+// Serve static files (CSS, images) from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
+// Routes
+app.get('/', (req, res) => {
+    res.render('home', { active: 'home' });
+});
 
-    // Universal Escape Selector: Safely close menu layout frame if a click occurs outside
-    if (companyWrapper && companyWrapper.classList.contains("is-open")) {
-        if (!companyWrapper.contains(event.target)) {
-            companyWrapper.classList.remove("is-open");
-        }
-    }
+app.get('/events', (req, res) => {
+    res.render('events', { active: 'events' });
+});
+
+app.get('/about', (req, res) => {
+    res.render('about', { active: 'about' });
+});
+
+app.get('/careers', (req, res) => {
+    res.render('careers', { active: 'careers' });
+});
+
+app.get('/membership', (req, res) => {
+    res.render('membership', { active: 'membership' });
+});
+
+app.listen(3000, () => {
+    console.log('Server is running at http://localhost:3000');
 });

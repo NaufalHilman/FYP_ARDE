@@ -62,4 +62,36 @@
             <a href="/membership" class="btn-join-arde">JOIN ARDE</a>
         </div>
     </div>
+    <!-- Mobile Slide-in Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <button class="close-menu-btn" id="close-menu-btn">&times;</button>
+        
+        <div class="mobile-menu-content">
+            <a href="/" class="<%= active === 'home' ? 'active' : '' %>">Home</a>
+            <a href="/events" class="<%= active === 'events' ? 'active' : '' %>">Events</a>
+            
+<div class="mobile-dropdown-wrapper">
+        <a href="#" id="mobile-company-trigger" class="dropdown-trigger">Company ▼</a>
+            
+        <div class="mobile-dropdown-menu" id="mobile-company-menu">
+                <h4 class="sub-title">🌐 Who Are We?</h4>
+                <a href="/about">About Us</a>
+                <a href="/community">Our Community Says</a>
+                
+                <h4 class="sub-title">👥 Our Team</h4>
+                <a href="/members">ARDE Members</a>
+                <a href="/executive">Executive Committee</a>
+                <a href="/honorary">Honorary Members</a>
+                
+                <h4 class="sub-title">📞 Contact</h4>
+                <a href="/contact">Contact Us</a>
+                <a href="/support">Contact Support</a>
+            </div>
+            
+        </div>            
+            <a href="/careers" class="<%= active === 'careers' ? 'active' : '' %>">Careers</a>
+            <a href="/membership" class="btn-join-arde-mobile">JOIN ARDE</a>
+        </div>
+    
+    </div>
 </nav>

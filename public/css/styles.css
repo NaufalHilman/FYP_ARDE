@@ -104,10 +104,19 @@ a { text-decoration: none; }
     background-color: #ffffff; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     display: none; padding: 40px 0; z-index: 999;
 }
+
 .dropdown-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); display: none; z-index: 998;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 998; /* Lower than the dropdown itself */
+    pointer-events: none; /* ADD THIS: This allows clicks to pass through the overlay */
 }
+
 .dropdown-wrapper.is-open .mega-dropdown,
 .dropdown-wrapper.is-open .dropdown-overlay { display: block; }
 
@@ -157,13 +166,54 @@ a { text-decoration: none; }
     margin-bottom: 20px;
 }
 
+.hamburger-menu {
+    display: none; 
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #333333; /* Dark color so it shows on white background */
+    display: block;
+    border-radius: 2px;
+}
+
+dropdown-link:hover {
+    color: var(--primary) !important; /* Deep blue */
+    cursor: pointer;
+}
+
+.dropdown-link {
+    color: var(--neutral-1); /* This should match your general body color */
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+}
+
+/* Force the hover on the specific dropdown links */
+.mega-dropdown .dropdown-column a.dropdown-link:hover {
+    color: var(--primary) !important;
+    text-decoration: none;
+}
+
 /* ==========================================================================
    6. Mobile Responsive Adjustments (Screens below 992px)
    ========================================================================== */
 @media (max-width: 992px) {
     /* Hide the full navigation links on mobile */
     .nav-links {
-        display: none;
+        display: none !important; /* Hide on mobile */
+    }
+
+    .nav-logo {
+        order: 1;
     }
 
     /* Adjust the mega-dropdown for mobile stacking */
@@ -183,17 +233,110 @@ a { text-decoration: none; }
     .feature-column {
         display: none; /* Often best to hide large banners on mobile */
     }
-}
 
-.hamburger-menu {
-    display: none; /* Hidden on desktop */
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-@media (max-width: 992px) {
     .hamburger-menu {
-        display: block; /* Show on mobile */
+        display: flex !important; /* Show on mobile */
+        order: 2;
+        margin-left: auto;
+    }
+
+    .nav-links{
+        display: none !important; /* Ensure nav links are hidden by default on mobile */
+    }
+
+    .nav-container.mobile-open .nav-links {
+        display: flex;
+        flex-direction: column;
     }
 }
+
+/* The background overlay that slides in */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start hidden off the right side */
+    width: 300px; /* Controls the width of the slide-in menu */
+    height: 100%;
+    background-color: #27247B; /* Deep blue branding color */
+    transition: right 0.4s ease-in-out;
+    z-index: 9999;
+    padding: 40px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+}
+
+/* This class will be added by JavaScript to trigger the slide-in */
+.mobile-menu-overlay.open {
+    right: 0; 
+}
+
+/* Styling for the close button */
+.close-menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Styling the links inside the mobile menu */
+.mobile-menu-content {
+    font-family: 'Proxima Nova', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.mobile-menu-content a {
+    color: #ffffff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.mobile-menu-content a:hover {
+    color: #FFCB05; /* Your secondary/gold color */
+}
+
+.mobile-menu-content a.active {
+    color: var(--secondary);
+    font-weight: 900;
+}
+
+.btn-join-arde-mobile {
+    display: inline-block;
+    background-color: var(--secondary); /* Black background */
+    color: #000000 !important;           /* Gold text for contrast */
+    font-weight: 900;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.mobile-dropdown-menu {
+    display: none; /* Hidden by default */
+    background-color: rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-top: 10px;
+    border-left: 3px solid #eaff05; /* Matches your yellow accent */
+}
+
+.mobile-dropdown-menu a {
+    font-size: 16px !important;
+    margin-bottom: 10px;
+    display: block;
+    color: #ffffff;
+}
+
+.sub-title {
+    color: var(--secondary);
+    font-size: 14px;
+    margin: 15px 0 10px 0;
+    text-transform: uppercase;
+}
+

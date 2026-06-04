@@ -1,21 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/styles.css">
-    <title>ARDE | Events Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARDE | Events</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/events.css">
 </head>
 <body>
-    <!-- Including the navbar component and passing the active variable -->
-    <%- include('../components/navbar', { active: 'events' }) %>
-    <script src="/js/navbar.js"></script>
 
-    <main style="padding: 100px 20px; text-align: center;">
-        <h1>Events Page</h1>
-        <p>If the "Events" link in the navigation is now yellow and bold, the test is successful.</p>
-    </main>
+  <%- include('../components/navbar', { active: 'events' }) %>
+  <script src="/js/navbar.js"></script>
 
-    <!-- Including the footer component -->
-    <%- include('../components/footer') %>
+  <main>
+
+    <!-- =====================================================
+         1. HERO
+         ===================================================== -->
+    <section class="hero">
+      <img class="hero__bg" src="/images/events-hero.webp" alt="" aria-hidden="true">
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1 class="hero__title">Events</h1>
+        <p class="hero__subtitle">Upcoming &amp; Past Events</p>
+        <p class="hero__body">Stay connected with the latest ARDE events, networking sessions and industry gatherings.</p>
+      </div>
+      <div class="hero__accent-bar"></div>
+    </section>
+
+    <!-- =====================================================
+         2. FEATURED EVENT
+         ===================================================== -->
+    <section class="featured-event">
+      <div class="featured-event__header">
+        <div class="featured-event__eyebrow">
+          <span class="featured-event__eyebrow-bar" aria-hidden="true"></span>
+          FEATURED EVENT
+        </div>
+        <h2 class="featured-event__heading">Don't Miss Out</h2>
+      </div>
+      <div class="featured-event__container container">
+        <div class="featured-event__card">
+
+          <div class="featured-event__info">
+            <span class="featured-event__pill">Awards</span>
+            <h3 class="featured-event__title">ARDE Annual Awards Ceremony 2026</h3>
+            <p class="featured-event__desc">
+              An evening celebrating excellence across Singapore's hospitality
+              industry — recognising the best in Rooms Division leadership.
+            </p>
+            <div class="featured-event__bottom-row">
+              <div class="featured-event__date-badge">
+                <span class="featured-event__date-day">28</span>
+                <span class="featured-event__date-month">JUN</span>
+              </div>
+              <p class="featured-event__location">
+                <svg class="featured-event__location-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Grand Hyatt Singapore
+              </p>
+              <a href="#" class="btn btn--primary btn--pill featured-event__cta">Register Now →</a>
+            </div>
+          </div>
+
+          <div class="featured-event__photo">
+            <img
+              src="/images/featured-event.webp"
+              alt="ARDE Annual Awards Ceremony 2026"
+              class="featured-event__img"
+              loading="lazy"
+            >
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3. FILTER TABS
+         ===================================================== -->
+    <section class="filter-tabs-wrap">
+      <div class="filter-tabs" role="tablist" aria-label="Filter events by category">
+        <button class="filter-tabs__btn filter-tabs__btn--active" data-filter="all"        role="tab" aria-selected="true">All Events</button>
+        <button class="filter-tabs__btn"                          data-filter="networking" role="tab" aria-selected="false">Networking</button>
+        <button class="filter-tabs__btn"                          data-filter="awards"     role="tab" aria-selected="false">Awards</button>
+        <button class="filter-tabs__btn"                          data-filter="workshop"   role="tab" aria-selected="false">Workshops</button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         4. UPCOMING EVENTS
+         ===================================================== -->
+    <section class="events-section">
+      <div class="events-section__header">
+        <p class="events-section__eyebrow">Upcoming Events</p>
+        <h2 class="events-section__title">What's Next</h2>
+      </div>
+
+      <div class="events-scroll" id="upcomingScroll">
+        <div class="events-scroll__track" id="upcomingTrack">
+
+          <article class="event-card" data-category="networking">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">12</span>
+                  <span class="event-card__date-month">JUL</span>
+                </div>
+                <span class="event-card__pill event-card__pill--networking">Networking</span>
+              </div>
+              <h3 class="event-card__title">Mid-Year Networking Mixer</h3>
+              <p class="event-card__meta">Raffles Hotel Singapore</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events1.webp" alt="Mid-Year Networking Mixer" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+          <article class="event-card" data-category="networking">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">08</span>
+                  <span class="event-card__date-month">NOV</span>
+                </div>
+                <span class="event-card__pill event-card__pill--networking">Networking</span>
+              </div>
+              <h3 class="event-card__title">Year-End Networking Soirée</h3>
+              <p class="event-card__meta">The Fullerton Hotel</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events2.webp" alt="Year-End Networking Soirée" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+          <article class="event-card" data-category="awards">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">28</span>
+                  <span class="event-card__date-month">JUN</span>
+                </div>
+                <span class="event-card__pill event-card__pill--awards">Awards</span>
+              </div>
+              <h3 class="event-card__title">ARDE Annual Awards Ceremony 2026</h3>
+              <p class="event-card__meta">Grand Hyatt Singapore</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events3.webp" alt="ARDE Annual Awards Ceremony 2026" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+          <article class="event-card" data-category="awards">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">15</span>
+                  <span class="event-card__date-month">OCT</span>
+                </div>
+                <span class="event-card__pill event-card__pill--awards">Awards</span>
+              </div>
+              <h3 class="event-card__title">Rising Star Awards Night</h3>
+              <p class="event-card__meta">Marina Bay Sands</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events4.webp" alt="Rising Star Awards Night" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+          <article class="event-card" data-category="workshop">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">05</span>
+                  <span class="event-card__date-month">AUG</span>
+                </div>
+                <span class="event-card__pill event-card__pill--workshop">Workshop</span>
+              </div>
+              <h3 class="event-card__title">Housekeeping Excellence Workshop</h3>
+              <p class="event-card__meta">SHATEC, Singapore</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events5.webp" alt="Housekeeping Excellence Workshop" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+          <article class="event-card" data-category="workshop">
+            <div class="event-card__info">
+              <div class="event-card__top-row">
+                <div class="event-card__date-badge">
+                  <span class="event-card__date-day">20</span>
+                  <span class="event-card__date-month">SEP</span>
+                </div>
+                <span class="event-card__pill event-card__pill--workshop">Workshop</span>
+              </div>
+              <h3 class="event-card__title">Front Office Leadership Masterclass</h3>
+              <p class="event-card__meta">Pan Pacific Singapore</p>
+              <a href="#" class="event-card__link">Learn More →</a>
+            </div>
+            <div class="event-card__photo">
+              <img src="/images/upcoming-events6.webp" alt="Front Office Leadership Masterclass" class="event-card__img" loading="lazy">
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         5. PAST EVENTS
+         ===================================================== -->
+    <section class="events-section events-section--past">
+      <div class="events-section__header">
+        <p class="events-section__eyebrow">Past Events</p>
+        <h2 class="events-section__title">Event Gallery</h2>
+      </div>
+
+      <div class="events-scroll">
+        <div class="events-scroll__track">
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2025</span>
+              <img src="/images/past-events1.webp" alt="Annual Dinner &amp; Awards 2025" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">Annual Dinner &amp; Awards 2025</h3>
+              <p class="event-card__meta">Awards</p>
+            </div>
+          </article>
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2025</span>
+              <img src="/images/past-events2.webp" alt="Q3 Networking Session" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">Q3 Networking Session</h3>
+              <p class="event-card__meta">Networking</p>
+            </div>
+          </article>
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2024</span>
+              <img src="/images/past-events3.webp" alt="Front Office Leadership Forum" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">Front Office Leadership Forum</h3>
+              <p class="event-card__meta">Workshop</p>
+            </div>
+          </article>
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2024</span>
+              <img src="/images/past-events4.webp" alt="ARDE Hotel Familiarisation Visit" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">ARDE Hotel Familiarisation Visit</h3>
+              <p class="event-card__meta">Hotel Visit</p>
+            </div>
+          </article>
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2023</span>
+              <img src="/images/past-events5.webp" alt="Annual Dinner &amp; Awards 2023" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">Annual Dinner &amp; Awards 2023</h3>
+              <p class="event-card__meta">Awards</p>
+            </div>
+          </article>
+
+          <article class="event-card event-card--past">
+            <div class="event-card__photo">
+              <span class="event-card__year-badge">2023</span>
+              <img src="/images/past-events6.webp" alt="Rooms Division Summit 2023" class="event-card__img" loading="lazy">
+            </div>
+            <div class="event-card__info">
+              <h3 class="event-card__title">Rooms Division Summit 2023</h3>
+              <p class="event-card__meta">Networking</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <%- include('../components/footer') %>
+
+  <script src="/js/events.js"></script>
+
 </body>
 </html>

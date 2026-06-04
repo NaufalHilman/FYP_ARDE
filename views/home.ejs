@@ -9,9 +9,258 @@
 
     <%- include('navbar', { active: 'home' }) %>
     <script src="/js/navbar.js"></script>
-    
-    <main style="min-height: 600px; padding: 50px; text-align: center;">
-        <h1>Welcome to ARDE Page Content Area</h1>
+    <script src="/js/homepage.js"></script>
+     <!-- =====================================================
+         Banner Carousel
+         ===================================================== -->
+        <section class="banner-hero">
+            <!-- SLIDE 1: Main -->
+            <div class="hero-slide active" id="slide-1">
+                <div class="hero-inner">
+                    <div class="hero-text">
+                        <span class="hero-eyebrow">ARDE Network</span>
+                        <h1 class="hero-heading">
+                            Reached over <span class="hero-accent">100 members</span> in more than <span class="hero-accent">70 organizations</span>
+                        </h1>
+                        <p class="hero-sub">
+                            A professional community built for shared learning, meaningful networking, and lasting industry impact.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="/join" class="btn-hero-primary">JOIN ARDE</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="hstat-num">100+</span>
+                                <span class="hstat-label">Members</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hstat-num">70+</span>
+                                <span class="hstat-label">Organizations</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hstat-num">3</span>
+                                <span class="hstat-label">Workshops</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-block">
+                        <div class="hero-image-wrap">
+                            <img src="/images/Arde_banner1.jpg" alt="ARDE Members" style="object-position: 30% center;">
+                            <div class="hero-image-badge">
+                                <span class="badge-dot"></span>
+                                <span>Now Accepting Members</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Finalists -->
+            <div class="hero-slide" id="slide-2">
+                <div class="hero-inner">
+                    <div class="hero-text">
+                        <span class="hero-eyebrow">Awards Night 2024</span>
+                        <h1 class="hero-heading">
+                            Meet the <span class="hero-accent">Finalists</span> of the Year
+                        </h1>
+                        <p class="hero-sub">
+                            Celebrating excellence across the industry — discover the outstanding individuals recognized at our annual gala.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="/finalists" class="btn-hero-primary">SEE ALL FINALISTS</a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <span class="hstat-num">Night</span>
+                                <span class="hstat-label">of Excellence</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hstat-num">2024</span>
+                                <span class="hstat-label">Annual Gala</span>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <span class="hstat-num">🏆</span>
+                                <span class="hstat-label">Awards</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-block">
+                        <div class="hero-image-wrap">
+                            <img src="/images/Arde_banner2.jpg" alt="ARDE Finalists" style="object-position: center center;">
+                            <div class="hero-image-badge">
+                                <span class="badge-dot" style="background:#FFCB05;"></span>
+                                <span>2024 Finalists Announced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dot Navigation -->
+            <button class="hero-arrow hero-arrow-left" aria-label="Previous slide">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="hero-arrow hero-arrow-right" aria-label="Next slide">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Keep dots as passive progress indicators only (no click) -->
+            <div class="hero-dots">
+                <span class="hero-dot active"></span>
+                <span class="hero-dot"></span>
+            </div>
+        </section>
+
+         <!-- =====================================================
+         Discover ARDE Section
+         ===================================================== -->
+        <section class="intro-section">
+            <div class="section-container">
+                
+                <div class="intro-header">
+                    <h2 class="section-title">Discover ARDE</h2>
+                    <p class="section-subtitle">Empowering innovation, cultivating community, and designing the future through our core pillars.</p>
+                </div>
+                
+                <div class="pillars-grid">
+                    
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <img src="/images/Arde_image3.jpg" alt="Events Icon">
+                        </div>
+                        <h3 class="pillar-title">Impactful Events</h3>
+                        <p class="pillar-desc">Join our exclusive gatherings, workshops, and networking sessions designed to accelerate your collaborative growth.</p>
+                        <a href="/events" class="pillar-link">See Events <span class="arrow">&rarr;</span></a>
+                    </div>
+                    
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <img src="/images/main_logo.png" alt="Company Icon">
+                        </div>
+                        <h3 class="pillar-title">Our Company</h3>
+                        <p class="pillar-desc">Discover our foundational mission, vision, and the dedicated project team driving innovation forward.</p>
+                        <a href="/about" class="pillar-link">Learn More <span class="arrow">&rarr;</span></a>
+                    </div>
+                    
+                    <div class="pillar-card">
+                        <div class="pillar-icon">
+                            <img src="/images/Arde_image1.jpg" alt="Careers Icon">
+                        </div>
+                        <h3 class="pillar-title">Thriving Careers</h3>
+                        <p class="pillar-desc">Explore professional pathways and unique opportunities to expand your portfolio and impact with our team.</p>
+                        <a href="/careers" class="pillar-link">Explore Roles <span class="arrow">&rarr;</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+ <!-- =====================================================
+            Collaboration Section
+         ===================================================== -->
+        <section class="collaboration-section">
+            <div class="collab-wrap">
+                <p class="collab-eyebrow">It's amazing</p>
+                <h2 class="collab-heading">What happens when we <em>work together</em></h2>
+
+                <div class="collab-layout">
+
+                    <div class="collab-card card-wide">
+                        <div>
+                            <span class="card-tag tag-light">Partnership</span>
+                            <p class="card-body-desc text-muted-white">In partnership with the Singapore Workforce Development Agency, ARDE successfully delivered specialized programs tailored for industry professionals.</p>
+                            <div class="stat-row">
+                                <div class="stat-item">
+                                    <span class="stat-num">3</span>
+                                    <span class="stat-label">Workshops</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-num">1</span>
+                                    <span class="stat-label">Diploma Program</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-num">70+</span>
+                                    <span class="stat-label">Organizations</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="collab-list">
+                                <li>3 specialized workshops delivered to Rooms Division professionals</li>
+                                <li>A comprehensive diploma program tailored for Rooms Division Executives</li>
+                                <li>Curriculum co-developed with industry leaders for real-world relevance</li>
+                            </ul>
+                        </div>
+                        <div class="deco-ring r1"></div>
+                        <div class="deco-ring r2"></div>
+                    </div>
+
+                    <div class="collab-card card-mid">
+                        <span class="card-tag tag-light">Community</span>
+                        <h3 class="card-body-title text-white">A platform to learn, network, and grow</h3>
+                        <p class="card-body-desc text-muted-white">More than just a professional network — a community built for shared learning and meaningful personal development.</p>
+                        <div class="deco-ring r1"></div>
+                    </div>
+
+                    <div class="collab-card card-accent">
+                        <span class="card-tag tag-dark">Looking Ahead</span>
+                        <h3 class="card-body-title text-dark">Expanding education & community events</h3>
+                        <p class="card-body-desc text-muted-dark">We aim to grow our educational offerings and continue organizing social events designed for both professional networking and personal development.</p>
+                    </div>
+
+                </div>
+                <div class="collab-cta">
+                    <a href="/contact" class="btn-partner">Partner With Us</a>
+                </div>
+            </div>
+        </section>
+         <!-- =====================================================
+         Partners Section
+         ===================================================== -->
+         <section class="supporters-section">
+            <div class="supporters-wrap">
+
+                <div class="supporters-header">
+                    <p class="collab-eyebrow">Gratitude</p>
+                    <h2 class="supporters-heading">Our Supporters <span>&amp;</span> Partners</h2>
+                </div>
+
+                <div class="supporters-layout">
+
+                    <div class="supporters-image-block">
+                        <img src="/images/Arde_image3.jpg" alt="ARDE Members">
+                        <div class="supporters-image-badge">
+                            <span class="badge-num">100+</span>
+                            <span class="badge-label">Members Strong</span>
+                        </div>
+                    </div>
+
+                    <div class="supporters-content-block">
+                        <p class="supporters-desc">
+                            These achievements were made possible through the dedicated support of our
+                            <a href="/members" class="supporters-link">members</a>,
+                            <a href="/sponsors" class="supporters-link">sponsors</a>, and the
+                            <a href="/about" class="supporters-link">executive committee</a>.
+                        </p>
+                        <div class="supporters-divider"></div>
+                        <div class="supporters-tags">
+                            <span class="stag">🤝 Members</span>
+                            <span class="stag">🏢 Sponsors</span>
+                            <span class="stag">⭐ Executive Committee</span>
+                        </div>
+                        <a href="/contact" class="btn-partner-yellow">PARTNER WITH US</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </main>
 
     <%- include('footer') %>

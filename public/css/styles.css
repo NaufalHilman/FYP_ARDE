@@ -1,6 +1,12 @@
 /* ==========================================================================
    1. Typography Setup
    ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
     /* Colors */
     --primary: #27247B;
@@ -134,9 +140,31 @@ a { text-decoration: none; }
 
 /* UI Elements */
 .btn-join-arde {
-    font-weight: 900; background-color: #FFCB05; color: #000;
+    font-weight: 900; background-color: var(--secondary); color: #000;
     padding: 10px 22px; border-radius: 4px; font-size: 14px; white-space: nowrap;
+    z-index: 100;
+    pointer-events: auto; /* Ensure the button is clickable even when inside the dropdown */
+    position: relative; /* Ensure it sits above the overlay */ 
 }
+
+.btn-join-arde:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-finalists {
+    font-weight: 900; background-color: var(--secondary); color: #000;
+    padding: 10px 22px; border-radius: 4px; font-size: 14px; white-space: nowrap;
+    z-index: 100;
+    pointer-events: auto; /* Ensure the button is clickable even when inside the dropdown */
+    position: relative; /* Ensure it sits above the overlay */ 
+}
+
+.btn-finalists:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
 .feature-banner {
     background: #8da4b1; padding: 25px; border-radius: 6px; 
     min-height: 220px; display: flex; align-items: flex-end;
@@ -211,7 +239,7 @@ dropdown-link:hover {
 /* ==========================================================================
    6. Mobile Responsive Adjustments (Screens below 992px)
    ========================================================================== */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     /* Hide the full navigation links on mobile */
     .nav-links {
         display: none !important; /* Hide on mobile */
@@ -345,3 +373,995 @@ dropdown-link:hover {
     text-transform: uppercase;
 }
 
+/*==========================================================================
+  Homepage Specific Styles
+========================================================================== */
+/* ==========================================================================
+   Hero Banner — Split Layout Slider
+   ========================================================================== */
+.banner-hero {
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Each slide stacks; active one fades in */
+.hero-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.hero-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.hero-slide.fade-in {
+    animation: heroFadeIn 0.6s ease forwards;
+}
+
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 72px 40px 60px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* ---- Left: Text ---- */
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.hero-eyebrow {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--secondary);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.hero-heading {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1.15;
+    margin: 0;
+}
+
+.hero-accent {
+    color: var(--primary);
+}
+
+/* ---- Arrow Buttons ---- */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(3, 8, 38, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    width: 44px;
+    height: 64px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    backdrop-filter: blur(6px);
+}
+
+.hero-arrow:hover {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #000000;
+}
+
+.hero-arrow-left  { left: 16px; }
+.hero-arrow-right { right: 16px; }
+
+.hero-sub {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--neutral-2);
+    line-height: 1.75;
+    max-width: 420px;
+    margin: 0;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+    font-family: 'Proxima Nova', sans-serif;
+    font-weight: 900;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: var(--secondary);
+    color: #000000;
+    padding: 14px 32px;
+    border-radius: 4px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn-hero-primary:hover {
+    background: #e6b800;
+    transform: translateY(-2px);
+}
+
+/* Stats Row */
+.hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 4px;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hstat-num {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: var(--neutral-3);
+    line-height: 1;
+}
+
+.hstat-label {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--neutral-2);
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(3, 17, 109, 0.792);
+    flex-shrink: 0;
+}
+
+/* ---- Right: Image ---- */
+.hero-image-block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    /* Subtle yellow border glow */
+    box-shadow: 0 0 0 1px rgba(255, 203, 5, 0.15), 
+                0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image-wrap img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+}
+
+/* Subtle dark gradient at bottom so badge reads cleanly */
+.hero-image-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(3, 8, 38, 0.6) 0%, transparent 100%);
+    border-radius: 0 0 14px 14px;
+    pointer-events: none;
+}
+
+/* Floating badge */
+.hero-image-badge {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    background: rgba(3, 8, 38, 0.88);
+    border: 1px solid rgba(255, 203, 5, 0.25);
+    border-radius: 100px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.55; transform: scale(0.8); }
+}
+
+/* ---- Dot Navigation ---- */
+.hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+}
+
+.hero-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--secondary);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-dot.active {
+    background: var(--primary);
+    transform: scale(1.3);
+}
+
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 56px 24px 36px;
+        text-align: center;
+    }
+
+    .hero-eyebrow {
+        justify-content: center;
+    }
+
+    .hero-sub {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-image-wrap img {
+        height: 320px;
+    }
+
+    .hero-arrow { width: 36px; height: 52px; }
+    .hero-arrow-left  { left: 8px; }
+    .hero-arrow-right { right: 8px; }
+}
+
+@media (max-width: 768px) {
+    .hero-inner {
+        padding: 40px 20px 28px;
+    }
+
+    .hero-heading {
+        font-size: 1.75rem;
+    }
+
+    .hero-image-wrap img {
+        height: 250px;
+    }
+}
+
+
+/* ==========================================================================
+   Homepage Second Section (Intro & Core Pillars)
+   ========================================================================== */
+.intro-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.intro-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-family: 'Proxima Nova Regular', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--neutral-3);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+    font-family: 'Proxima Nova Thin', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900; /* Proxima Nova Regular */
+    color: var(--neutral-2);
+    line-height: 1.6;
+}
+
+/* Grid Layout */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+/* Individual Cards */
+.pillar-card {
+    background-color: #fcfcfc;
+    padding: 48px 32px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #eaeaea;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.pillar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    border-color: #e0b204; /* Yellow border highlight on hover */
+}
+
+.pillar-icon {
+    width: 200px;  /* Increased from 64px to make the images prominent */
+    height: 200px; /* Increased from 64px */
+    margin: 0 auto 28px auto; /* Slightly more space below the larger image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures no awkward image overlapping */
+}
+
+.pillar-icon img {
+    width: 100%;   /* Forces the image to fill the container width */
+    height: 100%;  /* Forces the image to fill the container height */
+    object-fit: contain; /* Keeps the aspect ratio perfect without distortion */
+}
+
+.pillar-title {
+    font-size: 1.5rem;
+    font-weight: 900; /* Proxima Nova Black */
+    color: var(--neutral-1);
+    margin-bottom: 14px;
+}
+
+.pillar-desc {
+    font-size: 1rem;
+    font-weight: 400; /* Proxima Nova Regular */
+    color: var(--neutral-2);
+    line-height: 1.55;
+    margin-bottom: 24px;
+}
+
+/* Call to Actions inside Cards */
+.pillar-link {
+    font-size: 0.95rem;
+    font-weight: 900; /* Proxima Nova Black for prominent text */
+    color: var(--secondary); 
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.pillar-link .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.pillar-card:hover .pillar-link {
+    color: var(--primary); /* Transitions to crisp black when the whole card is hovered */
+}
+
+.pillar-card:hover .pillar-link .arrow {
+    transform: translateX(4px); /* Clean micro-interaction on the arrow */
+}
+
+/* ==========================================================================
+   Responsive Adjustments (Mobile & Tablet)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .intro-section {
+        padding: 56px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .pillars-grid {
+        grid-template-columns: 1fr; /* Stacks vertically on mobile viewports */
+        gap: 20px;
+    }
+    
+    .pillar-card {
+        padding: 36px 24px;
+    }
+
+    /* ==========================================================================
+   Mobile Positioning Fix for ARDE Banner (Screens under 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Reset main layout margins to give the banner breathing room */
+    main[style] {
+        padding: 20px 12px !important;
+        min-height: auto !important;
+    }
+
+    /* 2. Give the banner container a clean mobile height footprint */
+    .banner-carousel {
+        height: 360px !important; /* Slightly taller to accommodate stacked elements safely */
+        position: relative !important;
+    }
+
+    /* 3. OVERRIDE BOTTOM PINNING: Force-center everything right in the middle */
+    /* 3. POSITIONING: Pulls text down towards the bottom with safe spacing */
+    .banner-content {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        
+        /* Updates: Aligns content to the lower section safely */
+        justify-content: flex-end !important; 
+        align-items: center !important;
+        
+        /* Adjust this number to move the content up or down! */
+        padding-bottom: 50px !important; /* Higher number = moves UP, Lower number = moves DOWN */
+        
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+    }
+
+    /* 4. Tightly control the header element bounding box */
+    .banner-text-wrapper {
+        margin: 0 0 16px 0 !important; /* Controlled gap right above button */
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .banner-text-wrapper h1 {
+        font-size: 1.35rem !important; /* Sized to stack beautifully without crowding */
+        line-height: 1.35 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 5. Hide hardcoded line breaks so lines wrap naturally */
+    .banner-text-wrapper h1 br {
+        display: none !important;
+    }
+
+    /* 6. Tighten button scaling to minimize vertical bloat */
+    .banner-button-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .btn-join-arde, 
+    .btn-finalists {
+        padding: 10px 22px !important; /* Shaves off vertical padding */
+        font-size: 0.8rem !important;
+        letter-spacing: 0.5px !important;
+        display: inline-block !important;
+    }
+
+    /* 7. Keep dots low profile out of the way */
+    .carousel-dots {
+        bottom: 10px !important;
+    }
+}
+}
+
+/* =========================================
+   COLLABORATION SECTION
+   ========================================= */
+.collaboration-section {
+    background: #ffffff;
+}
+
+.collab-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.collab-eyebrow {
+    font-family: 'Proxima Nova Thin', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--neutral-3);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.collab-heading {
+    font-family: 'Proxima Nova Regular', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--neutral-3);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.collab-heading em {
+    font-style: normal;
+    color: var(--primary);
+}
+
+.collab-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.collab-card {
+    border-radius: 16px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-wide {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    background: #030826;
+}
+
+.card-mid {
+    background: #27247B;
+}
+
+.card-accent {
+    background: #FFCB05;
+}
+
+.card-tag {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.tag-light {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgb(255, 255, 255);
+}
+
+.tag-dark {
+    background: rgba(39, 36, 123, 0.15);
+    color: #000000;
+}
+
+.card-body-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 16px;
+}
+
+.text-white { color: #ffffff; }
+.text-dark  { color: #0d0d2b; }
+.text-muted-white { color: rgb(255, 255, 255); }
+.text-muted-dark  { color: rgb(0, 0, 0); }
+
+.card-body-desc {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+.collab-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.collab-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: rgb(255, 255, 255);
+    line-height: 1.5;
+}
+
+.collab-list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FFCB05;
+    margin-top: 7px;
+    flex-shrink: 0;
+}
+
+.stat-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #FFCB05;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.deco-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.07);
+    pointer-events: none;
+}
+
+.deco-ring.r1 { width: 220px; height: 220px; bottom: -80px; right: -60px; }
+.deco-ring.r2 { width: 140px; height: 140px; bottom: -20px; right: -10px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .collab-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .card-wide {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .collab-wrap {
+        padding: 60px 20px;
+    }
+
+    .collab-heading {
+        font-size: 2rem;
+    }
+
+    .big-number {
+        font-size: 3.5rem;
+    }
+
+    .stat-row {
+        gap: 20px;
+    }
+
+    .collab-card {
+        padding: 32px 24px;
+    }
+}
+
+.collab-cta {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-partner {
+    display: inline-block;
+    background-color: #27247B;
+    color: #ffffff;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-partner:hover {
+    background-color: #FFCB05;
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Supporters & Partners Section
+   ========================================================================== */
+.supporters-section {
+    background: #ffffff;
+    padding: 80px 0;
+    border-top: 1px solid #eaeaea;
+}
+
+.supporters-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.supporters-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.supporters-heading {
+    font-family: 'Proxima Nova Regular', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--neutral-3);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.supporters-heading span {
+    color: var(--secondary);
+}
+
+/* Two-column layout */
+.supporters-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Left: Image block */
+.supporters-image-block {
+    position: relative;
+    border-radius: 16px;
+    overflow: visible;
+}
+
+.supporters-image-block img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+    box-shadow: 0 20px 40px rgba(39, 36, 123, 0.15);
+}
+
+.supporters-image-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: #030826;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.badge-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--secondary);
+    line-height: 1;
+}
+
+.badge-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+/* Right: Content block */
+.supporters-content-block {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.supporters-desc {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--neutral-2);
+    line-height: 1.75;
+    text-align: center;
+}
+
+.supporters-link {
+    font-family: 'Proxima Nova Regular', sans-serif;
+    color: var(--accent);
+    font-weight: 900;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.supporters-link:hover {
+    color: var(--primary);
+}
+
+
+.supporters-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.stag {
+    background: #f4f4fb;
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid #e0dff5;
+}
+
+.btn-partner-yellow {
+    display: inline-block;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    align-self: center;
+    text-align: center;
+}
+
+.btn-partner-yellow:hover {
+    background-color: var(--secondary);
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .supporters-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .supporters-image-badge {
+        bottom: -16px;
+        right: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .supporters-section {
+        padding: 60px 0;
+    }
+
+    .supporters-heading {
+        font-size: 2rem;
+    }
+
+    .supporters-image-block img {
+        height: 260px;
+    }
+}

@@ -163,9 +163,11 @@
 }
 
 .featured-event__heading {
-  font-size: clamp(1.875rem, 4vw, 2.5rem);
-  font-weight: 100;
-  color: var(--neutral-2);
+  font-family: 'Proxima Nova', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #27247B;
+  line-height: 1.15;
 }
 
 .featured-event__container {

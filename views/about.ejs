@@ -2,18 +2,277 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARDE | About Us</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/about.css">
 </head>
+
 <body>
+
     <%- include('navbar', { active: 'about' }) %>
+
     <script src="/js/navbar.js"></script>
 
-    <main style="padding: 100px 20px; text-align: center;">
-        <h1>About Us</h1>
-        <p>Testing the active state for the Company dropdown.</p>
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="about-hero">
+
+            <div class="about-hero-overlay"></div>
+
+            <img
+                src="/images/committee/banner.jpg"
+                alt="About ARDE"
+                class="about-hero-image"
+            >
+
+            <div class="about-hero-content">
+
+                <p class="about-breadcrumb">
+                    Company / About Us
+                </p>
+
+                <h1 class="about-title">
+                    About ARDE
+                </h1>
+
+                <h3 class="about-subtitle">
+                    Empowering Rooms Division Professionals in Hospitality
+                </h3>
+
+                <p class="about-description">
+                    ARDE is a professional community in Singapore dedicated to developing, connecting, and recognising hospitality leaders in Rooms Division.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- WHO WE ARE -->
+
+        <section class="about-section">
+
+            <div class="about-container">
+
+                <div class="about-text">
+
+                    <span class="about-tag">
+                        WHO WE ARE
+                    </span>
+
+                    <h2>
+                        A Community Built on Hospitality Excellence
+                    </h2>
+
+                    <p>
+                        ARDE (Association of Rooms Division Executives) Singapore is a professional community dedicated to advancing excellence in hospitality and Rooms Division leadership.
+                    </p>
+
+                    <p>
+                        Established in Singapore to bring together professionals across front office, housekeeping, guest services, and hotel operations, ARDE has grown into a recognised platform for networking, professional development, and industry collaboration.
+                    </p>
+
+                    <p>
+                        Over the years, ARDE has supported hospitality professionals through leadership initiatives, industry events, competitions, and knowledge-sharing opportunities — helping members build meaningful connections and grow within Singapore’s hospitality sector.
+                    </p>
+
+                    <p>
+                        Today, ARDE continues to strengthen the Rooms Division community by creating opportunities for learning, recognition, and future industry leadership.
+                    </p>
+
+                </div>
+
+                <div class="about-image">
+
+                    <img
+                        src="/images/past-events4.webp"
+                        alt="ARDE Members"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MISSION VISION -->
+
+        <section class="mission-section">
+
+            <div class="mission-container">
+
+                <div class="mission-card">
+
+                    <h3>Our Mission</h3>
+
+                    <p>
+                        To advance the professional development of Rooms Division
+                        executives and promote the highest standards of hospitality
+                        service in Singapore.
+                    </p>
+
+                </div>
+
+                <div class="vision-card">
+
+                    <h3>Our Vision</h3>
+
+                    <p>
+                        To be the leading voice for Rooms Division professionals,
+                        shaping a vibrant, inclusive and future-ready hospitality
+                        industry in Singapore.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CORE VALUES -->
+
+        <section class="values-section">
+
+            <div class="section-container">
+
+                <span class="about-tag values-tag">
+                    WHAT WE STAND FOR
+                </span>
+
+                <h2 class="values-title">
+                    Our Core Values
+                </h2>
+
+                <div class="values-grid">
+
+                    <div class="value-card">
+                        <h4>Connect</h4>
+                        <p>Build meaningful relationships across Singapore’s hospitality industry.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <h4>Develop</h4>
+                        <p>Advance skills through workshops, training, and industry exposure.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <h4>Recognise</h4>
+                        <p>Celebrate excellence through competitions, awards, and leadership opportunities.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- COMMITTEE -->
+
+        <section class="committee-section">
+
+            <div class="section-container">
+
+                <span class="about-tag">
+                    OUR PEOPLE
+                </span>
+
+                <h2>
+                    Meet the Committee
+                </h2>
+
+                <div class="committee-grid">
+
+                    <div class="committee-card">
+                        <img src="/images/committee/president.jpg" alt="">
+                        <h4>Mr. Damian Tan</h4>
+                        <p>President</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/vice president.jpg" alt="">
+                        <h4>Mr. Ian Soh</h4>
+                        <p>Vice President</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/secretary.jpg" alt="">
+                        <h4>Ms. Susan Lim</h4>
+                        <p>Secretary</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/honour member.jpg" alt="">
+                        <h4>Ms. Adeline Teoh</h4>
+                        <p>Honorary Member</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/treasurer.jpg" alt="">
+                        <h4>Mr. Gobinath Pillai</h4>
+                        <p>Treasurer</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/membership.jpg" alt="">
+                        <h4>Mr. Marvin Ho</h4>
+                        <p>Membership & Head of ACR Development</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/socialmedia.jpg" alt="">
+                        <h4>Mr. Shervin Poh</h4>
+                        <p>Social Media</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/socialevents.jpg" alt="">
+                        <h4>Mr. Roy Tan</h4>
+                        <p>Social Media & Events</p>
+                    </div>
+
+                    <div class="committee-card">
+                        <img src="/images/committee/shatec.jpg" alt="">
+                        <h4>Ms. Charlene Rosco</h4>
+                        <p>SHATEC Representative & Events</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section class="about-cta">
+
+            <div class="cta-container">
+
+                <div>
+
+                    <h2>
+                        Ready to Join ARDE?
+                    </h2>
+
+                    <p>
+                        Become part of Singapore's leading Rooms Division community.
+                    </p>
+
+                </div>
+
+                <a href="/join" class="cta-btn">
+                    JOIN ARDE
+                </a>
+
+            </div>
+
+        </section>
+
     </main>
 
     <%- include('footer') %>
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "fyp_arde",
   "version": "1.0.0",
-  "description": "A final-year website revamp project for ARDE",
+  "description": "ARDE Website Revamp FYP Project",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

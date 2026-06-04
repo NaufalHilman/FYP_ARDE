@@ -1,0 +1,292 @@
+/* =====================================================
+   HERO
+===================================================== */
+
+.career-hero {
+    height: 550px;
+    background: url('/images/Arde_banner1.jpg') center/cover;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.career-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.career-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.career-hero-content h1 {
+    color: white;
+    font-size: 4.5rem;
+    font-weight: 100;
+    text-align: center;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.join-team {
+    padding: 90px 0;
+}
+
+.join-team h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--neutral-3);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+}
+
+.join-team-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.join-image-wrapper {
+    width: 320px;
+    height: 320px;
+    position: relative;
+}
+
+.image-background {
+    width: 320px;
+    height: 320px;
+    background: var(--primary);
+    position: absolute;
+    transform: rotate(-20deg);
+}
+
+.join-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.join-text-box {
+    background: var(--primary);
+    padding: 60px;
+    max-width: 700px;
+}
+
+.join-text-box p {
+    color: white;
+    font-size: 1.8rem;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   SUPPORT
+===================================================== */
+
+.career-support {
+    padding: 80px 0;
+    background: #f8f8f8;
+}
+
+.career-support-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+}
+
+.career-support h2 {
+    text-align: center;
+    color: var(--neutral-3);
+    font-size: 2.4rem;
+    text-transform: uppercase;
+}
+
+.support-intro {
+    text-align: center;
+    margin: 20px auto 50px;
+    max-width: 700px;
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 24px;
+}
+
+.support-card {
+    background: var(--primary);
+    padding: 40px;
+    text-align: center;
+}
+
+.support-card h3 {
+    color: white;
+    font-weight: 900;
+}
+
+/* =====================================================
+   JOBS
+===================================================== */
+
+.jobs-section {
+    padding: 80px 0;
+}
+
+.jobs-section h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--neutral-3);
+    text-transform: uppercase;
+}
+
+.job-subtitle {
+    text-align: center;
+    margin: 20px 0 50px;
+}
+
+.jobs-scroll-container {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 24px 20px;
+}
+
+.job-card {
+    width: 300px;
+    min-width: 300px;
+    flex-shrink: 0;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+}
+
+.job-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.job-content {
+    background: var(--primary);
+    padding: 20px;
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.job-content h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+
+.job-content p {
+    color: white;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.job-content a {
+    color: var(--secondary);
+    display: block;
+    text-align: right;
+    margin-top: 20px;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.career-cta {
+    background: #f8f8f8;
+    padding: 80px 24px;
+}
+
+.career-cta-box {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+}
+
+.career-cta-box h2 {
+    font-size: 2.4rem;
+    color: var(--neutral-3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.career-cta-box p {
+    max-width: 650px;
+    margin: auto;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.career-btn {
+    display: inline-block;
+    background: var(--secondary);
+    color: black;
+    padding: 15px 35px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.career-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .career-hero-content h1 {
+        font-size: 2.5rem;
+        padding: 0 20px;
+    }
+
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .join-text-box p {
+        font-size: 1.3rem;
+    }
+
+    .job-card {
+        width: 280px;
+        min-width: 280px;
+    }
+
+    .join-image-wrapper,
+    .image-background,
+    .join-image {
+        width: 250px;
+        height: 250px;
+    }
+}

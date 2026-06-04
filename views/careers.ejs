@@ -2,18 +2,203 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARDE | Careers</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/career.css">
 </head>
+
 <body>
+
     <%- include('navbar', { active: 'careers' }) %>
     <script src="/js/navbar.js"></script>
 
-    <main style="padding: 100px 20px; text-align: center;">
-        <h1>Careers at ARDE</h1>
-        <p>Current openings and opportunities will be listed here.</p>
+    <main>
+
+        <!-- HERO -->
+        <section class="career-hero">
+            <div class="career-overlay"></div>
+
+            <div class="career-hero-content">
+                <h1>Build Your Hospitality Career</h1>
+            </div>
+        </section>
+
+        <!-- INTRO -->
+        <section class="join-team">
+
+            <h2>Build Your Hospitality Career</h2>
+
+            <div class="join-team-container">
+
+                <div class="join-image-wrapper">
+                    <div class="image-background"></div>
+
+                    <img
+                        src="/images/Arde_banner2.jpg"
+                        alt="Hospitality Career"
+                        class="join-image"
+                    >
+                </div>
+
+                <div class="join-text-box">
+                    <p>
+                        ARDE connects you with real opportunities in the
+                        hospitality industry. From students to professionals,
+                        we help you grow at every stage of your career journey.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- WHO WE SUPPORT -->
+
+        <section class="career-support">
+
+            <div class="career-support-container">
+
+                <h2>Who We Support</h2>
+
+                <p class="support-intro">
+                    ARDE supports professionals at different stages of their
+                    hospitality journey.
+                </p>
+
+                <div class="support-grid">
+
+                    <div class="support-card">
+                        <h3>Students & Fresh Graduates</h3>
+                    </div>
+
+                    <div class="support-card">
+                        <h3>Front Office & Guest Services Staff</h3>
+                    </div>
+
+                    <div class="support-card">
+                        <h3>Rooms Division Professionals</h3>
+                    </div>
+
+                    <div class="support-card">
+                        <h3>Hospitality Executives & Managers</h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- JOB OPPORTUNITIES -->
+
+        <section class="jobs-section">
+
+            <h2>Career Opportunities</h2>
+
+            <p class="job-subtitle">
+                Explore opportunities across Singapore's hospitality industry
+            </p>
+
+            <div class="jobs-scroll-container">
+
+                <div class="job-card">
+
+                    <img src="/images/Arde_career_students.jpg" alt="Students">
+
+                    <div class="job-content">
+                        <h3>Students & Fresh Graduates</h3>
+
+                        <p>
+                            Discover internships, mentorship programmes and
+                            entry-level opportunities to kickstart your career.
+                        </p>
+
+                        <a href="#">More Details →</a>
+                    </div>
+
+                </div>
+
+                <div class="job-card">
+
+                    <img src="/images/past-events4.webp" alt="Front Office">
+
+                    <div class="job-content">
+                        <h3>Front Office & Guest Services</h3>
+
+                        <p>
+                            Build valuable guest engagement skills and advance
+                            your career in customer-facing hospitality roles.
+                        </p>
+
+                        <a href="#">More Details →</a>
+                    </div>
+
+                </div>
+
+                <div class="job-card">
+
+                    <img src="/images/Arde_room_division.webp" alt="Rooms Division">
+
+                    <div class="job-content">
+                        <h3>Rooms Division Professionals</h3>
+
+                        <p>
+                            Access opportunities that strengthen operational
+                            excellence and leadership within rooms division.
+                        </p>
+
+                        <a href="#">More Details →</a>
+                    </div>
+
+                </div>
+
+                <div class="job-card">
+
+                    <img src="/images/upcoming-events6.webp"alt="Managers">
+
+                    <div class="job-content">
+                        <h3>Hospitality Executives & Managers</h3>
+
+                        <p>
+                            Connect with senior-level opportunities, leadership
+                            development and industry networking events.
+                        </p>
+
+                        <a href="#">More Details →</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section class="career-cta">
+
+            <div class="career-cta-box">
+
+                <h2>Join The Hospitality Community</h2>
+
+                <p>
+                    Be part of a professional network that encourages learning,
+                    leadership and hospitality excellence.
+                </p>
+
+                <a href="#" class="career-btn">
+                    Explore Career Opportunities
+                </a>
+
+            </div>
+
+        </section>
+
     </main>
 
     <%- include('footer') %>
+
 </body>
 </html>

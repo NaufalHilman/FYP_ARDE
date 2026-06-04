@@ -4,7 +4,10 @@ const path = require('path');
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [
+    path.join(__dirname, 'views'),
+    path.join(__dirname, 'components')
+]);
 
 // Serve static files (CSS, images) from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));

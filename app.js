@@ -1,6 +1,13 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const db = require('./config/db');
+
+// Test the database connection
+db.query('SELECT 1')
+  .then(() => console.log('Database connection successful!'))
+  .catch((err) => console.error('Database connection failed:', err.message));
+
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');

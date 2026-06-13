@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | <%= job.job_title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/career.css">
+</head>
+<body>
+    <%- include('navbar', { active: 'careers' }) %>
+
+    <main>
+        <section class="job-detail-section">
+            <div class="job-detail-container">
+
+                <a href="/careers" class="back-link">← Back to Careers</a>
+
+                <% if (job.image_path) { %>
+                <img src="<%= job.image_path %>" alt="<%= job.job_title %>" class="job-detail-img">
+                <% } %>
+
+                <h1><%= job.job_title %></h1>
+
+                <div class="job-detail-meta">
+                    <% if (job.department) { %>
+                        <span>&#128188; <%= job.department %></span>
+                    <% } %>
+                    <% if (job.location) { %>
+                        <span>&#128205; <%= job.location %></span>
+                    <% } %>
+                    <% if (job.posted_at) { %>
+                        <span>&#128197; Posted <%= new Date(job.posted_at).toLocaleDateString('en-SG', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                    <% } %>
+                </div>
+
+                <div class="job-detail-description">
+                    <h3>About This Role</h3>
+                    <p><%= job.description %></p>
+                </div>
+
+            </div>
+        </section>
+        <!-- APPLICATION FORM -->
+        <section class="apply-section">
+            <div class="apply-container">
+                <h2>Apply for This Role</h2>
+                <p>Fill in your details and attach your resume to apply for <strong><%= job.job_title %></strong>.</p>
+
+                <% if (locals.success) { %>
+                    <div class="apply-success-banner">
+                        ✅ Application submitted successfully! We'll be in touch.
+                    </div>
+                <% } %>
+
+                <form action="/careers/<%= job.id %>/apply" method="POST" enctype="multipart/form-data" class="apply-form">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="full_name" required placeholder="John Tan">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required placeholder="john@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" placeholder="+65 9123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cover Letter</label>
+                        <textarea name="cover_letter" rows="5" placeholder="Tell us why you're a great fit..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Resume / CV *</label>
+                        <div class="file-upload-box" id="fileBox">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop or <span>browse files</span></p>
+                            <small>PDF, DOC, DOCX up to 5MB</small>
+                            <input type="file" name="resume" accept=".pdf,.doc,.docx" required id="resumeInput">
+                        </div>
+                        <p class="file-name" id="fileName"></p>
+                    </div>
+
+                    <button type="submit" class="apply-btn">Submit Application</button>
+
+                </form>
+            </div>
+        </section>
+
+        <script>
+            const resumeInput = document.getElementById('resumeInput');
+            const fileName = document.getElementById('fileName');
+            const fileBox = document.getElementById('fileBox');
+
+            resumeInput.addEventListener('change', () => {
+                fileName.textContent = resumeInput.files[0]?.name || '';
+            });
+
+            // Drag and drop
+            fileBox.addEventListener('dragover', e => { e.preventDefault(); fileBox.classList.add('drag-over'); });
+            fileBox.addEventListener('dragleave', () => fileBox.classList.remove('drag-over'));
+            fileBox.addEventListener('drop', e => {
+                e.preventDefault();
+                fileBox.classList.remove('drag-over');
+                resumeInput.files = e.dataTransfer.files;
+                fileName.textContent = resumeInput.files[0]?.name || '';
+            });
+        </script>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

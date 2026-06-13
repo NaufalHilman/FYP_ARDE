@@ -380,7 +380,7 @@ dropdown-link:hover {
    Hero Banner — Split Layout Slider
    ========================================================================== */
 .banner-hero {
-    background: #fff;
+    background: var(--primary);
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -432,7 +432,7 @@ dropdown-link:hover {
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--primary);
+    color: var(--secondary);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -452,23 +452,46 @@ dropdown-link:hover {
     font-family: 'Proxima Nova', sans-serif;
     font-size: clamp(1.9rem, 3vw, 2.8rem);
     font-weight: 900;
-    color: var(--primary);
+    color: #ffffff;
     line-height: 1.15;
     margin: 0;
 }
 
 .hero-accent {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
+.banner-hero .hero-shape {
+    position: absolute;
+    left: -80px;
+    top: -80px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(150, 205, 246, 0.07);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.banner-hero .hero-shape2 {
+    position: absolute;
+    left: 60px;
+    bottom: -120px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 203, 5, 0.06);
+    pointer-events: none;
+    z-index: 0;
+}
 /* ---- Arrow Buttons ---- */
 .hero-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: rgba(3, 8, 38, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
     width: 44px;
     height: 64px;
@@ -494,7 +517,7 @@ dropdown-link:hover {
     font-family: 'Proxima Nova', sans-serif;
     font-size: 1rem;
     font-weight: 400;
-    color: var(--neutral-2);
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.75;
     max-width: 420px;
     margin: 0;
@@ -522,7 +545,7 @@ dropdown-link:hover {
 }
 
 .btn-hero-primary:hover {
-    background: #e6b800;
+    background: #ffffff;
     transform: translateY(-2px);
 }
 
@@ -545,7 +568,7 @@ dropdown-link:hover {
     font-family: 'Proxima Nova', sans-serif;
     font-size: 1.55rem;
     font-weight: 900;
-    color: var(--neutral-3);
+    color: var(--secondary);
     line-height: 1;
 }
 
@@ -555,13 +578,13 @@ dropdown-link:hover {
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--neutral-2);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .hero-stat-divider {
     width: 1px;
     height: 30px;
-    background: rgba(3, 17, 109, 0.792);
+    background: rgba(255, 255, 255, 0.2);
     flex-shrink: 0;
 }
 
@@ -610,8 +633,8 @@ dropdown-link:hover {
     position: absolute;
     bottom: 18px;
     left: 18px;
-    background: rgba(3, 8, 38, 0.88);
-    border: 1px solid rgba(255, 203, 5, 0.25);
+    background: rgba(39, 36, 123, 0.92);
+    border: 1px solid rgba(255, 203, 5, 0.35);
     border-radius: 100px;
     padding: 8px 16px;
     display: flex;
@@ -620,7 +643,7 @@ dropdown-link:hover {
     font-family: 'Proxima Nova', sans-serif;
     font-size: 0.78rem;
     font-weight: 700;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     white-space: nowrap;
     z-index: 2;
 }
@@ -654,12 +677,12 @@ dropdown-link:hover {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--secondary);
+    background: rgba(255, 255, 255, 0.3);
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .hero-dot.active {
-    background: var(--primary);
+    background: #FFCB05;
     transform: scale(1.3);
 }
 

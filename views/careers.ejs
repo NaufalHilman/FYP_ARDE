@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARDE | Careers</title>
-
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/career.css">
 </head>
-
 <body>
 
     <%- include('navbar', { active: 'careers' }) %>
@@ -18,130 +16,129 @@
 
         <!-- HERO -->
         <section class="career-hero">
-            <div class="career-overlay"></div>
-
-            <div class="career-hero-content">
-                <h1>Build Your Hospitality Career</h1>
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="career-hero-inner">
+                <div class="hero-text">
+                    <p class="hero-eyebrow">ARDE Careers</p>
+                    <h1>Build Your <span>Hospitality</span> Career</h1>
+                    <p class="hero-desc">
+                        ARDE connects you with real opportunities in the
+                        hospitality industry. From students to professionals —
+                        we help you grow at every stage.
+                    </p>
+                    <a href="#jobs" class="hero-cta">Explore Opportunities</a>
+                </div>
+                <div class="hero-cards">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🎓</div>
+                        <div class="hero-card-text">
+                            <h4>Students & Graduates</h4>
+                            <p>Internships and entry-level roles to start your journey</p>
+                        </div>
+                    </div>
+                    <div class="hero-card hero-card--accent">
+                        <div class="hero-card-icon">🏨</div>
+                        <div class="hero-card-text">
+                            <h4>Hospitality Professionals</h4>
+                            <p>Senior roles and leadership development programmes</p>
+                        </div>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📋</div>
+                        <div class="hero-card-text">
+                            <h4>Easy Application</h4>
+                            <p>Apply directly with your resume and cover letter</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- INTRO -->
-        <section class="join-team">
-
-            <h2>Build Your Hospitality Career</h2>
-
-            <div class="join-team-container">
-
-                <div class="join-image-wrapper">
-                    <div class="image-background"></div>
-
-                    <img
-                        src="/images/Arde_banner2.jpg"
-                        alt="Hospitality Career"
-                        class="join-image"
-                    >
-                </div>
-
-                <div class="join-text-box">
+        <section class="career-intro">
+            <div class="career-intro-inner">
+                <div class="intro-text">
+                    <div class="accent-bar"></div>
+                    <p class="section-label">Our Mission</p>
+                    <h2>Growing <strong>Hospitality Talent</strong> Across Singapore</h2>
                     <p>
-                        ARDE connects you with real opportunities in the
-                        hospitality industry. From students to professionals,
-                        we help you grow at every stage of your career journey.
+                        ARDE connects you with real opportunities in the hospitality
+                        industry. From students to professionals, we help you grow at
+                        every stage of your career journey — through mentorship,
+                        networking, and direct placement.
                     </p>
                 </div>
-
+                <div class="intro-img-wrap">
+                    <div class="intro-img-bg"></div>
+                    <img src="/images/Arde_banner2.jpg" alt="ARDE Team" class="intro-img">
+                </div>
             </div>
-
         </section>
 
         <!-- WHO WE SUPPORT -->
-
         <section class="career-support">
-
-            <div class="career-support-container">
-
-                <h2>Who We Support</h2>
-
-                <p class="support-intro">
-                    ARDE supports professionals at different stages of their
-                    hospitality journey.
-                </p>
-
+            <div class="career-support-inner">
+                <div class="section-header">
+                    <span class="section-label">Who We Support</span>
+                    <h2>Professionals at <strong>Every Stage</strong></h2>
+                    <p>ARDE supports professionals at different stages of their hospitality journey.</p>
+                </div>
                 <div class="support-grid">
-
                     <div class="support-card">
+                        <div class="support-card-icon">🎓</div>
                         <h3>Students & Fresh Graduates</h3>
                     </div>
-
                     <div class="support-card">
+                        <div class="support-card-icon">🛎️</div>
                         <h3>Front Office & Guest Services Staff</h3>
                     </div>
-
                     <div class="support-card">
+                        <div class="support-card-icon">🏨</div>
                         <h3>Rooms Division Professionals</h3>
                     </div>
-
                     <div class="support-card">
+                        <div class="support-card-icon">👔</div>
                         <h3>Hospitality Executives & Managers</h3>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
         <!-- JOB OPPORTUNITIES -->
-
-        <!-- JOB OPPORTUNITIES -->
-<section class="jobs-section">
-
-    <h2>Career Opportunities</h2>
-
-    <p class="job-subtitle">
-        Explore opportunities across Singapore's hospitality industry
-    </p>
-
-    <div class="jobs-scroll-container">
-
-        <% if (jobs.length === 0) { %>
-            <p class="no-jobs">No openings at the moment. Check back soon!</p>
-        <% } else { %>
-            <% jobs.forEach(job => { %>
-            <div class="job-card">
-
-                <img
-                    src="<%= job.image_path || '/images/Arde_banner2.jpg' %>"
-                    alt="<%= job.job_title %>"
-                >
-
-                <div class="job-content">
-                    <h3><%= job.job_title %></h3>
-
-                    <% if (job.department || job.location) { %>
-                    <p class="job-meta">
-                        <% if (job.department) { %>
-                            <span>&#128188; <%= job.department %></span>
-                        <% } %>
-                        <% if (job.location) { %>
-                            <span>&#128205; <%= job.location %></span>
-                        <% } %>
-                    </p>
-                    <% } %>
-
-                    <p><%= job.description %></p>
-
-                    <a href="/careers/<%= job.id %>">More Details →</a>
+        <section class="career-jobs" id="jobs">
+            <div class="career-jobs-inner">
+                <div class="section-header">
+                    <span class="section-label">Open Positions</span>
+                    <h2><strong>Career</strong> Opportunities</h2>
+                    <p>Explore opportunities across Singapore's hospitality industry</p>
                 </div>
 
+                <% if (jobs.length === 0) { %>
+                    <p class="no-jobs">No openings at the moment. Check back soon!</p>
+                <% } else { %>
+                <div class="jobs-grid">
+                    <% jobs.forEach((job, i) => { %>
+                    <div class="job-card">
+                        <div class="job-card-img">
+                            <% if (i === 0) { %><span class="job-tag">New</span><% } %>
+                            <img src="<%= job.image_path || '/images/Arde_banner2.jpg' %>" alt="<%= job.job_title %>">
+                        </div>
+                        <div class="job-card-body">
+                            <h3><%= job.job_title %></h3>
+                            <div class="job-card-meta">
+                                <% if (job.department) { %><span><%= job.department %></span><% } %>
+                                <% if (job.location) { %><span><%= job.location %></span><% } %>
+                            </div>
+                            <p><%= job.description %></p>
+                            <a href="/careers/<%= job.id %>" class="job-card-link">View Role</a>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+                <% } %>
             </div>
-            <% }) %>
-        <% } %>
-
-    </div>
-
-</section>
-
+        </section>
 
     </main>
 

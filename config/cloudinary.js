@@ -15,6 +15,7 @@ const resumeStorage = new CloudinaryStorage({
             folder: 'arde/resumes',
             allowed_formats: ['pdf', 'doc', 'docx'],
             resource_type: 'raw',
+            public_id: Date.now() + '-' + file.originalname.replace(/\.[^/.]+$/, '').replace(/\s+/g, '_'),            format: file.originalname.split('.').pop(),
         };
     },
 });

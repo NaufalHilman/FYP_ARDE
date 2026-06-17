@@ -27,8 +27,47 @@ app.get('/', (req, res) => {
     res.render('home', { active: 'home' });
 });
 
-app.get('/events', (req, res) => {
-    res.render('events', { active: 'events' });
+app.get('/events', async (req, res) => {
+    try {
+        const [events] = await db.query('SELECT * FROM events ORDER BY event_date ASC');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        res.render('events', {
+            active: 'events',
+            featured: events.find(e => e.is_featured),
+            upcoming: events.filter(e => new Date(e.event_date) >= today),
+            past:     events.filter(e => new Date(e.event_date) <  today).reverse()
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.get('/events/:id', async (req, res) => {
+    try {
+        const [[event]] = await db.query('SELECT * FROM events WHERE id = ?', [req.params.id]);
+        if (!event) return res.status(404).send('Event not found');
+        res.render('event-detail', { event });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.post('/events/:id/register', async (req, res) => {
+    const { full_name, email, phone, message } = req.body;
+    const event_id = req.params.id;
+    try {
+        await db.query(
+            'INSERT INTO event_registrations (event_id, full_name, email, phone, message) VALUES (?, ?, ?, ?, ?)',
+            [event_id, full_name, email, phone, message]
+        );
+        res.render('event-register-success', { event_id });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error submitting registration');
+    }
 });
 
 app.get('/about', (req, res) => {

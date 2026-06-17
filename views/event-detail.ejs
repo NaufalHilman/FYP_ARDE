@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | <%= event.title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/career.css">
+</head>
+<body>
+    <%- include('navbar', { active: 'events' }) %>
+
+    <main>
+        <section class="job-detail-section">
+            <div class="job-detail-container">
+
+                <a href="/events" class="back-link">← Back to Events</a>
+
+                <% if (event.image_path) { %>
+                <img src="<%= event.image_path %>" alt="<%= event.title %>" class="job-detail-img">
+                <% } %>
+
+                <h1><%= event.title %></h1>
+
+                <div class="job-detail-meta">
+                    <% if (event.category) { %>
+                        <span>&#127991; <%= event.category.charAt(0).toUpperCase() + event.category.slice(1) %></span>
+                    <% } %>
+                    <% if (event.location) { %>
+                        <span>&#128205; <%= event.location %></span>
+                    <% } %>
+                    <% if (event.event_date) { %>
+                        <span>&#128197; <%= new Date(event.event_date).toLocaleDateString('en-SG', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                    <% } %>
+                </div>
+
+                <div class="job-detail-description">
+                    <h3>About This Event</h3>
+                    <p><%= event.description %></p>
+                </div>
+
+            </div>
+        </section>
+
+                <!-- REGISTRATION FORM -->
+        <% const isUpcoming = new Date(event.event_date) >= new Date(new Date().setHours(0,0,0,0)); %>
+        <% if (isUpcoming) { %>
+        <section class="apply-section">
+            <div class="apply-container">
+                <h2>Register Your Interest</h2>
+                <p>Fill in your details to register your interest for <strong><%= event.title %></strong>.</p>
+
+                <form action="/events/<%= event.id %>/register" method="POST" class="apply-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" name="full_name" required placeholder="John Tan">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required placeholder="john@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" placeholder="+65 9123 4567">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" rows="4" placeholder="Anything you'd like us to know..."></textarea>
+                    </div>
+
+                    <button type="submit" class="apply-btn">Register Interest</button>
+                </form>
+            </div>
+        </section>
+        <% } else { %>
+        <section class="apply-section">
+            <div class="apply-container" style="text-align:center;">
+                <p>This event has already taken place.</p>
+            </div>
+        </section>
+        <% } %>
+
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

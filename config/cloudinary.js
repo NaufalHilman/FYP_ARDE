@@ -11,11 +11,13 @@ cloudinary.config({
 const resumeStorage = new CloudinaryStorage({
     cloudinary,
     params: async (req, file) => {
+        const ext = file.originalname.split('.').pop();
+        const baseName = file.originalname.replace(/\.[^/.]+$/, '').replace(/\s+/g, '_');
         return {
             folder: 'arde/resumes',
-            allowed_formats: ['pdf', 'doc', 'docx'],
             resource_type: 'raw',
-            public_id: Date.now() + '-' + file.originalname.replace(/\.[^/.]+$/, '').replace(/\s+/g, '_'),            format: file.originalname.split('.').pop(),
+            public_id: `${Date.now()}-${baseName}.${ext}`,
+            use_filename: false,
         };
     },
 });

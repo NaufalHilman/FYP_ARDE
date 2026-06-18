@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | Honorary Members</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/members.css">
+</head>
+<body>
+    <%- include('navbar', { active }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main>
+        <section class="members-hero">
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="members-hero-inner">
+                <p class="hero-eyebrow">Recognising Excellence</p>
+                <h1>Honorary <span>Members</span></h1>
+                <p class="hero-desc">
+                    Honouring individuals who have made lasting contributions
+                    to ARDE and Singapore's hospitality industry.
+                </p>
+            </div>
+        </section>
+
+        <section class="leadership-section">
+            <div class="leadership-inner">
+                <% if (honorary.length === 0) { %>
+                    <p class="no-data">No honorary members listed yet.</p>
+                <% } else { %>
+                <div class="leadership-grid">
+                    <% honorary.forEach(member => { %>
+                    <div class="leader-card">
+                        <div class="leader-photo">
+                            <% if (member.image_path) { %>
+                                <img src="<%= member.image_path %>" alt="<%= member.full_name %>">
+                            <% } else { %>
+                                <div class="photo-placeholder"><%= member.full_name.charAt(0) %></div>
+                            <% } %>
+                        </div>
+                        <h4><%= member.full_name %></h4>
+                        <p class="leader-role"><%= member.title %></p>
+                        <% if (member.description) { %>
+                            <p class="leader-desc"><%= member.description %></p>
+                        <% } %>
+                    </div>
+                    <% }) %>
+                </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

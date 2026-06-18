@@ -126,4 +126,52 @@ if (require.main === module) {
     });
 }
 
+/* =====================================================
+   ARDE MEMBERS (regular members list)
+===================================================== */
+app.get('/members', async (req, res) => {
+    try {
+        const [members] = await db.query('SELECT * FROM members ORDER BY full_name ASC');
+        res.render('members', { members, active: 'about' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+/* =====================================================
+   EXECUTIVE COMMITTEE
+===================================================== */
+app.get('/executive', async (req, res) => {
+    try {
+        const [groups] = await db.query('SELECT * FROM executive_groups ORDER BY display_order ASC');
+        const [executives] = await db.query('SELECT * FROM executive_members ORDER BY display_order ASC');
+
+        const groupedExecutives = groups.map(group => ({
+            ...group,
+            members: executives.filter(e => e.group_id === group.id)
+        })).filter(group => group.members.length > 0);
+
+        const president = executives.find(e => e.is_president);
+
+        res.render('executive', { groupedExecutives, president, active: 'about' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+/* =====================================================
+   HONORARY MEMBERS
+===================================================== */
+app.get('/honorary', async (req, res) => {
+    try {
+        const [honorary] = await db.query('SELECT * FROM honorary_members ORDER BY display_order ASC');
+        res.render('honorary', { honorary, active: 'about' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = app;

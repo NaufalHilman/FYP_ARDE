@@ -1,0 +1,313 @@
+:root {
+    --primary: #27247B;
+    --secondary: #FFCB05;
+    --accent: #96CDF6;
+    --neutral-1: #465560;
+}
+
+/* HERO */
+.members-hero {
+    min-height: 320px;
+    background: var(--primary);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.hero-shape {
+    position: absolute;
+    left: -80px;
+    top: -80px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(150, 205, 246, 0.07);
+    pointer-events: none;
+}
+
+.hero-shape2 {
+    position: absolute;
+    left: 60px;
+    bottom: -120px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 203, 5, 0.06);
+    pointer-events: none;
+}
+
+.members-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 48px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-eyebrow {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.members-hero-inner h1 {
+    font-size: 2.6rem;
+    font-weight: 100;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.members-hero-inner h1 span {
+    color: var(--secondary);
+    font-weight: 900;
+}
+
+.hero-desc {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+/* MEMBERS TABLE */
+.members-list-section {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.members-list-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.members-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.members-table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 16px 20px;
+    border-bottom: 2px solid #eef0fb;
+}
+
+.members-table tbody td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--neutral-1);
+    border-bottom: 1px solid #f0f1f9;
+}
+
+.members-table tbody tr:hover {
+    background: #fafaff;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    padding: 60px;
+}
+
+/* PRESIDENT FEATURE */
+.president-section {
+    padding: 80px 0;
+    background: #f7f8fc;
+}
+
+.president-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.president-photo img,
+.president-photo .photo-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-placeholder {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+.president-tag {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+}
+
+.president-info h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    font-weight: 900;
+    margin-bottom: 6px;
+}
+
+.president-title {
+    font-size: 0.95rem;
+    color: var(--neutral-1);
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.president-vision {
+    font-size: 1.05rem;
+    color: var(--neutral-1);
+    line-height: 1.8;
+    font-style: italic;
+}
+
+/* LEADERSHIP GROUPS */
+.leadership-section {
+    padding: 90px 0;
+    background: #fff;
+}
+
+.leadership-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.section-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 100;
+    color: var(--primary);
+}
+
+.section-header h2 strong {
+    font-weight: 900;
+}
+
+.leadership-group {
+    margin-bottom: 56px;
+}
+
+.group-title {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #eef0fb;
+}
+
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.leader-card {
+    background: #fcfcfc;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: all 0.25s;
+}
+
+.leader-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 12px 24px rgba(39, 36, 123, 0.08);
+}
+
+.leader-photo {
+    margin-bottom: 16px;
+}
+
+.leader-photo img,
+.leader-photo .photo-placeholder {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.leader-card h4 {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.leader-role {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.leader-desc {
+    font-size: 0.85rem;
+    color: var(--neutral-1);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .president-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+    .members-hero-inner h1 { font-size: 1.9rem; }
+    .members-table { font-size: 13px; }
+    .members-table thead th,
+    .members-table tbody td { padding: 12px 10px; }
+}

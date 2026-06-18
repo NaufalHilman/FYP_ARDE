@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | Members</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/members.css">
+</head>
+<body>
+    <%- include('navbar', { active }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main>
+        <section class="members-hero">
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="members-hero-inner">
+                <p class="hero-eyebrow">Our Community</p>
+                <h1>ARDE <span>Members</span></h1>
+                <p class="hero-desc">
+                    Connecting hospitality professionals across Singapore's
+                    Rooms Division community.
+                </p>
+            </div>
+        </section>
+
+        <section class="members-list-section">
+            <div class="members-list-inner">
+                <% if (members.length === 0) { %>
+                    <p class="no-data">No members listed yet.</p>
+                <% } else { %>
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Company / Hotel</th>
+                            <th>Valid Till</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% members.forEach(m => { %>
+                        <tr>
+                            <td><%= m.full_name %></td>
+                            <td><%= m.company || '—' %></td>
+                            <td>
+                                <% if (m.valid_till) { %>
+                                    <%= new Date(m.valid_till).toLocaleDateString('en-SG', { year: 'numeric', month: 'short', day: 'numeric' }) %>
+                                <% } else { %>
+                                    —
+                                <% } %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

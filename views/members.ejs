@@ -29,6 +29,29 @@
                 <% if (members.length === 0) { %>
                     <p class="no-data">No members listed yet.</p>
                 <% } else { %>
+
+                    <div class="members-controls">
+                        <input type="text" id="search-input" placeholder="Search by name or hotel...">
+
+                        <select id="filter-hotel">
+                            <option value="">All Hotels</option>
+                            <% const hotels = [...new Set(members.map(m => m.company).filter(Boolean))].sort();
+                            hotels.forEach(h => { %>
+                                <option value="<%= h %>"><%= h %></option>
+                            <% }) %>
+                        </select>
+
+                        <select id="sort-select">
+                            <option value="default">Sort By</option>
+                            <option value="alpha-asc">Name A → Z</option>
+                            <option value="alpha-desc">Name Z → A</option>
+                            <option value="expiry-asc">Expiry (Earliest)</option>
+                            <option value="expiry-desc">Expiry (Latest)</option>
+                        </select>
+
+                        <button id="reset-btn">Clear</button>
+                    </div>
+
                 <table class="members-table">
                     <thead>
                         <tr>
@@ -50,7 +73,7 @@
                                 <% } %>
                             </td>
                         </tr>
-                        <% }) %>
+                        <% }) %>    
                     </tbody>
                 </table>
                 <% } %>
@@ -59,5 +82,64 @@
     </main>
 
     <%- include('footer') %>
+    
+    <script>
+        const searchInput  = document.getElementById('search-input');
+        const filterHotel  = document.getElementById('filter-hotel');
+        const sortSelect   = document.getElementById('sort-select');
+        const resetBtn     = document.getElementById('reset-btn');
+        const tbody        = document.querySelector('.members-table tbody');
+        const allRows      = Array.from(tbody.querySelectorAll('tr'));
+
+        function applyFilters() {
+            const search = searchInput.value.toLowerCase().trim();
+            const hotel  = filterHotel.value.toLowerCase();
+            const sort   = sortSelect.value;
+
+            // 1. Filter
+            let rows = allRows.filter(row => {
+                const name    = row.cells[0].textContent.toLowerCase();
+                const company = row.cells[1].textContent.toLowerCase();
+                const matchSearch = !search || name.includes(search) || company.includes(search);
+                const matchHotel  = !hotel  || company === hotel;
+                return matchSearch && matchHotel;
+            });
+
+            // 2. Sort
+            rows.sort((a, b) => {
+                const nameA = a.cells[0].textContent.trim();
+                const nameB = b.cells[0].textContent.trim();
+                const dateA = new Date(a.cells[2].textContent.trim());
+                const dateB = new Date(b.cells[2].textContent.trim());
+
+                if (sort === 'alpha-asc')   return nameA.localeCompare(nameB);
+                if (sort === 'alpha-desc')  return nameB.localeCompare(nameA);
+                if (sort === 'expiry-asc')  return dateA - dateB;
+                if (sort === 'expiry-desc') return dateB - dateA;
+                return 0;
+            });
+
+            // 3. Re-render
+            tbody.innerHTML = '';
+            if (rows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: #888;">No members found.</td></tr>';
+            } else {
+                rows.forEach(row => tbody.appendChild(row));
+            }
+        }
+
+        // 4. Reset
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            filterHotel.value = '';
+            sortSelect.value  = 'default';
+            applyFilters();
+        });
+
+        searchInput.addEventListener('input', applyFilters);
+        filterHotel.addEventListener('change', applyFilters);
+        sortSelect.addEventListener('change', applyFilters);
+    </script>
+    
 </body>
 </html>

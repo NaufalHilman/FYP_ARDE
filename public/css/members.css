@@ -311,3 +311,40 @@
     .members-table thead th,
     .members-table tbody td { padding: 12px 10px; }
 }
+
+.members-controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.members-controls input,
+.members-controls select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: #fff;
+    min-width: 160px;
+}
+
+.members-controls input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.members-controls button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #e5e7eb;
+    color: #374151;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.members-controls button:hover {
+    background: #d1d5db;
+}

@@ -3,6 +3,7 @@
     --secondary: #FFCB05;
     --accent: #96CDF6;
     --neutral-1: #465560;
+    --neutral-2: #273036;    
 }
 
 /* HERO */
@@ -227,6 +228,7 @@
 
 .leadership-group {
     margin-bottom: 56px;
+    text-align: center;
 }
 
 .group-title {
@@ -241,8 +243,9 @@
 }
 
 .leadership-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
 }
 
@@ -253,6 +256,9 @@
     padding: 28px 22px;
     text-align: center;
     transition: all 0.25s;
+    /* Add these lines to fix the width and stop stretching */
+    width: 220px; 
+    flex-shrink: 0; 
 }
 
 .leader-card:hover {
@@ -280,15 +286,15 @@
 
 .leader-card h4 {
     font-size: 1rem;
-    font-weight: 900;
+    font-weight: 500;
     color: var(--primary);
     margin-bottom: 4px;
 }
 
 .leader-role {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--neutral-s);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 12px;

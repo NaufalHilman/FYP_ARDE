@@ -346,9 +346,26 @@ a { text-decoration: none; }
     transform: translateY(-2px);
 }
 
+.dropdown-link.active {
+    color: var(--secondary) !important;
+    font-weight: 600;
+    background-color: #f4f4fb;
+}
+
+.dropdown-link.active .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--secondary);
+}
+
 /* ==========================================================================
    6. Mobile Responsive Adjustments (Screens below 992px)
    ========================================================================== */
+.mobile-dropdown-menu a.active {
+    color: var(--secondary) !important;
+    font-weight: 700;
+}
+
 @media (max-width: 768px) {
     /* Hide the full navigation links on mobile */
     .nav-links {

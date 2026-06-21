@@ -71,7 +71,7 @@ app.post('/events/:id/register', async (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.render('about', { active: 'about' });
+    res.render('about', { active: 'about', subActive: 'about-us' });
 });
 
 //careers routes
@@ -132,7 +132,7 @@ if (require.main === module) {
 app.get('/members', async (req, res) => {
     try {
         const [members] = await db.query('SELECT * FROM members ORDER BY full_name ASC');
-        res.render('members', { members, active: 'about' });
+        res.render('members', { members, active: 'about', subActive: 'members' });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -154,7 +154,7 @@ app.get('/executive', async (req, res) => {
 
         const president = executives.find(e => e.is_president);
 
-        res.render('executive', { groupedExecutives, president, active: 'about' });
+        res.render('executive', { groupedExecutives, president, active: 'about', subActive: 'executive' });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');
@@ -167,7 +167,7 @@ app.get('/executive', async (req, res) => {
 app.get('/honorary', async (req, res) => {
     try {
         const [honorary] = await db.query('SELECT * FROM honorary_members ORDER BY display_order ASC');
-        res.render('honorary', { honorary, active: 'about' });
+        res.render('honorary', { honorary, active: 'about', subActive: 'honorary' });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

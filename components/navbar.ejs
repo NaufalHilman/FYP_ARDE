@@ -1,3 +1,5 @@
+<% subActive = typeof subActive !== 'undefined' ? subActive : null; %>
+<% active = typeof active !== 'undefined' ? active : null; %>
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-links left-links">
@@ -28,8 +30,8 @@
                                 Who Are We?
                             </h4>
                             <p class="column-caption">Our mission and community</p>
-                            <a href="/about" class="dropdown-link">About Us <span class="link-arrow">→</span></a>
-                            <a href="/community" class="dropdown-link">Our Community Says <span class="link-arrow">→</span></a>
+                            <a href="/about" class="dropdown-link <%= subActive === 'about-us' ? 'active' : '' %>">About Us <span class="link-arrow">→</span></a>
+                            <a href="/community" class="dropdown-link <%= subActive === 'community' ? 'active' : '' %>">Our Community Says <span class="link-arrow">→</span></a>
                         </div>
 
                         <!-- Column 2: Our Team -->
@@ -41,9 +43,9 @@
                                 Our Team
                             </h4>
                             <p class="column-caption">The people behind ARDE</p>
-                            <a href="/members" class="dropdown-link">ARDE Members <span class="link-arrow">→</span></a>
-                            <a href="/executive" class="dropdown-link">Executive Committee <span class="link-arrow">→</span></a>
-                            <a href="/honorary" class="dropdown-link">Honorary Members <span class="link-arrow">→</span></a>
+                            <a href="/members" class="dropdown-link <%= subActive === 'members' ? 'active' : '' %>">ARDE Members <span class="link-arrow">→</span></a>
+                            <a href="/executive" class="dropdown-link <%= subActive === 'executive' ? 'active' : '' %>">Executive Committee <span class="link-arrow">→</span></a>
+                            <a href="/honorary" class="dropdown-link <%= subActive === 'honorary' ? 'active' : '' %>">Honorary Members <span class="link-arrow">→</span></a>
 
                             <h4 class="column-title contact-title">
                                 <span class="col-icon">
@@ -51,8 +53,8 @@
                                 </span>
                                 Contact
                             </h4>
-                            <a href="/contact" class="dropdown-link">Contact Us <span class="link-arrow">→</span></a>
-                            <a href="/support" class="dropdown-link">Contact Support <span class="link-arrow">→</span></a>
+                            <a href="/contact" class="dropdown-link <%= subActive === 'contact' ? 'active' : '' %>">Contact Us <span class="link-arrow">→</span></a>
+                            <a href="/support" class="dropdown-link <%= subActive === 'support' ? 'active' : '' %>">Contact Support <span class="link-arrow">→</span></a>
 
                             <div class="social-row">
                                 <a href="https://x.com/AICRaustria" class="social-icon" aria-label="X / Twitter">
@@ -104,23 +106,23 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
                     Who Are We?
                 </h4>
-                <a href="/about">About Us</a>
-                <a href="/community">Our Community Says</a>
+                <a href="/about" class="<%= subActive === 'about-us' ? 'active' : '' %>">About Us</a>
+                <a href="/community" class="<%= subActive === 'community' ? 'active' : '' %>">Our Community Says</a>
 
                 <h4 class="sub-title">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 19c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5"/><circle cx="17.5" cy="8.5" r="2.6"/><path d="M15.7 13.7c2.8.3 4.8 2.2 4.8 5.3"/></svg>
                     Our Team
                 </h4>
-                <a href="/members">ARDE Members</a>
-                <a href="/executive">Executive Committee</a>
-                <a href="/honorary">Honorary Members</a>
+                <a href="/members" class="<%= subActive === 'members' ? 'active' : '' %>">ARDE Members</a>
+                <a href="/executive" class="<%= subActive === 'executive' ? 'active' : '' %>">Executive Committee</a>
+                <a href="/honorary" class="<%= subActive === 'honorary' ? 'active' : '' %>">Honorary Members</a>
 
                 <h4 class="sub-title">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2C9.6 20 4 14.4 4 7a2 2 0 0 1 1-3z"/></svg>
                     Contact
                 </h4>
-                <a href="/contact">Contact Us</a>
-                <a href="/support">Contact Support</a>
+                <a href="/contact" class="<%= subActive === 'contact' ? 'active' : '' %>">Contact Us</a>
+                <a href="/support" class="<%= subActive === 'support' ? 'active' : '' %>">Contact Support</a>
             </div>
         </div>
             <a href="/careers" class="<%= active === 'careers' ? 'active' : '' %>">Careers</a>

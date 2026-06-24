@@ -56,12 +56,31 @@ app.get('/events/:id', async (req, res) => {
 });
 
 app.post('/events/:id/register', async (req, res) => {
-    const { full_name, email, phone, message } = req.body;
+    const { member_id, full_name, email, phone, message } = req.body;
     const event_id = req.params.id;
+
+    // Normalise to 5 digits so "472" still matches a stored "00472"
+    const memberId = (member_id || '').trim().padStart(5, '0');
+
     try {
+        // The ID must belong to an accepted member
+        const [members] = await db.query(
+            "SELECT member_id FROM membership_applications WHERE member_id = ? AND status = 'accepted'",
+            [memberId]
+        );
+
+        if (members.length === 0) {
+            const [[event]] = await db.query('SELECT * FROM events WHERE id = ?', [event_id]);
+            return res.status(400).render('event-detail', {
+                event,
+                error: 'That member ID was not found or is not an active member. Please check and try again.',
+                form: { member_id, full_name, email, phone, message }
+            });
+        }
+
         await db.query(
-            'INSERT INTO event_registrations (event_id, full_name, email, phone, message) VALUES (?, ?, ?, ?, ?)',
-            [event_id, full_name, email, phone, message]
+            'INSERT INTO event_registrations (event_id, member_id, full_name, email, phone, message) VALUES (?, ?, ?, ?, ?, ?)',
+            [event_id, memberId, full_name, email, phone, message]
         );
         res.render('event-register-success', { event_id });
     } catch (err) {
@@ -117,6 +136,46 @@ app.post('/careers/:id/apply', uploadResume.single('resume'), async (req, res) =
 //membership route
 app.get('/membership', (req, res) => {
     res.render('membership', { active: 'membership' });
+});
+
+// membership application submit
+app.post('/membership/apply', async (req, res) => {
+    const {
+        membership_type, title, full_name, nationality, nationality_other,
+        date_of_birth, residential_address, personal_email, mobile_number,
+        hotel_name, business_address, business_email, telephone_number,
+        current_position, years_in_position, existing_member_id,
+        opt_email_updates, opt_event_sms, opt_admin_responsibility, consent
+    } = req.body;
+
+    // If "Others" was picked, store the typed-in country instead
+    const finalNationality = nationality === 'Others' ? nationality_other : nationality;
+    // Only keep an existing ID for Renew applications
+    const existingId = membership_type === 'Renew' ? (existing_member_id || null) : null;
+
+    try {
+        await db.query(
+            `INSERT INTO membership_applications
+              (membership_type, title, full_name, nationality, date_of_birth,
+               residential_address, personal_email, mobile_number,
+               hotel_name, business_address, business_email, telephone_number,
+               current_position, years_in_position, existing_member_id,
+               opt_email_updates, opt_event_sms, opt_admin_responsibility, consent)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                membership_type, title, full_name, finalNationality, date_of_birth || null,
+                residential_address, personal_email, mobile_number,
+                hotel_name, business_address, business_email, telephone_number,
+                current_position, years_in_position, existingId,
+                opt_email_updates ? 1 : 0, opt_event_sms ? 1 : 0,
+                opt_admin_responsibility ? 1 : 0, consent ? 1 : 0
+            ]
+        );
+        res.render('membership-success', { active: 'membership' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error submitting application');
+    }
 });
 
 if (require.main === module) {

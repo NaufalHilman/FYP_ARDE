@@ -3,18 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>ARDE | Membership</title>
+    <link rel="stylesheet" href="/css/membership.css">
+    <title>ARDE | Become a Member</title>
 </head>
 <body>
     <%- include('navbar', { active: 'membership' }) %>
     <script src="/js/navbar.js"></script>
-    
-    <main style="padding: 100px 20px; text-align: center;">
-        <h1>Membership</h1>
-        <p>Information on how to join ARDE goes here.</p>
+
+    <main class="mship">
+        <h1 class="mship__title">Sign up as an ARDE member</h1>
+
+        <form action="/membership/apply" method="POST" class="mship__form">
+
+            <!-- MEMBERSHIP TYPE -->
+            <h2 class="mship__heading">Membership Type</h2>
+            <div class="mship__radio-group">
+                <label class="mship__radio">
+                    <input type="radio" name="membership_type" value="New" required> New
+                </label>
+                <label class="mship__radio">
+                    <input type="radio" name="membership_type" value="Renew"> Renew
+                </label>
+            </div>
+
+            <!-- shown only when Renew is picked -->
+            <div class="mship__field mship__renew" id="renewBox" style="display:none;">
+                <label>Existing Member ID</label>
+                <input type="text" name="existing_member_id" id="existingId"
+                       maxlength="5" placeholder="Your current 5-digit ID">
+            </div>
+
+            <!-- ABOUT YOU -->
+            <h2 class="mship__heading">Tell us about yourself</h2>
+
+            <div class="mship__field">
+                <select name="title" required>
+                    <option value="" disabled selected>Select Title (required)</option>
+                    <option>Mr</option><option>Mrs</option><option>Ms</option>
+                    <option>Dr</option><option>Prof</option>
+                </select>
+            </div>
+
+            <div class="mship__field">
+                <input type="text" name="full_name" required
+                       placeholder="Name as in NRIC/Passport (required)">
+            </div>
+
+            <div class="mship__row">
+                <div class="mship__field">
+                    <select name="nationality" id="nationality" required>
+                        <option value="" disabled selected>Select Nationality (required)</option>
+                        <option value="Singaporean">Singaporean</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="mship__field">
+                    <input type="date" name="date_of_birth" required>
+                </div>
+            </div>
+
+            <!-- shown only when Others is picked -->
+            <div class="mship__field" id="natOtherBox" style="display:none;">
+                <input type="text" name="nationality_other" id="natOther"
+                       placeholder="Please state your nationality">
+            </div>
+
+            <div class="mship__field">
+                <textarea name="residential_address" rows="3" required
+                          placeholder="Residential Address (required)"></textarea>
+            </div>
+
+            <div class="mship__row">
+                <div class="mship__field">
+                    <input type="email" name="personal_email" required
+                           placeholder="Personal Email (required)">
+                </div>
+                <div class="mship__field">
+                    <input type="text" name="mobile_number" required
+                           placeholder="Mobile Number (required)">
+                </div>
+            </div>
+
+            <!-- WORK -->
+            <h2 class="mship__heading">Where do you work</h2>
+
+            <div class="mship__field">
+                <input type="text" name="hotel_name" required
+                       placeholder="Name of Hotel (required)">
+            </div>
+
+            <div class="mship__field">
+                <textarea name="business_address" rows="3" required
+                          placeholder="Business Address (required)"></textarea>
+            </div>
+
+            <div class="mship__row">
+                <div class="mship__field">
+                    <input type="email" name="business_email" required
+                           placeholder="Business Email (required)">
+                </div>
+                <div class="mship__field">
+                    <input type="text" name="telephone_number" required
+                           placeholder="Telephone Number (required)">
+                </div>
+            </div>
+
+            <div class="mship__field">
+                <input type="text" name="current_position" required
+                       placeholder="Current Position (required)">
+            </div>
+
+            <div class="mship__field">
+                <select name="years_in_position" required>
+                    <option value="" disabled selected>Select no. of years in current position (required)</option>
+                    <option>Less than 1 year</option>
+                    <option>1-3 years</option>
+                    <option>3-5 years</option>
+                    <option>5-10 years</option>
+                    <option>More than 10 years</option>
+                </select>
+            </div>
+
+            <!-- PREFERENCES -->
+            <div class="mship__checks">
+                <label class="mship__check">
+                    <input type="checkbox" name="opt_email_updates" value="1">
+                    Would you like to receive updates and news from the association and/or our benefactor members via email?
+                </label>
+                <label class="mship__check">
+                    <input type="checkbox" name="opt_event_sms" value="1">
+                    Would you like to receive our notification of events via mobile sms?
+                </label>
+                <label class="mship__check">
+                    <input type="checkbox" name="opt_admin_responsibility" value="1">
+                    Are you willing to undertake elected administrative responsibility?
+                </label>
+            </div>
+
+            <label class="mship__consent">
+                <input type="checkbox" name="consent" value="1" required>
+                I consent to my data being stored in line with the guidelines set out in the privacy policy.
+            </label>
+
+            <button type="submit" class="mship__submit">SUBMIT</button>
+        </form>
     </main>
 
     <%- include('footer') %>
-    
+
+    <script>
+        // Show the existing-ID box only for Renew, and require it when shown
+        const renewBox = document.getElementById('renewBox');
+        const existingId = document.getElementById('existingId');
+        document.querySelectorAll('input[name="membership_type"]').forEach(r => {
+            r.addEventListener('change', () => {
+                const isRenew = document.querySelector('input[name="membership_type"]:checked').value === 'Renew';
+                renewBox.style.display = isRenew ? 'block' : 'none';
+                existingId.required = isRenew;
+            });
+        });
+
+        // Show the "other nationality" box only when Others is picked
+        const nat = document.getElementById('nationality');
+        const natOtherBox = document.getElementById('natOtherBox');
+        const natOther = document.getElementById('natOther');
+        nat.addEventListener('change', () => {
+            const isOther = nat.value === 'Others';
+            natOtherBox.style.display = isOther ? 'block' : 'none';
+            natOther.required = isOther;
+        });
+    </script>
 </body>
 </html>

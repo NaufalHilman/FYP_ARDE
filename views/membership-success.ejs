@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | Application Received</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/career.css">
+</head>
+<body>
+    <%- include('navbar', { active: 'membership' }) %>
+    <main>
+        <section class="apply-section">
+            <div class="apply-container" style="text-align:center; padding: 80px 20px;">
+                <div style="font-size:60px; margin-bottom:20px;">✅</div>
+                <h2>Application Received!</h2>
+                <p>Thank you for applying. Your application is now <strong>pending review</strong>.
+                   Our team will be in touch once it has been processed.</p>
+                <a href="/" class="apply-btn" style="display:inline-block; margin-top:24px;">
+                    Back to Home
+                </a>
+            </div>
+        </section>
+    </main>
+    <%- include('footer') %>
+</body>
+</html>

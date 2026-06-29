@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/membership.css">
     <title>ARDE | Become a Member</title>
@@ -10,167 +11,256 @@
     <%- include('navbar', { active: 'membership' }) %>
     <script src="/js/navbar.js"></script>
 
-    <main class="mship">
-        <h1 class="mship__title">Sign up as an ARDE member</h1>
+    <!-- ===================== HERO ===================== -->
+    <section class="mship-hero">
+        <div class="mship-hero__overlay"></div>
+        <img src="/images/Arde_banner1.jpg" alt="" class="mship-hero__img" aria-hidden="true">
+        <div class="mship-hero__content">
+            <p class="mship-hero__breadcrumb">ARDE / Join Us</p>
+            <h1 class="mship-hero__title">Become an ARDE Member</h1>
+            <p class="mship-hero__sub">Join Singapore's leading community of Rooms Division professionals. Connect, develop, and grow with ARDE.</p>
+        </div>
+        <div class="mship-hero__accent"></div>
+    </section>
 
-        <form action="/membership/apply" method="POST" class="mship__form">
+    <!-- ===================== FORM ===================== -->
+    <div class="mship-wrap">
+        <form action="/membership/apply" method="POST" class="mship-form">
 
-            <!-- MEMBERSHIP TYPE -->
-            <h2 class="mship__heading">Membership Type</h2>
-            <div class="mship__radio-group">
-                <label class="mship__radio">
-                    <input type="radio" name="membership_type" value="New" required> New
-                </label>
-                <label class="mship__radio">
-                    <input type="radio" name="membership_type" value="Renew"> Renew
-                </label>
+            <!-- ── 01 MEMBERSHIP TYPE ── -->
+            <div class="mship-card">
+                <div class="mship-card__hdr">
+                    <span class="mship-card__step">01</span>
+                    <div>
+                        <h2 class="mship-card__title">Membership Type</h2>
+                        <p class="mship-card__desc">Are you joining for the first time or renewing an existing membership?</p>
+                    </div>
+                </div>
+
+                <div class="mship-type-row">
+                    <label class="mship-type-card">
+                        <input type="radio" name="membership_type" value="New" required>
+                        <div class="mship-type-card__inner">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                            <span class="mship-type-card__label">New Member</span>
+                            <span class="mship-type-card__sub">First time joining ARDE</span>
+                        </div>
+                    </label>
+                    <label class="mship-type-card">
+                        <input type="radio" name="membership_type" value="Renew">
+                        <div class="mship-type-card__inner">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                            <span class="mship-type-card__label">Renew Membership</span>
+                            <span class="mship-type-card__sub">Existing ARDE member</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="mship-field" id="renewBox" style="display:none;">
+                    <label class="mship-label">Existing Member ID</label>
+                    <input type="text" name="existing_member_id" id="existingId"
+                           maxlength="5" placeholder="Your current 5-digit ID" class="mship-input">
+                </div>
             </div>
 
-            <!-- shown only when Renew is picked -->
-            <div class="mship__field mship__renew" id="renewBox" style="display:none;">
-                <label>Existing Member ID</label>
-                <input type="text" name="existing_member_id" id="existingId"
-                       maxlength="5" placeholder="Your current 5-digit ID">
+            <!-- ── 02 ABOUT YOU ── -->
+            <div class="mship-card">
+                <div class="mship-card__hdr">
+                    <span class="mship-card__step">02</span>
+                    <div>
+                        <h2 class="mship-card__title">Tell Us About Yourself</h2>
+                        <p class="mship-card__desc">Personal details as per your NRIC or Passport.</p>
+                    </div>
+                </div>
+
+                <div class="mship-grid mship-grid--3">
+                    <div class="mship-field">
+                        <label class="mship-label">Title <span class="mship-req">*</span></label>
+                        <select name="title" required class="mship-input">
+                            <option value="" disabled selected>Select</option>
+                            <option>Mr</option><option>Mrs</option><option>Ms</option>
+                            <option>Dr</option><option>Prof</option>
+                        </select>
+                    </div>
+                    <div class="mship-field mship-field--span2">
+                        <label class="mship-label">Full Name <span class="mship-req">*</span></label>
+                        <input type="text" name="full_name" required class="mship-input"
+                               placeholder="As in NRIC / Passport">
+                    </div>
+                </div>
+
+                <div class="mship-grid mship-grid--2">
+                    <div class="mship-field">
+                        <label class="mship-label">Nationality <span class="mship-req">*</span></label>
+                        <select name="nationality" id="nationality" required class="mship-input">
+                            <option value="" disabled selected>Select nationality</option>
+                            <option value="Singaporean">Singaporean</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="mship-field">
+                        <label class="mship-label">Date of Birth (D.O.B) <span class="mship-req">*</span></label>
+                        <input type="date" name="date_of_birth" required class="mship-input">
+                    </div>
+                </div>
+
+                <div class="mship-field" id="natOtherBox" style="display:none;">
+                    <label class="mship-label">Please state your nationality</label>
+                    <input type="text" name="nationality_other" id="natOther"
+                           placeholder="e.g. Malaysian" class="mship-input">
+                </div>
+
+                <div class="mship-field">
+                    <label class="mship-label">Residential Address <span class="mship-req">*</span></label>
+                    <textarea name="residential_address" rows="3" required class="mship-input mship-input--textarea"
+                              placeholder="Block / Street / Unit / Postal Code"></textarea>
+                </div>
+
+                <div class="mship-grid mship-grid--2">
+                    <div class="mship-field">
+                        <label class="mship-label">Personal Email <span class="mship-req">*</span></label>
+                        <input type="email" name="personal_email" required class="mship-input"
+                               placeholder="you@email.com">
+                    </div>
+                    <div class="mship-field">
+                        <label class="mship-label">Mobile Number <span class="mship-req">*</span></label>
+                        <input type="text" name="mobile_number" required class="mship-input"
+                               placeholder="+65 9XXX XXXX">
+                    </div>
+                </div>
             </div>
 
-            <!-- ABOUT YOU -->
-            <h2 class="mship__heading">Tell us about yourself</h2>
+            <!-- ── 03 WHERE DO YOU WORK ── -->
+            <div class="mship-card">
+                <div class="mship-card__hdr">
+                    <span class="mship-card__step">03</span>
+                    <div>
+                        <h2 class="mship-card__title">Where Do You Work</h2>
+                        <p class="mship-card__desc">Your current hotel and position details.</p>
+                    </div>
+                </div>
 
-            <div class="mship__field">
-                <select name="title" required>
-                    <option value="" disabled selected>Select Title (required)</option>
-                    <option>Mr</option><option>Mrs</option><option>Ms</option>
-                    <option>Dr</option><option>Prof</option>
-                </select>
-            </div>
+                <div class="mship-field">
+                    <label class="mship-label">Hotel Name <span class="mship-req">*</span></label>
+                    <input type="text" name="hotel_name" required class="mship-input"
+                           placeholder="e.g. Marina Bay Sands">
+                </div>
 
-            <div class="mship__field">
-                <input type="text" name="full_name" required
-                       placeholder="Name as in NRIC/Passport (required)">
-            </div>
+                <div class="mship-field">
+                    <label class="mship-label">Business Address <span class="mship-req">*</span></label>
+                    <textarea name="business_address" rows="3" required class="mship-input mship-input--textarea"
+                              placeholder="Hotel business address"></textarea>
+                </div>
 
-            <div class="mship__row">
-                <div class="mship__field">
-                    <select name="nationality" id="nationality" required>
-                        <option value="" disabled selected>Select Nationality (required)</option>
-                        <option value="Singaporean">Singaporean</option>
-                        <option value="Others">Others</option>
+                <div class="mship-grid mship-grid--2">
+                    <div class="mship-field">
+                        <label class="mship-label">Business Email <span class="mship-req">*</span></label>
+                        <input type="email" name="business_email" required class="mship-input"
+                               placeholder="you@hotel.com">
+                    </div>
+                    <div class="mship-field">
+                        <label class="mship-label">Telephone Number <span class="mship-req">*</span></label>
+                        <input type="text" name="telephone_number" required class="mship-input"
+                               placeholder="+65 6XXX XXXX">
+                    </div>
+                </div>
+
+                <div class="mship-field">
+                    <label class="mship-label">Current Position <span class="mship-req">*</span></label>
+                    <input type="text" name="current_position" required class="mship-input"
+                           placeholder="e.g. Front Office Manager">
+                </div>
+
+                <div class="mship-field">
+                    <label class="mship-label">Years in Current Position <span class="mship-req">*</span></label>
+                    <select name="years_in_position" required class="mship-input">
+                        <option value="" disabled selected>Select duration</option>
+                        <option>Less than 1 year</option>
+                        <option>1-3 years</option>
+                        <option>3-5 years</option>
+                        <option>5-10 years</option>
+                        <option>More than 10 years</option>
                     </select>
                 </div>
-                <div class="mship__field">
-                    <input type="date" name="date_of_birth" required>
+            </div>
+
+            <!-- ── 04 PREFERENCES ── -->
+            <div class="mship-card">
+                <div class="mship-card__hdr">
+                    <span class="mship-card__step">04</span>
+                    <div>
+                        <h2 class="mship-card__title">Your Preferences</h2>
+                        <p class="mship-card__desc">Let us know how you'd like to stay involved.</p>
+                    </div>
+                </div>
+
+                <div class="mship-checks">
+                    <label class="mship-check">
+                        <input type="checkbox" name="opt_email_updates" value="1">
+                        <div>
+                            <span class="mship-check__title">Email Updates</span>
+                            <span class="mship-check__sub">Receive updates and news from the association and/or our benefactor members via email.</span>
+                        </div>
+                    </label>
+                    <label class="mship-check">
+                        <input type="checkbox" name="opt_event_sms" value="1">
+                        <div>
+                            <span class="mship-check__title">Event Notifications</span>
+                            <span class="mship-check__sub">Receive notifications of upcoming events via mobile SMS.</span>
+                        </div>
+                    </label>
+                    <label class="mship-check">
+                        <input type="checkbox" name="opt_admin_responsibility" value="1">
+                        <div>
+                            <span class="mship-check__title">Administrative Responsibility</span>
+                            <span class="mship-check__sub">I am willing to undertake elected administrative responsibility within ARDE.</span>
+                        </div>
+                    </label>
                 </div>
             </div>
 
-            <!-- shown only when Others is picked -->
-            <div class="mship__field" id="natOtherBox" style="display:none;">
-                <input type="text" name="nationality_other" id="natOther"
-                       placeholder="Please state your nationality">
-            </div>
-
-            <div class="mship__field">
-                <textarea name="residential_address" rows="3" required
-                          placeholder="Residential Address (required)"></textarea>
-            </div>
-
-            <div class="mship__row">
-                <div class="mship__field">
-                    <input type="email" name="personal_email" required
-                           placeholder="Personal Email (required)">
-                </div>
-                <div class="mship__field">
-                    <input type="text" name="mobile_number" required
-                           placeholder="Mobile Number (required)">
-                </div>
-            </div>
-
-            <!-- WORK -->
-            <h2 class="mship__heading">Where do you work</h2>
-
-            <div class="mship__field">
-                <input type="text" name="hotel_name" required
-                       placeholder="Name of Hotel (required)">
-            </div>
-
-            <div class="mship__field">
-                <textarea name="business_address" rows="3" required
-                          placeholder="Business Address (required)"></textarea>
-            </div>
-
-            <div class="mship__row">
-                <div class="mship__field">
-                    <input type="email" name="business_email" required
-                           placeholder="Business Email (required)">
-                </div>
-                <div class="mship__field">
-                    <input type="text" name="telephone_number" required
-                           placeholder="Telephone Number (required)">
-                </div>
-            </div>
-
-            <div class="mship__field">
-                <input type="text" name="current_position" required
-                       placeholder="Current Position (required)">
-            </div>
-
-            <div class="mship__field">
-                <select name="years_in_position" required>
-                    <option value="" disabled selected>Select no. of years in current position (required)</option>
-                    <option>Less than 1 year</option>
-                    <option>1-3 years</option>
-                    <option>3-5 years</option>
-                    <option>5-10 years</option>
-                    <option>More than 10 years</option>
-                </select>
-            </div>
-
-            <!-- PREFERENCES -->
-            <div class="mship__checks">
-                <label class="mship__check">
-                    <input type="checkbox" name="opt_email_updates" value="1">
-                    Would you like to receive updates and news from the association and/or our benefactor members via email?
+            <!-- ── CONSENT + SUBMIT ── -->
+            <div class="mship-footer">
+                <label class="mship-consent">
+                    <input type="checkbox" name="consent" value="1" required>
+                    <span>I consent to my personal data being stored and processed in line with ARDE's privacy policy.</span>
                 </label>
-                <label class="mship__check">
-                    <input type="checkbox" name="opt_event_sms" value="1">
-                    Would you like to receive our notification of events via mobile sms?
-                </label>
-                <label class="mship__check">
-                    <input type="checkbox" name="opt_admin_responsibility" value="1">
-                    Are you willing to undertake elected administrative responsibility?
-                </label>
+                <button type="submit" class="mship-submit">Submit Application</button>
             </div>
 
-            <label class="mship__consent">
-                <input type="checkbox" name="consent" value="1" required>
-                I consent to my data being stored in line with the guidelines set out in the privacy policy.
-            </label>
-
-            <button type="submit" class="mship__submit">SUBMIT</button>
         </form>
-    </main>
+    </div>
 
     <%- include('footer') %>
 
     <script>
-        // Show the existing-ID box only for Renew, and require it when shown
-        const renewBox = document.getElementById('renewBox');
+        // Show the existing-ID box only for Renew
+        const renewBox  = document.getElementById('renewBox');
         const existingId = document.getElementById('existingId');
         document.querySelectorAll('input[name="membership_type"]').forEach(r => {
             r.addEventListener('change', () => {
                 const isRenew = document.querySelector('input[name="membership_type"]:checked').value === 'Renew';
                 renewBox.style.display = isRenew ? 'block' : 'none';
-                existingId.required = isRenew;
+                existingId.required    = isRenew;
             });
         });
 
-        // Show the "other nationality" box only when Others is picked
-        const nat = document.getElementById('nationality');
+        // Show "other nationality" box
+        const nat         = document.getElementById('nationality');
         const natOtherBox = document.getElementById('natOtherBox');
-        const natOther = document.getElementById('natOther');
+        const natOther    = document.getElementById('natOther');
         nat.addEventListener('change', () => {
             const isOther = nat.value === 'Others';
             natOtherBox.style.display = isOther ? 'block' : 'none';
-            natOther.required = isOther;
+            natOther.required         = isOther;
+        });
+
+        // Highlight selected membership type card
+        document.querySelectorAll('.mship-type-card input').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.querySelectorAll('.mship-type-card').forEach(c => c.classList.remove('mship-type-card--active'));
+                if (radio.checked) radio.closest('.mship-type-card').classList.add('mship-type-card--active');
+            });
         });
     </script>
 </body>

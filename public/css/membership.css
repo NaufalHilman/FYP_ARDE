@@ -1,79 +1,391 @@
-.mship {
-    background: #27247B;
-    padding: 60px 20px 80px;
-    min-height: 100vh;
+/* ============================================================
+   MEMBERSHIP PAGE — ARDE Design System
+   Primary: #27247B | Yellow: #FFCB05 | Accent: #96CDF6
+   ============================================================ */
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.mship-hero {
+    position: relative;
+    height: 340px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
-.mship__title {
+
+.mship-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.mship-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgba(39,36,123,0.93) 45%, rgba(39,36,123,0.55) 100%);
+    z-index: 1;
+}
+
+.mship-hero__accent {
+    position: absolute;
+    right: -60px;
+    bottom: -60px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 50px solid rgba(150,205,246,0.12);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.mship-hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 0 100px;
+}
+
+.mship-hero__breadcrumb {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     color: #FFCB05;
-    text-align: center;
-    font-size: 2.4rem;
-    margin-bottom: 40px;
+    margin: 0 0 12px;
 }
-.mship__form {
+
+.mship-hero__title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 14px;
+    line-height: 1.15;
+}
+
+.mship-hero__sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.82);
+    max-width: 520px;
+    margin: 0;
+    line-height: 1.65;
+}
+
+/* ── FORM WRAPPER ─────────────────────────────────────────── */
+.mship-wrap {
+    background: #f6f6fc;
+    min-height: 60vh;
+    padding: 56px 100px 80px;
+}
+
+.mship-form {
     max-width: 820px;
     margin: 0 auto;
-}
-.mship__heading {
-    color: #fff;
-    margin: 36px 0 16px;
-    font-size: 1.3rem;
-}
-.mship__field { margin-bottom: 16px; }
-.mship__row {
-    display: flex;
-    gap: 16px;
-}
-.mship__row .mship__field { flex: 1; }
-
-.mship__field input,
-.mship__field select,
-.mship__field textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 16px 20px;
-    border: none;
-    border-radius: 30px;
-    background: #FBF1EE;
-    font-size: 0.95rem;
-    color: #273036;
-}
-.mship__field textarea { border-radius: 18px; resize: vertical; }
-
-.mship__radio-group { display: flex; flex-direction: column; gap: 8px; }
-.mship__radio, .mship__check, .mship__consent {
-    color: #fff;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    cursor: pointer;
-}
-.mship__checks {
-    background: #FBF1EE;
-    color: #273036;
-    border-radius: 18px;
-    padding: 22px 26px;
-    margin: 32px 0 20px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 28px;
 }
-.mship__checks .mship__check { color: #273036; font-size: 0.85rem; }
-.mship__consent { justify-content: center; font-size: 0.85rem; margin-bottom: 30px; }
 
-.mship__submit {
-    display: block;
-    margin: 0 auto;
-    background: #FFCB05;
-    color: #27247B;
+/* ── CARD ─────────────────────────────────────────────────── */
+.mship-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 36px 40px;
+    box-shadow: 0 2px 16px rgba(39,36,123,0.07);
+    border-top: 4px solid #27247B;
+}
+
+.mship-card__hdr {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeef6;
+}
+
+.mship-card__step {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #27247B;
+    color: #FFCB05;
+    font-size: 14px;
     font-weight: 800;
-    font-size: 1.1rem;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+}
+
+.mship-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #27247B;
+    margin: 0 0 4px;
+}
+
+.mship-card__desc {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+    line-height: 1.55;
+}
+
+/* ── MEMBERSHIP TYPE CARDS ────────────────────────────────── */
+.mship-type-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.mship-type-card {
+    cursor: pointer;
+    display: block;
+}
+
+.mship-type-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mship-type-card__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 20px;
+    border: 2px solid #e0e0ee;
     border-radius: 12px;
-    padding: 16px 60px;
+    background: #fafafe;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    color: #555;
+    text-align: center;
+}
+
+.mship-type-card__label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #27247B;
+}
+
+.mship-type-card__sub {
+    font-size: 12px;
+    color: #888;
+}
+
+.mship-type-card--active .mship-type-card__inner,
+.mship-type-card input[type="radio"]:checked ~ .mship-type-card__inner {
+    border-color: #27247B;
+    background: #f0f0f9;
+    box-shadow: 0 0 0 3px rgba(39,36,123,0.12);
+    color: #27247B;
+}
+
+.mship-type-card__inner:hover {
+    border-color: #96CDF6;
+    background: #f6faff;
+}
+
+/* ── FIELDS & INPUTS ─────────────────────────────────────── */
+.mship-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.mship-grid--2 { grid-template-columns: 1fr 1fr; }
+.mship-grid--3 { grid-template-columns: 1fr 2fr; }
+
+.mship-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.mship-grid .mship-field {
+    margin-bottom: 0;
+}
+
+.mship-field--span2 {
+    grid-column: span 2;
+}
+
+.mship-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #27247B;
+    letter-spacing: 0.2px;
+}
+
+.mship-req {
+    color: #e53e3e;
+    font-weight: 700;
+}
+
+.mship-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #d8d8ee;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #222;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+}
+
+.mship-input:focus {
+    outline: none;
+    border-color: #27247B;
+    box-shadow: 0 0 0 3px rgba(39,36,123,0.1);
+}
+
+.mship-input::placeholder {
+    color: #b0b0c0;
+}
+
+.mship-input--textarea {
+    resize: vertical;
+    min-height: 88px;
+}
+
+select.mship-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2327247B' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
     cursor: pointer;
 }
-.mship__submit:hover { filter: brightness(0.95); }
 
-@media (max-width: 600px) {
-    .mship__row { flex-direction: column; gap: 0; }
+/* ── PREFERENCE CHECKS ─────────────────────────────────────── */
+.mship-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mship-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1.5px solid #e8e8f4;
+    border-radius: 10px;
+    background: #fafafe;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.mship-check:hover {
+    border-color: #96CDF6;
+    background: #f6faff;
+}
+
+.mship-check input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: #27247B;
+    cursor: pointer;
+}
+
+.mship-check__title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #27247B;
+    margin-bottom: 3px;
+}
+
+.mship-check__sub {
+    display: block;
+    font-size: 12.5px;
+    color: #888;
+    line-height: 1.55;
+}
+
+/* ── FOOTER (CONSENT + SUBMIT) ─────────────────────────────── */
+.mship-footer {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 40px;
+    box-shadow: 0 2px 16px rgba(39,36,123,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.mship-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    line-height: 1.6;
+    max-width: 580px;
+    text-align: center;
+}
+
+.mship-consent input[type="checkbox"] {
+    flex-shrink: 0;
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+    accent-color: #27247B;
+}
+
+.mship-submit {
+    display: inline-block;
+    padding: 15px 52px;
+    background: #FFCB05;
+    color: #27247B;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(255,203,5,0.35);
+}
+
+.mship-submit:hover {
+    background: #e6b800;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255,203,5,0.45);
+}
+
+.mship-submit:active {
+    transform: translateY(0);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .mship-wrap  { padding: 40px 24px 60px; }
+    .mship-card  { padding: 28px 24px; }
+    .mship-footer { padding: 28px 24px; }
+    .mship-hero__content { padding: 0 40px; }
+    .mship-grid--2 { grid-template-columns: 1fr; }
+    .mship-grid--3 { grid-template-columns: 1fr; }
+    .mship-field--span2 { grid-column: span 1; }
+    .mship-type-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+    .mship-hero { height: 280px; }
+    .mship-hero__content { padding: 0 20px; }
+    .mship-wrap  { padding: 28px 16px 48px; }
+    .mship-card  { padding: 22px 18px; }
 }

@@ -30,13 +30,30 @@ app.get('/', (req, res) => {
 app.get('/events', async (req, res) => {
     try {
         const [events] = await db.query('SELECT * FROM events ORDER BY event_date ASC');
+        const [awards] = await db.query('SELECT * FROM awards ORDER BY deadline ASC');
+        const [allWinners] = await db.query(
+            "SELECT * FROM award_winners ORDER BY award_id ASC, role ASC, id ASC"
+        );
+
+        // Build a map: award_id -> { winners: [], runnerUps: [] }
+        const winnersMap = {};
+        allWinners.forEach(w => {
+            if (!winnersMap[w.award_id]) winnersMap[w.award_id] = { winners: [], runnerUps: [] };
+            if (w.role === 'winner') winnersMap[w.award_id].winners.push(w);
+            else                     winnersMap[w.award_id].runnerUps.push(w);
+        });
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         res.render('events', {
             active: 'events',
             featured: events.find(e => e.is_featured),
             upcoming: events.filter(e => new Date(e.event_date) >= today),
-            past:     events.filter(e => new Date(e.event_date) <  today).reverse()
+            past:     events.filter(e => new Date(e.event_date) <  today).reverse(),
+            awards,
+            winnersMap,
+            notice: req.query.notice || null,
+            error:  req.query.error  || null
         });
     } catch (err) {
         console.error(err);
@@ -86,6 +103,56 @@ app.post('/events/:id/register', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Error submitting registration');
+    }
+});
+
+app.post('/awards/:id/register', async (req, res) => {
+    const award_id = req.params.id;
+    const { member_id, full_name } = req.body;
+    const memberId = (member_id || '').trim().padStart(5, '0');
+
+    try {
+        // Award must exist and deadline must not have passed
+        const [[award]] = await db.query('SELECT * FROM awards WHERE id = ?', [award_id]);
+        if (!award) return res.redirect('/events#awards');
+
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        if (new Date(award.deadline) < today) {
+            return res.redirect('/events?error=' + encodeURIComponent('The deadline for this award has passed.') + '#awards');
+        }
+
+        // Member ID must exist in members table OR accepted membership application
+        const [[inMembers]] = await db.query(
+            'SELECT id FROM members WHERE member_id = ?', [memberId]
+        );
+        if (!inMembers) {
+            const [[inApps]] = await db.query(
+                "SELECT id FROM membership_applications WHERE member_id = ? AND status = 'accepted'",
+                [memberId]
+            );
+            if (!inApps) {
+                return res.redirect('/events?error=' + encodeURIComponent('Member ID not found. Please check and try again.') + '#awards');
+            }
+        }
+
+        // No duplicate registrations
+        const [[existing]] = await db.query(
+            'SELECT id FROM award_registrations WHERE award_id = ? AND member_id = ?',
+            [award_id, memberId]
+        );
+        if (existing) {
+            return res.redirect('/events?error=' + encodeURIComponent('You have already registered for this award.') + '#awards');
+        }
+
+        await db.query(
+            'INSERT INTO award_registrations (award_id, member_id, full_name) VALUES (?, ?, ?)',
+            [award_id, memberId, full_name]
+        );
+
+        res.redirect('/events?notice=' + encodeURIComponent(`Successfully registered for "${award.title}"!`) + '#awards');
+    } catch (err) {
+        console.error(err);
+        res.redirect('/events?error=' + encodeURIComponent('Something went wrong. Please try again.') + '#awards');
     }
 });
 

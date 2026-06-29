@@ -15,33 +15,107 @@
   <%
   function pad(n) { return String(n).padStart(2, '0'); }
   const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  function ordinal(n) {
+    const s = ['th','st','nd','rd'];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
   function day(d)  { return pad(new Date(d).getDate()); }
   function mon(d)  { return MONTHS[new Date(d).getMonth()]; }
   function year(d) { return new Date(d).getFullYear(); }
   function cap(s)  { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+  const _now = new Date();
+  const openAwardsList   = awards.filter(a => new Date(a.deadline) >= _now);
+  const closedAwardsList = awards.filter(a => new Date(a.deadline) <  _now);
   %>
 
   <main>
 
     <!-- =====================================================
-         1. HERO
+         1. HERO  (matches homepage banner-hero style)
          ===================================================== -->
-    <section class="hero">
-      <img class="hero__bg" src="/images/events-hero.webp" alt="" aria-hidden="true">
-      <div class="hero__overlay"></div>
-      <div class="hero__content">
-        <h1 class="hero__title">Events</h1>
-        <p class="hero__subtitle">Upcoming &amp; Past Events</p>
-        <p class="hero__body">Stay connected with the latest ARDE events, networking sessions and industry gatherings.</p>
+    <section class="banner-hero events-hero">
+      <div class="hero-shape"></div>
+      <div class="hero-shape2"></div>
+      <div class="hero-inner">
+
+        <!-- Left: text -->
+        <div class="hero-text">
+          <span class="hero-eyebrow">ARDE Events</span>
+          <h1 class="hero-heading">
+            Events &amp; <span class="hero-accent">Industry</span> Engagement
+          </h1>
+          <p class="hero-sub">
+            Showcasing upcoming events, networking opportunities, workshops, competitions, and member engagement activities within Singapore's hospitality industry.
+          </p>
+          <div class="hero-actions">
+            <a href="#upcomingSection" class="btn-hero-primary">Explore Events</a>
+          </div>
+        </div>
+
+        <!-- Right: image -->
+        <div class="hero-image-block">
+          <div class="hero-image-wrap">
+            <img src="/images/Arde_banner2.jpg" alt="ARDE Events" style="object-position: center center;">
+            <div class="hero-image-badge">
+              <span class="badge-dot" style="background:#FFCB05;"></span>
+              <span>Now Open for Registration</span>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="hero__accent-bar"></div>
     </section>
 
     <!-- =====================================================
-         2. FEATURED EVENT
+         FLASH MESSAGES
+         ===================================================== -->
+    <% if (notice) { %>
+    <div class="flash flash--notice"><%= notice %></div>
+    <% } %>
+    <% if (error) { %>
+    <div class="flash flash--error"><%= error %></div>
+    <% } %>
+
+    <!-- =====================================================
+         FILTER TABS: All Events | Networking | Awards | Workshops
+         ===================================================== -->
+    <section class="filter-tabs-wrap">
+      <div class="filter-tabs" role="tablist" aria-label="Filter events by category">
+        <button class="filter-tabs__btn filter-tabs__btn--active" data-filter="all"        role="tab" aria-selected="true">All Events</button>
+        <button class="filter-tabs__btn"                          data-filter="networking" role="tab" aria-selected="false">Networking</button>
+        <button class="filter-tabs__btn"                          data-filter="workshop"   role="tab" aria-selected="false">Workshops</button>
+        <button class="filter-tabs__btn"                          data-filter="awards"     role="tab" aria-selected="false">Awards</button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         WHY IT MATTERS — shown with events, hidden with Awards tab
+         ===================================================== -->
+    <section class="why-section" id="whySection">
+      <div class="why-section__inner">
+        <div class="why-section__text">
+          <span class="why-section__tag">Why It Matters</span>
+          <h2 class="why-section__title">More Than Just Gatherings</h2>
+          <p class="why-section__desc">ARDE's events go beyond simple gatherings. We are part of a larger effort to uplift the hospitality industry — helping members grow at every stage of their career journey.</p>
+        </div>
+        <ul class="why-section__list">
+          <li><span class="why-section__dot"></span>Professional networking opportunities</li>
+          <li><span class="why-section__dot"></span>Exposure to hospitality best practices</li>
+          <li><span class="why-section__dot"></span>Career development and mentorship</li>
+          <li><span class="why-section__dot"></span>Industry trend updates and market insights</li>
+          <li><span class="why-section__dot"></span>Learning journeys and hotel visits</li>
+          <li><span class="why-section__dot"></span>Skills enhancement workshops</li>
+          <li><span class="why-section__dot"></span>Opportunities to connect with hospitality leaders and peers</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         2. FEATURED EVENT (always visible)
          ===================================================== -->
     <% if (featured) { %>
-    <section class="featured-event">
+    <section class="featured-event" id="featuredSection">
       <div class="featured-event__header">
         <div class="featured-event__eyebrow">
           <span class="featured-event__eyebrow-bar" aria-hidden="true"></span>
@@ -51,7 +125,6 @@
       </div>
       <div class="featured-event__container container">
         <div class="featured-event__card">
-
           <div class="featured-event__info">
             <span class="featured-event__pill"><%= cap(featured.category) %></span>
             <h3 class="featured-event__title"><%= featured.title %></h3>
@@ -68,32 +141,18 @@
               <a href="/events/<%= featured.id %>" class="btn btn--primary btn--pill featured-event__cta">Register Now →</a>
             </div>
           </div>
-
           <div class="featured-event__photo">
             <img src="<%= featured.image_path %>" alt="<%= featured.title %>" class="featured-event__img" loading="lazy">
           </div>
-
         </div>
       </div>
     </section>
     <% } %>
 
     <!-- =====================================================
-         3. FILTER TABS
+         3. UPCOMING EVENTS
          ===================================================== -->
-    <section class="filter-tabs-wrap">
-      <div class="filter-tabs" role="tablist" aria-label="Filter events by category">
-        <button class="filter-tabs__btn filter-tabs__btn--active" data-filter="all"        role="tab" aria-selected="true">All Events</button>
-        <button class="filter-tabs__btn"                          data-filter="networking" role="tab" aria-selected="false">Networking</button>
-        <button class="filter-tabs__btn"                          data-filter="awards"     role="tab" aria-selected="false">Awards</button>
-        <button class="filter-tabs__btn"                          data-filter="workshop"   role="tab" aria-selected="false">Workshops</button>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         4. UPCOMING EVENTS
-         ===================================================== -->
-    <section class="events-section">
+    <section class="events-section" id="upcomingSection">
       <div class="events-section__header">
         <p class="events-section__eyebrow">Upcoming Events</p>
         <h2 class="events-section__title">What's Next</h2>
@@ -131,9 +190,9 @@
     </section>
 
     <!-- =====================================================
-         5. PAST EVENTS
+         4. PAST EVENTS
          ===================================================== -->
-    <section class="events-section events-section--past">
+    <section class="events-section events-section--past" id="pastSection">
       <div class="events-section__header">
         <p class="events-section__eyebrow">Past Events</p>
         <h2 class="events-section__title">Event Gallery</h2>
@@ -147,7 +206,7 @@
           <% } %>
 
           <% past.forEach(ev => { %>
-          <article class="event-card event-card--past">
+          <article class="event-card event-card--past" data-category="<%= ev.category %>">
             <div class="event-card__photo">
               <span class="event-card__year-badge"><%= year(ev.event_date) %></span>
               <img src="<%= ev.image_path %>" alt="<%= ev.title %>" class="event-card__img" loading="lazy">
@@ -164,11 +223,270 @@
       </div>
     </section>
 
+    <!-- =====================================================
+         5. AWARDS SECTION (shown when "Awards" tab active)
+         ===================================================== -->
+    <div id="awardsSection" style="display:none;">
+
+      <!-- Competition overview -->
+      <section class="awards-section">
+        <div class="awards-section__header">
+          <p class="awards-section__eyebrow">Recognising Excellence</p>
+          <h2 class="awards-section__title">ARDE Awards &amp; Competitions</h2>
+          <p class="awards-section__sub">ARDE is committed to recognising excellence and developing talent within the hospitality industry through a range of prestigious competitions. These platforms celebrate outstanding performance and provide valuable opportunities for learning, exposure, and career advancement.</p>
+        </div>
+
+        <div class="comp-overview">
+          <div class="comp-card">
+            <div class="comp-card__icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div class="comp-card__body">
+              <p class="comp-card__label">Flagship Competition</p>
+              <h3 class="comp-card__title">Singapore Best Receptionist Competition (SBRC)</h3>
+              <p class="comp-card__desc">A prestigious competition recognising top front office professionals. The SBRC winner represents Singapore at the World's Best Receptionist Competition (WBRC) at the AICR Congress. Participants are assessed on service excellence, communication skills, professionalism, and leadership potential.</p>
+              <ul class="comp-card__list">
+                <li>Preliminary round: Written assessment &amp; professional interview</li>
+                <li>Final round: Written examination &amp; hospitality role play</li>
+                <li>Winner represents Singapore at international WBRC</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="comp-card">
+            <div class="comp-card__icon comp-card__icon--gold">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="comp-card__body">
+              <p class="comp-card__label">Department Excellence</p>
+              <h3 class="comp-card__title">SHA Best Department Awards</h3>
+              <p class="comp-card__desc">In partnership with Peak Hospitality Solutions, the SHA Best Department Awards recognise outstanding hotel departments through mystery shopping exercises. Awards span Economy, Upscale, and Luxury segments across four categories.</p>
+              <ul class="comp-card__list">
+                <li>Best Front Office Department</li>
+                <li>Best Concierge Department</li>
+                <li>Best Housekeeping Department</li>
+                <li>Best Executive Club Floor Department</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Open registrations -->
+      <% if (openAwardsList.length > 0) { %>
+      <section class="awards-section awards-section--open">
+        <div class="awards-section__header awards-section__header--left">
+          <p class="awards-section__eyebrow">Now Open</p>
+          <h2 class="awards-section__title awards-section__title--sm">Open Registrations</h2>
+        </div>
+        <div class="awards-grid">
+          <% openAwardsList.forEach(award => {
+            const deadline = new Date(award.deadline);
+            const daysLeft = Math.ceil((deadline - _now) / (1000*60*60*24));
+          %>
+          <article class="award-card">
+            <% if (award.image_path) { %>
+            <div class="award-card__img-wrap">
+              <img src="<%= award.image_path %>" alt="<%= award.title %>" class="award-card__img" loading="lazy">
+              <div class="award-card__img-overlay"></div>
+            </div>
+            <% } %>
+            <div class="award-card__body">
+              <div class="award-card__top">
+                <span class="award-card__status award-card__status--open">
+                  <span class="award-card__dot"></span> Open
+                </span>
+                <% if (daysLeft <= 14) { %>
+                <span class="award-card__deadline-pill award-card__deadline-pill--urgent"><%= daysLeft %> day<%= daysLeft !== 1 ? 's' : '' %> left</span>
+                <% } else { %>
+                <span class="award-card__deadline-pill">Closes <%= deadline.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'}) %></span>
+                <% } %>
+              </div>
+              <h3 class="award-card__title"><%= award.title %></h3>
+              <% if (award.description) { %><p class="award-card__desc"><%= award.description %></p><% } %>
+              <div class="award-card__footer">
+                <span class="award-card__winners-note">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Up to <%= award.max_winners %> winner<%= award.max_winners !== 1 ? 's' : '' %>
+                </span>
+                <button class="award-card__btn"
+                        data-award-id="<%= award.id %>"
+                        data-award-title="<%= (award.title||'').replace(/"/g,'&quot;') %>"
+                        onclick="openAwardModal(this.dataset.awardId, this.dataset.awardTitle)">Register →</button>
+              </div>
+            </div>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+      <% } %>
+
+      <!-- Past competitions -->
+      <% if (closedAwardsList.length > 0) { %>
+      <section class="awards-section awards-section--past">
+        <div class="awards-section__header awards-section__header--left">
+          <p class="awards-section__eyebrow">Hall of Fame</p>
+          <h2 class="awards-section__title awards-section__title--sm">Past Competitions</h2>
+        </div>
+        <div class="awards-grid awards-grid--past">
+          <% closedAwardsList.forEach(award => {
+            const deadline = new Date(award.deadline);
+          %>
+          <%
+            const awardWinners   = (winnersMap[award.id] || {}).winners   || [];
+            const awardRunnerUps = (winnersMap[award.id] || {}).runnerUps || [];
+          %>
+          <article class="award-card award-card--closed">
+            <% if (award.image_path) { %>
+            <div class="award-card__img-wrap">
+              <img src="<%= award.image_path %>" alt="<%= award.title %>" class="award-card__img" loading="lazy">
+              <div class="award-card__img-overlay"></div>
+            </div>
+            <% } %>
+            <div class="award-card__body">
+              <div class="award-card__top">
+                <span class="award-card__status award-card__status--closed">Closed</span>
+                <span class="award-card__deadline-pill award-card__deadline-pill--closed">Ended <%= deadline.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'}) %></span>
+              </div>
+              <h3 class="award-card__title"><%= award.title %></h3>
+
+              <% if (awardWinners.length > 0 || awardRunnerUps.length > 0) { %>
+              <div class="award-card__results">
+
+                <% awardWinners.forEach((w, i) => {
+                  const pos = i + 1;
+                  const posClass = pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : 'neutral';
+                %>
+                <div class="award-card__result-row award-card__result-row--<%= posClass %>">
+                  <span class="award-card__result-pos"><%= ordinal(pos) %> Place</span>
+                  <div class="award-card__result-person">
+                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
+                  </div>
+                </div>
+                <% }) %>
+
+                <% if (awardRunnerUps.length > 0) { %>
+                <div class="award-card__result-group award-card__result-group--runners">
+                  <p class="award-card__result-label award-card__result-label--silver">
+                    Runner-up<%= awardRunnerUps.length > 1 ? 's' : '' %>
+                  </p>
+                  <% awardRunnerUps.forEach(w => { %>
+                  <div class="award-card__result-person">
+                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
+                  </div>
+                  <% }) %>
+                </div>
+                <% } %>
+
+              </div>
+              <% } %>
+
+              <div class="award-card__footer">
+                <span class="award-card__winners-note">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Up to <%= award.max_winners %> winner<%= award.max_winners !== 1 ? 's' : '' %>
+                </span>
+                <span class="award-card__btn award-card__btn--disabled">Registration Closed</span>
+              </div>
+            </div>
+          </article>
+          <% }) %>
+        </div>
+      </section>
+      <% } %>
+
+    </div><!-- /#awardsSection -->
+
+    <!-- Award Registration Modal -->
+    <div id="award-modal" class="award-modal-overlay" style="display:none;" onclick="if(event.target===this)closeAwardModal()">
+      <div class="award-modal">
+        <button class="award-modal__close" onclick="closeAwardModal()" aria-label="Close">&times;</button>
+        <div class="award-modal__eyebrow">Award Registration</div>
+        <h3 class="award-modal__title" id="award-modal-title"></h3>
+        <form id="award-modal-form" method="POST">
+          <label class="award-modal__label" for="aw-member-id">Member ID</label>
+          <input class="award-modal__input" type="text" id="aw-member-id" name="member_id"
+                 placeholder="e.g. 00123" required maxlength="10">
+          <label class="award-modal__label" for="aw-full-name">Full Name</label>
+          <input class="award-modal__input" type="text" id="aw-full-name" name="full_name"
+                 placeholder="Your full name" required>
+          <button class="award-modal__submit" type="submit">Submit Registration</button>
+        </form>
+      </div>
+    </div>
+
   </main>
 
   <%- include('footer') %>
 
   <script src="/js/events.js"></script>
+  <script>
+    // ===== FILTER TABS =====
+    const filterBtns      = document.querySelectorAll('.filter-tabs__btn');
+    const upcomingSection  = document.getElementById('upcomingSection');
+    const pastSection      = document.getElementById('pastSection');
+    const awardsSection    = document.getElementById('awardsSection');
+    const featuredSection  = document.getElementById('featuredSection');
+    const whySection       = document.getElementById('whySection');
+
+    function applyFilter(filter) {
+      const isAwards = filter === 'awards';
+      const isAll    = filter === 'all';
+
+      // Awards tab: show awards section, hide everything events
+      // Networking/Workshops: show event rows (filtered), hide why + featured
+      // All Events: show everything events, hide awards
+
+      awardsSection.style.display = isAwards ? '' : 'none';
+
+      if (upcomingSection) upcomingSection.style.display = isAwards ? 'none' : '';
+      if (pastSection)     pastSection.style.display     = isAwards ? 'none' : '';
+
+      // Why It Matters + Featured only appear on "All Events"
+      if (whySection)      whySection.style.display      = isAll ? '' : 'none';
+      if (featuredSection) featuredSection.style.display = isAll ? '' : 'none';
+
+      // Filter event cards by category (for Networking / Workshops / All)
+      if (!isAwards) {
+        document.querySelectorAll('.event-card').forEach(card => {
+          const match = isAll || card.dataset.category === filter;
+          card.style.display = match ? '' : 'none';
+        });
+      }
+
+      // Update active state
+      filterBtns.forEach(b => {
+        b.classList.toggle('filter-tabs__btn--active', b.dataset.filter === filter);
+        b.setAttribute('aria-selected', b.dataset.filter === filter);
+      });
+
+      // Update URL hash
+      history.replaceState(null, '', filter === 'awards' ? '#awards' : isAll ? '#' : '#' + filter);
+    }
+
+    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+
+    // Honour URL hash on load (#awards, #networking, etc.)
+    const hash = window.location.hash.replace('#', '');
+    if (['awards','networking','workshop'].includes(hash)) {
+      applyFilter(hash);
+    }
+
+    // ===== AWARD MODAL =====
+    function openAwardModal(id, title) {
+      document.getElementById('award-modal-title').textContent = title;
+      document.getElementById('award-modal-form').action = '/awards/' + id + '/register';
+      document.getElementById('award-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeAwardModal() {
+      document.getElementById('award-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAwardModal(); });
+  </script>
 
 </body>
 </html>

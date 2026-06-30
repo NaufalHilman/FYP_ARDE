@@ -160,6 +160,10 @@ app.get('/about', (req, res) => {
     res.render('about', { active: 'about', subActive: 'about-us' });
 });
 
+app.get('/community', (req, res) => {
+    res.render('community', { active: 'about', subActive: 'community' });
+});
+
 //careers routes
 
 app.get('/careers', async (req, res) => {

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDE | Our Community Says</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/community.css">
+</head>
+<body>
+    <%- include('navbar', { active: 'about', subActive: 'community' }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main class="community-page">
+        <section class="community-hero">
+            <div class="community-hero-overlay"></div>
+            <img src="/images/committee/banner.jpg" alt="ARDE community" class="community-hero-image">
+            <div class="community-hero-content">
+                <p class="community-breadcrumb">Company / Our Community Says</p>
+                <h1>What Our Community Says</h1>
+                <h3>Voices from members, partners, and industry peers who have grown with ARDE.</h3>
+                <p>
+                    Our community is shaped by shared ambition, meaningful connections, and a genuine commitment to hospitality excellence across Singapore.
+                </p>
+                <div class="community-hero-stats">
+                    <div>
+                        <strong>100+</strong>
+                        <span>Members</span>
+                    </div>
+                    <div>
+                        <strong>70+</strong>
+                        <span>Organizations</span>
+                    </div>
+                    <div>
+                        <strong>3</strong>
+                        <span>Signature Programs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="community-section community-stories">
+            <div class="section-container">
+                <div class="section-heading">
+                    <span class="about-tag">COMMUNITY VOICES</span>
+                    <h2>Stories from the people who make ARDE special</h2>
+                    <p>From emerging leaders to seasoned professionals, our members value the network, recognition, and opportunities ARDE creates.</p>
+                </div>
+
+                <div class="community-grid">
+                    <article class="community-card quote-card">
+                        <p class="community-quote">“ARDE gave me a platform to connect with fellow professionals and grow beyond my own department. The relationships I built here continue to shape my career.”</p>
+                        <div class="community-card-footer">
+                            <strong>Ms. Aisha Rahman</strong>
+                            <span>Front Office Supervisor</span>
+                        </div>
+                    </article>
+
+                    <article class="community-card quote-card">
+                        <p class="community-quote">“What I appreciate most is how ARDE brings together people who genuinely want to learn, support one another, and raise the standard of hospitality service.”</p>
+                        <div class="community-card-footer">
+                            <strong>Mr. Daniel Lim</strong>
+                            <span>Rooms Division Executive</span>
+                        </div>
+                    </article>
+
+                    <article class="community-card quote-card">
+                        <p class="community-quote">“The events and professional conversations have helped me build confidence, gain visibility, and expand my network in ways that feel both meaningful and lasting.”</p>
+                        <div class="community-card-footer">
+                            <strong>Ms. Charmaine Lee</strong>
+                            <span>Hospitality Operations Lead</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="community-section community-highlights">
+            <div class="section-container highlights-grid">
+                <div class="highlight-card highlight-image-card">
+                    <img src="/images/Arde_image3.jpg" alt="ARDE members gathering">
+                </div>
+
+                <div class="highlight-card highlight-content-card">
+                    <span class="about-tag">WHY MEMBERS STAY</span>
+                    <h2>A community built for connection and growth</h2>
+                    <div class="benefit-list">
+                        <div>
+                            <h4>Meaningful networking</h4>
+                            <p>Meet professionals across hotels, service teams, and industry partners who share your passion.</p>
+                        </div>
+                        <div>
+                            <h4>Professional development</h4>
+                            <p>Gain insight from workshops, conversations, and recognition opportunities that support your career journey.</p>
+                        </div>
+                        <div>
+                            <h4>Shared recognition</h4>
+                            <p>Celebrate success together through events, awards, and the collective pride of being part of ARDE.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="community-section community-cta">
+            <div class="section-container">
+                <div class="cta-panel">
+                    <h2>Be part of the next chapter</h2>
+                    <p>Join a growing network of hospitality professionals who are building stronger careers and stronger communities together.</p>
+                    <a href="/membership" class="btn-join-arde">Join ARDE</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

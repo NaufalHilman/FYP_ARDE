@@ -694,10 +694,29 @@ a { text-decoration: none; }
     flex-wrap: wrap;
 }
 
+.hero-stat-link {
+    display: inline-flex;
+    align-items: flex-start;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.hero-stat-link:hover {
+    transform: translateY(-2px);
+}
+
 .hero-stat {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+
+.hero-stat-link:hover .hstat-num {
+    color: #ffffff;
+}
+
+.hero-stat-link:hover .hstat-label {
+    color: rgba(255,255,255,0.8);
 }
 
 .hstat-num {
@@ -1399,10 +1418,20 @@ a { text-decoration: none; }
     box-shadow: 0 20px 40px rgba(39, 36, 123, 0.15);
 }
 
-.supporters-image-badge {
+.supporters-image-badge-link {
     position: absolute;
     bottom: -20px;
     right: -20px;
+    text-decoration: none;
+    z-index: 2;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.supporters-image-badge-link:hover {
+    transform: translateY(-3px);
+}
+
+.supporters-image-badge {
     background: #030826;
     border-radius: 12px;
     padding: 16px 24px;

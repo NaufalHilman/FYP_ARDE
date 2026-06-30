@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDE | Contact</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+<body>
+
+    <%- include('navbar', { active: 'about', subActive: 'contact' }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main>
+
+        <section class="banner-hero contact-hero">
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">Contact ARDE</span>
+                    <h1 class="hero-heading">Reach out to us for membership, events, or registration support.</h1>
+                    <p class="hero-sub">Our team is ready to answer your questions and guide you through the next steps.</p>
+                    <a href="#contactForm" class="btn-hero-primary">Send a Message</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="section-container">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <span class="section-eyebrow">Contact Information</span>
+                        <h2 class="section-title">Need help with registration?</h2>
+                        <p class="section-subtitle">
+                            For the registration form or further information, please contact Raihan Abdullah at <a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a>.
+                        </p>
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <span>General enquiries</span>
+                                <strong><a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a></strong>
+                            </div>
+                            <div class="contact-detail">
+                                <span>Office</span>
+                                <strong>Association of Rooms Division Executives Singapore</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-card" id="contactForm">
+                        <% if (notice) { %>
+                        <div class="flash flash--notice"><%= notice %></div>
+                        <% } %>
+                        <% if (error) { %>
+                        <div class="flash flash--error"><%= error %></div>
+                        <% } %>
+
+                        <h2 class="form-heading">Send us a message</h2>
+                        <p class="form-copy">We aim to respond within 1-2 business days.</p>
+
+                        <form action="/contact" method="POST" class="contact-form">
+                            <label for="full_name">Full Name</label>
+                            <input id="full_name" name="full_name" type="text" value="<%= form?.full_name || '' %>" required>
+
+                            <label for="email">Email Address</label>
+                            <input id="email" name="email" type="email" value="<%= form?.email || '' %>" required>
+
+                            <label for="phone">Phone Number</label>
+                            <input id="phone" name="phone" type="tel" value="<%= form?.phone || '' %>">
+
+                            <label for="subject">Subject</label>
+                            <input id="subject" name="subject" type="text" value="<%= form?.subject || '' %>">
+
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="6" required><%= form?.message || '' %></textarea>
+
+                            <button type="submit" class="btn-contact-submit">Submit Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

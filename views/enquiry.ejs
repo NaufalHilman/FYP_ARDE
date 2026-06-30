@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARDE | Sponsorship Enquiry</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+<body>
+    <%- include('navbar', { active: 'about', subActive: 'enquiry' }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main>
+        <section class="banner-hero contact-hero">
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">Sponsorship Enquiry</span>
+                    <h1 class="hero-heading">Partner with ARDE to elevate hospitality education and events.</h1>
+                    <p class="hero-sub">Share your sponsorship interest, partnership idea, or event support request and our team will get back to you promptly.</p>
+                    <div class="hero-actions">
+                        <a href="#enquiryForm" class="btn-hero-primary">Start Your Enquiry</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="section-eyebrow">Let's collaborate</span>
+                    <h2 class="section-title">Sponsorship & Partnership Enquiries</h2>
+                    <p class="section-subtitle">ARDE welcomes organisations, educational institutions and industry partners interested in supporting our hospitality events, workshops, competitions and community programmes.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <span>Contact email</span>
+                            <strong><a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a></strong>
+                        </div>
+                        <div class="contact-detail">
+                            <span>Response time</span>
+                            <strong>Within 48 hours during business days</strong>
+                        </div>
+                        <div class="contact-detail">
+                            <span>What to include</span>
+                            <strong>Company name, collaboration goals, event type, and budget or sponsorship preference.</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-card" id="enquiryForm">
+                    <% if (notice) { %>
+                        <div class="flash flash--notice"><%= notice %></div>
+                    <% } %>
+                    <% if (error) { %>
+                        <div class="flash flash--error"><%= error %></div>
+                    <% } %>
+
+                    <h2 class="form-heading">Send an Enquiry</h2>
+                    <p class="form-copy">Fill in the details below and let us know how you'd like to work with ARDE.</p>
+
+                    <form action="/enquiry" method="POST" class="contact-form">
+                        <div>
+                            <label for="full_name">Full Name</label>
+                            <input id="full_name" name="full_name" type="text" value="<%= form.full_name || '' %>" required>
+                        </div>
+                        <div>
+                            <label for="organization">Organisation</label>
+                            <input id="organization" name="organization" type="text" value="<%= form.organization || '' %>">
+                        </div>
+                        <div>
+                            <label for="email">Email Address</label>
+                            <input id="email" name="email" type="email" value="<%= form.email || '' %>" required>
+                        </div>
+                        <div>
+                            <label for="phone">Phone Number</label>
+                            <input id="phone" name="phone" type="tel" value="<%= form.phone || '' %>">
+                        </div>
+                        <div>
+                            <label for="subject">Subject</label>
+                            <input id="subject" name="subject" type="text" value="<%= form.subject || 'Sponsorship enquiry' %>">
+                        </div>
+                        <div>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required><%= form.message || '' %></textarea>
+                        </div>
+                        <button type="submit" class="btn-contact-submit">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

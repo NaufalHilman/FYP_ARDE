@@ -311,4 +311,60 @@ app.get('/sponsors', (req, res) => {
     res.render('sponsors', { active: 'about', subActive: 'sponsors' });
 });
 
+app.get('/enquiry', (req, res) => {
+    res.render('enquiry', {
+        active: 'about',
+        subActive: 'contact',
+        notice: req.query.notice || null,
+        error: req.query.error || null,
+        form: {}
+    });
+});
+
+app.post('/enquiry', (req, res) => {
+    const { full_name, organization, email, phone, subject, message } = req.body;
+    const form = { full_name, organization, email, phone, subject, message };
+
+    if (!full_name?.trim() || !email?.trim() || !message?.trim()) {
+        return res.render('enquiry', {
+            active: 'about',
+            subActive: 'contact',
+            error: 'Please provide your name, email address, and a message.',
+            notice: null,
+            form
+        });
+    }
+
+    const notice = 'Thanks! Your sponsorship enquiry has been received. We will respond shortly.';
+    res.redirect('/enquiry?notice=' + encodeURIComponent(notice));
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact', {
+        active: 'about',
+        subActive: 'contact',
+        notice: req.query.notice || null,
+        error: req.query.error || null,
+        form: {}
+    });
+});
+
+app.post('/contact', (req, res) => {
+    const { full_name, email, phone, subject, message } = req.body;
+    const form = { full_name, email, phone, subject, message };
+
+    if (!full_name?.trim() || !email?.trim() || !message?.trim()) {
+        return res.render('contact', {
+            active: 'about',
+            subActive: 'contact',
+            error: 'Please provide your name, email address, and a message.',
+            notice: null,
+            form
+        });
+    }
+
+    const notice = 'Thanks! Your message has been received. We will respond shortly.';
+    res.redirect('/contact?notice=' + encodeURIComponent(notice));
+});
+
 module.exports = app;

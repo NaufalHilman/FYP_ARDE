@@ -304,4 +304,11 @@ app.get('/honorary', async (req, res) => {
     }
 });
 
+/* =====================================================
+   SPONSORS & PARTNERS
+===================================================== */
+app.get('/sponsors', (req, res) => {
+    res.render('sponsors', { active: 'about', subActive: 'sponsors' });
+});
+
 module.exports = app;

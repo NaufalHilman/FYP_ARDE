@@ -71,7 +71,7 @@
                                     <div class="member-row-avatar photo-placeholder member-row-avatar--placeholder"><%= m.full_name.charAt(0) %></div>
                                 <% } %>
                             </td>
-                            <td><%= m.full_name %></td>
+                            <td><%= m.title ? m.title + ' ' : '' %><%= m.full_name %></td>
                             <td><%= m.company || '—' %></td>
                             <td>
                                 <% if (m.valid_till) { %>

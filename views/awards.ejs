@@ -96,7 +96,7 @@
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
               <% } %>
             </div>
-            <h3 class="winner-card__name"><%= w.full_name %></h3>
+            <h3 class="winner-card__name"><%= w.member_title ? w.member_title + ' ' : '' %><%= w.full_name %></h3>
             <% if (w.hotel) { %><p class="winner-card__hotel"><%= w.hotel %></p><% } %>
           </article>
           <% }) %>
@@ -116,7 +116,7 @@
                 <% } %>
               </div>
               <div class="runnerup-card__info">
-                <p class="runnerup-card__name"><%= w.full_name %></p>
+                <p class="runnerup-card__name"><%= w.member_title ? w.member_title + ' ' : '' %><%= w.full_name %></p>
                 <% if (w.hotel) { %><p class="runnerup-card__hotel"><%= w.hotel %></p><% } %>
               </div>
             </div>
@@ -274,7 +274,7 @@
                   <span class="award-card__result-avatar award-card__result-avatar--placeholder"><%= w.full_name.charAt(0) %></span>
                   <% } %>
                   <span class="award-card__result-text">
-                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <span class="award-card__result-name"><%= w.member_title ? w.member_title + ' ' : '' %><%= w.full_name %></span>
                     <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
                   </span>
                 </div>
@@ -294,7 +294,7 @@
                   <span class="award-card__result-avatar award-card__result-avatar--placeholder"><%= w.full_name.charAt(0) %></span>
                   <% } %>
                   <span class="award-card__result-text">
-                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <span class="award-card__result-name"><%= w.member_title ? w.member_title + ' ' : '' %><%= w.full_name %></span>
                     <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
                   </span>
                 </div>

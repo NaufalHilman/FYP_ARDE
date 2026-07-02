@@ -54,7 +54,7 @@ app.get('/awards', async (req, res) => {
     try {
         const [awards] = await db.query('SELECT * FROM awards ORDER BY deadline ASC');
         const [allWinners] = await db.query(
-            `SELECT aw.*, m.image_path AS member_image
+            `SELECT aw.*, m.image_path AS member_image, m.title AS member_title
              FROM award_winners aw
              LEFT JOIN members m ON aw.member_id = m.member_id
              ORDER BY aw.award_id ASC, aw.role ASC, aw.id ASC`

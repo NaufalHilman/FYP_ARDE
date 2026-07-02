@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARDE | Awards</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/events.css">
+</head>
+<body>
+
+  <%- include('navbar', { active: 'about', subActive: 'awards' }) %>
+  <script src="/js/navbar.js"></script>
+
+  <%
+  function ordinal(n) {
+    const s = ['th','st','nd','rd'];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+  const _now = new Date();
+  const openAwardsList   = awards.filter(a => new Date(a.deadline) >= _now);
+  const closedAwardsList = awards.filter(a => new Date(a.deadline) <  _now);
+
+  // Featured Winners — latest closed award with at least one winner
+  const featuredAward = closedAwardsList
+    .slice().sort((a, b) => new Date(b.deadline) - new Date(a.deadline))
+    .find(a => (winnersMap[a.id] || {}).winners && winnersMap[a.id].winners.length > 0);
+  const featuredWinners   = featuredAward ? (winnersMap[featuredAward.id].winners   || []) : [];
+  const featuredRunnerUps = featuredAward ? (winnersMap[featuredAward.id].runnerUps || []) : [];
+  const podiumColors  = ['gold','silver','bronze'];
+  const podiumLabels  = ['1st Place','2nd Place','3rd Place'];
+  %>
+
+  <main>
+
+    <!-- =====================================================
+         FILTER TABS: Featured Winners | All Awards | Upcoming Awards | Past Awards
+         ===================================================== -->
+    <section class="filter-tabs-wrap">
+      <div class="filter-tabs" role="tablist" aria-label="Filter awards">
+        <button class="filter-tabs__btn filter-tabs__btn--active" data-filter="featured" role="tab" aria-selected="true">Featured Winners</button>
+        <button class="filter-tabs__btn"                          data-filter="all"      role="tab" aria-selected="false">All Awards</button>
+        <button class="filter-tabs__btn"                          data-filter="upcoming" role="tab" aria-selected="false">Upcoming Awards</button>
+        <button class="filter-tabs__btn"                          data-filter="past"     role="tab" aria-selected="false">Past Awards</button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FLASH MESSAGES
+         ===================================================== -->
+    <% if (notice) { %>
+    <div class="flash flash--notice"><%= notice %></div>
+    <% } %>
+    <% if (error) { %>
+    <div class="flash flash--error"><%= error %></div>
+    <% } %>
+
+    <!-- =====================================================
+         FEATURED WINNERS (card showcase — shown first)
+         ===================================================== -->
+    <section class="awards-section winners-showcase" id="featuredWinnersSection">
+      <div class="awards-section__header">
+        <p class="awards-section__eyebrow">Spotlight</p>
+        <h2 class="awards-section__title">Featured Winners</h2>
+        <% if (featuredAward) { %>
+        <p class="awards-section__sub"><%= featuredAward.title %> &middot; Closed <%= new Date(featuredAward.deadline).toLocaleDateString('en-SG',{month:'long',year:'numeric'}) %></p>
+        <% } else { %>
+        <p class="awards-section__sub">Winners will be showcased here once a competition concludes.</p>
+        <% } %>
+      </div>
+
+      <% if (featuredAward && featuredWinners.length > 0) { %>
+      <div class="winners-panel">
+        <div class="winners-panel__shape"></div>
+        <div class="winners-panel__shape2"></div>
+
+        <div class="winners-podium">
+          <% featuredWinners.forEach((w, i) => {
+            const pos = i + 1;
+            const posClass = podiumColors[i] || 'neutral';
+          %>
+          <article class="winner-card winner-card--<%= posClass %>">
+            <span class="winner-card__badge" aria-hidden="true">
+              <% if (pos === 1) { %>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <% } else { %>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <% } %>
+            </span>
+            <span class="winner-card__rank"><%= podiumLabels[i] || ordinal(pos)+' Place' %></span>
+            <div class="winner-card__avatar" aria-hidden="true">
+              <% if (w.member_image) { %>
+              <img src="<%= w.member_image %>" alt="<%= w.full_name %>" class="winner-card__avatar-img">
+              <% } else { %>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              <% } %>
+            </div>
+            <h3 class="winner-card__name"><%= w.full_name %></h3>
+            <% if (w.hotel) { %><p class="winner-card__hotel"><%= w.hotel %></p><% } %>
+          </article>
+          <% }) %>
+        </div>
+
+        <% if (featuredRunnerUps.length > 0) { %>
+        <div class="runnerups">
+          <p class="runnerups__label">Runner-up<%= featuredRunnerUps.length > 1 ? 's' : '' %></p>
+          <div class="runnerups__grid">
+            <% featuredRunnerUps.forEach(w => { %>
+            <div class="runnerup-card">
+              <div class="runnerup-card__avatar" aria-hidden="true">
+                <% if (w.member_image) { %>
+                <img src="<%= w.member_image %>" alt="<%= w.full_name %>" class="runnerup-card__avatar-img">
+                <% } else { %>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <% } %>
+              </div>
+              <div class="runnerup-card__info">
+                <p class="runnerup-card__name"><%= w.full_name %></p>
+                <% if (w.hotel) { %><p class="runnerup-card__hotel"><%= w.hotel %></p><% } %>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <% } else { %>
+      <p class="winners-empty">No winners have been announced yet. Check back after our next competition concludes.</p>
+      <% } %>
+    </section>
+
+    <!-- =====================================================
+         ALL AWARDS — COMPETITION OVERVIEW
+         ===================================================== -->
+    <section class="awards-section" id="awardsOverview">
+      <div class="awards-section__header">
+        <p class="awards-section__eyebrow">Recognising Excellence</p>
+        <h2 class="awards-section__title">ARDE Awards &amp; Competitions</h2>
+        <p class="awards-section__sub">ARDE is committed to recognising excellence and developing talent within the hospitality industry through a range of prestigious competitions. These platforms celebrate outstanding performance and provide valuable opportunities for learning, exposure, and career advancement.</p>
+      </div>
+
+      <div class="comp-overview">
+        <div class="comp-card">
+          <div class="comp-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div class="comp-card__body">
+            <p class="comp-card__label">Flagship Competition</p>
+            <h3 class="comp-card__title">Singapore Best Receptionist Competition (SBRC)</h3>
+            <p class="comp-card__desc">A prestigious competition recognising top front office professionals. The SBRC winner represents Singapore at the World's Best Receptionist Competition (WBRC) at the AICR Congress. Participants are assessed on service excellence, communication skills, professionalism, and leadership potential.</p>
+            <ul class="comp-card__list">
+              <li>Preliminary round: Written assessment &amp; professional interview</li>
+              <li>Final round: Written examination &amp; hospitality role play</li>
+              <li>Winner represents Singapore at international WBRC</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card__icon comp-card__icon--gold">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="comp-card__body">
+            <p class="comp-card__label">Department Excellence</p>
+            <h3 class="comp-card__title">SHA Best Department Awards</h3>
+            <p class="comp-card__desc">In partnership with Peak Hospitality Solutions, the SHA Best Department Awards recognise outstanding hotel departments through mystery shopping exercises. Awards span Economy, Upscale, and Luxury segments across four categories.</p>
+            <ul class="comp-card__list">
+              <li>Best Front Office Department</li>
+              <li>Best Concierge Department</li>
+              <li>Best Housekeeping Department</li>
+              <li>Best Executive Club Floor Department</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         UPCOMING AWARDS (open registrations)
+         ===================================================== -->
+    <% if (openAwardsList.length > 0) { %>
+    <section class="awards-section awards-section--open" id="upcomingAwardsSection">
+      <div class="awards-section__header awards-section__header--left">
+        <p class="awards-section__eyebrow">Now Open</p>
+        <h2 class="awards-section__title awards-section__title--sm">Open Registrations</h2>
+      </div>
+      <div class="awards-grid">
+        <% openAwardsList.forEach(award => {
+          const deadline = new Date(award.deadline);
+          const daysLeft = Math.ceil((deadline - _now) / (1000*60*60*24));
+        %>
+        <article class="award-card">
+          <% if (award.image_path) { %>
+          <div class="award-card__img-wrap">
+            <img src="<%= award.image_path %>" alt="<%= award.title %>" class="award-card__img" loading="lazy">
+            <div class="award-card__img-overlay"></div>
+          </div>
+          <% } %>
+          <div class="award-card__body">
+            <div class="award-card__top">
+              <span class="award-card__status award-card__status--open">
+                <span class="award-card__dot"></span> Open
+              </span>
+              <% if (daysLeft <= 14) { %>
+              <span class="award-card__deadline-pill award-card__deadline-pill--urgent"><%= daysLeft %> day<%= daysLeft !== 1 ? 's' : '' %> left</span>
+              <% } else { %>
+              <span class="award-card__deadline-pill">Closes <%= deadline.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'}) %></span>
+              <% } %>
+            </div>
+            <h3 class="award-card__title"><%= award.title %></h3>
+            <% if (award.description) { %><p class="award-card__desc"><%= award.description %></p><% } %>
+            <div class="award-card__footer">
+              <span class="award-card__winners-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Up to <%= award.max_winners %> winner<%= award.max_winners !== 1 ? 's' : '' %>
+              </span>
+              <button class="award-card__btn"
+                      data-award-id="<%= award.id %>"
+                      data-award-title="<%= (award.title||'').replace(/"/g,'&quot;') %>"
+                      onclick="openAwardModal(this.dataset.awardId, this.dataset.awardTitle)">Register →</button>
+            </div>
+          </div>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+    <% } %>
+
+    <!-- =====================================================
+         PAST AWARDS (past competitions)
+         ===================================================== -->
+    <% if (closedAwardsList.length > 0) { %>
+    <section class="awards-section awards-section--past" id="pastAwardsSection">
+      <div class="awards-section__header awards-section__header--left">
+        <p class="awards-section__eyebrow">Hall of Fame</p>
+        <h2 class="awards-section__title awards-section__title--sm">Past Competitions</h2>
+      </div>
+      <div class="awards-grid awards-grid--past">
+        <% closedAwardsList.forEach(award => {
+          const deadline = new Date(award.deadline);
+        %>
+        <%
+          const awardWinners   = (winnersMap[award.id] || {}).winners   || [];
+          const awardRunnerUps = (winnersMap[award.id] || {}).runnerUps || [];
+        %>
+        <article class="award-card award-card--closed">
+          <% if (award.image_path) { %>
+          <div class="award-card__img-wrap">
+            <img src="<%= award.image_path %>" alt="<%= award.title %>" class="award-card__img" loading="lazy">
+            <div class="award-card__img-overlay"></div>
+          </div>
+          <% } %>
+          <div class="award-card__body">
+            <div class="award-card__top">
+              <span class="award-card__status award-card__status--closed">Closed</span>
+              <span class="award-card__deadline-pill award-card__deadline-pill--closed">Ended <%= deadline.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'}) %></span>
+            </div>
+            <h3 class="award-card__title"><%= award.title %></h3>
+
+            <% if (awardWinners.length > 0 || awardRunnerUps.length > 0) { %>
+            <div class="award-card__results">
+
+              <% awardWinners.forEach((w, i) => {
+                const pos = i + 1;
+                const posClass = pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : 'neutral';
+              %>
+              <div class="award-card__result-row award-card__result-row--<%= posClass %>">
+                <span class="award-card__result-pos"><%= ordinal(pos) %> Place</span>
+                <div class="award-card__result-person">
+                  <% if (w.member_image) { %>
+                  <img src="<%= w.member_image %>" alt="<%= w.full_name %>" class="award-card__result-avatar">
+                  <% } else { %>
+                  <span class="award-card__result-avatar award-card__result-avatar--placeholder"><%= w.full_name.charAt(0) %></span>
+                  <% } %>
+                  <span class="award-card__result-text">
+                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
+                  </span>
+                </div>
+              </div>
+              <% }) %>
+
+              <% if (awardRunnerUps.length > 0) { %>
+              <div class="award-card__result-group award-card__result-group--runners">
+                <p class="award-card__result-label award-card__result-label--silver">
+                  Runner-up<%= awardRunnerUps.length > 1 ? 's' : '' %>
+                </p>
+                <% awardRunnerUps.forEach(w => { %>
+                <div class="award-card__result-person">
+                  <% if (w.member_image) { %>
+                  <img src="<%= w.member_image %>" alt="<%= w.full_name %>" class="award-card__result-avatar">
+                  <% } else { %>
+                  <span class="award-card__result-avatar award-card__result-avatar--placeholder"><%= w.full_name.charAt(0) %></span>
+                  <% } %>
+                  <span class="award-card__result-text">
+                    <span class="award-card__result-name"><%= w.full_name %></span>
+                    <% if (w.hotel) { %><span class="award-card__result-hotel"><%= w.hotel %></span><% } %>
+                  </span>
+                </div>
+                <% }) %>
+              </div>
+              <% } %>
+
+            </div>
+            <% } %>
+
+            <div class="award-card__footer">
+              <span class="award-card__winners-note">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Up to <%= award.max_winners %> winner<%= award.max_winners !== 1 ? 's' : '' %>
+              </span>
+              <span class="award-card__btn award-card__btn--disabled">Registration Closed</span>
+            </div>
+          </div>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+    <% } %>
+
+    <!-- Award Registration Modal -->
+    <div id="award-modal" class="award-modal-overlay" style="display:none;" onclick="if(event.target===this)closeAwardModal()">
+      <div class="award-modal">
+        <button class="award-modal__close" onclick="closeAwardModal()" aria-label="Close">&times;</button>
+        <div class="award-modal__eyebrow">Award Registration</div>
+        <h3 class="award-modal__title" id="award-modal-title"></h3>
+        <form id="award-modal-form" method="POST">
+          <label class="award-modal__label" for="aw-member-id">Member ID</label>
+          <input class="award-modal__input" type="text" id="aw-member-id" name="member_id"
+                 placeholder="e.g. 00123" required maxlength="10">
+          <label class="award-modal__label" for="aw-full-name">Full Name</label>
+          <input class="award-modal__input" type="text" id="aw-full-name" name="full_name"
+                 placeholder="Your full name" required>
+          <button class="award-modal__submit" type="submit">Submit Registration</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <%- include('footer') %>
+
+  <script>
+    // ===== FILTER TABS =====
+    const filterBtns       = document.querySelectorAll('.filter-tabs__btn');
+    const heroSection       = document.getElementById('featuredWinnersSection');
+    const overviewSection   = document.getElementById('awardsOverview');
+    const upcomingSection   = document.getElementById('upcomingAwardsSection');
+    const pastSection       = document.getElementById('pastAwardsSection');
+
+    function applyFilter(filter) {
+      const isAll = filter === 'all';
+
+      if (heroSection)     heroSection.style.display     = (filter === 'featured') ? '' : 'none';
+      if (overviewSection) overviewSection.style.display = isAll ? '' : 'none';
+      if (upcomingSection) upcomingSection.style.display = (isAll || filter === 'upcoming') ? '' : 'none';
+      if (pastSection)     pastSection.style.display     = (isAll || filter === 'past') ? '' : 'none';
+
+      filterBtns.forEach(b => {
+        b.classList.toggle('filter-tabs__btn--active', b.dataset.filter === filter);
+        b.setAttribute('aria-selected', b.dataset.filter === filter);
+      });
+
+      history.replaceState(null, '', isAll ? '#' : '#' + filter);
+    }
+
+    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
+
+    // Map hash values to a filter — covers both the short codes used when
+    // switching tabs in-page and the full section-id anchors used by the
+    // Company dropdown links
+    const hashToFilter = {
+      featured: 'featured',
+      all: 'all',
+      upcoming: 'upcoming',
+      past: 'past',
+      featuredWinnersSection: 'featured',
+      awardsOverview: 'all',
+      upcomingAwardsSection: 'upcoming',
+      pastAwardsSection: 'past'
+    };
+    // Featured Winners is the default view when there's no specific hash
+    const initialHash = window.location.hash.replace('#', '');
+    applyFilter(hashToFilter[initialHash] || 'featured');
+
+    // Keep in sync with in-page anchor links (e.g. hero's "View All Awards")
+    window.addEventListener('hashchange', () => {
+      const h = window.location.hash.replace('#', '');
+      applyFilter(hashToFilter[h] || 'featured');
+    });
+
+    // ===== AWARD MODAL =====
+    function openAwardModal(id, title) {
+      document.getElementById('award-modal-title').textContent = title;
+      document.getElementById('award-modal-form').action = '/awards/' + id + '/register';
+      document.getElementById('award-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeAwardModal() {
+      document.getElementById('award-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAwardModal(); });
+  </script>
+
+</body>
+</html>

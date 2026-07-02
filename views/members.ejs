@@ -55,6 +55,7 @@
                 <table class="members-table">
                     <thead>
                         <tr>
+                            <th>Photo</th>
                             <th>Name</th>
                             <th>Company / Hotel</th>
                             <th>Valid Till</th>
@@ -63,6 +64,13 @@
                     <tbody>
                         <% members.forEach(m => { %>
                         <tr>
+                            <td>
+                                <% if (m.image_path) { %>
+                                    <img src="<%= m.image_path %>" alt="<%= m.full_name %>" class="member-row-avatar">
+                                <% } else { %>
+                                    <div class="member-row-avatar photo-placeholder member-row-avatar--placeholder"><%= m.full_name.charAt(0) %></div>
+                                <% } %>
+                            </td>
                             <td><%= m.full_name %></td>
                             <td><%= m.company || '—' %></td>
                             <td>
@@ -73,7 +81,7 @@
                                 <% } %>
                             </td>
                         </tr>
-                        <% }) %>    
+                        <% }) %>
                     </tbody>
                 </table>
                 <% } %>
@@ -98,8 +106,8 @@
 
             // 1. Filter
             let rows = allRows.filter(row => {
-                const name    = row.cells[0].textContent.toLowerCase();
-                const company = row.cells[1].textContent.toLowerCase();
+                const name    = row.cells[1].textContent.toLowerCase();
+                const company = row.cells[2].textContent.toLowerCase();
                 const matchSearch = !search || name.includes(search) || company.includes(search);
                 const matchHotel  = !hotel  || company === hotel;
                 return matchSearch && matchHotel;
@@ -107,10 +115,10 @@
 
             // 2. Sort
             rows.sort((a, b) => {
-                const nameA = a.cells[0].textContent.trim();
-                const nameB = b.cells[0].textContent.trim();
-                const dateA = new Date(a.cells[2].textContent.trim());
-                const dateB = new Date(b.cells[2].textContent.trim());
+                const nameA = a.cells[1].textContent.trim();
+                const nameB = b.cells[1].textContent.trim();
+                const dateA = new Date(a.cells[3].textContent.trim());
+                const dateB = new Date(b.cells[3].textContent.trim());
 
                 if (sort === 'alpha-asc')   return nameA.localeCompare(nameB);
                 if (sort === 'alpha-desc')  return nameB.localeCompare(nameA);
@@ -122,7 +130,7 @@
             // 3. Re-render
             tbody.innerHTML = '';
             if (rows.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: #888;">No members found.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color: #888;">No members found.</td></tr>';
             } else {
                 rows.forEach(row => tbody.appendChild(row));
             }

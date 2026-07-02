@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const companyTrigger = document.getElementById('mobile-company-trigger');
 
     // List of sub-pages that should keep "Company" active
-    const companySubPages = ['/about', '/community', '/members', '/executive', '/honorary', '/directory', '/contact', '/support'];
+    const companySubPages = ['/about', '/community', '/members', '/executive', '/honorary', '/directory', '/contact', '/support', '/awards'];
 
     // Check if current path matches any company sub-pages
     if (companySubPages.some(page => currentPath.startsWith(page))) {

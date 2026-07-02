@@ -30,9 +30,34 @@ app.get('/', (req, res) => {
 app.get('/events', async (req, res) => {
     try {
         const [events] = await db.query('SELECT * FROM events ORDER BY event_date ASC');
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        res.render('events', {
+            active: 'events',
+            featured: events.find(e => e.is_featured),
+            upcoming: events.filter(e => new Date(e.event_date) >= today),
+            past:     events.filter(e => new Date(e.event_date) <  today).reverse(),
+            notice: req.query.notice || null,
+            error:  req.query.error  || null
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+/* =====================================================
+   AWARDS (upcoming / past / featured winners)
+===================================================== */
+app.get('/awards', async (req, res) => {
+    try {
         const [awards] = await db.query('SELECT * FROM awards ORDER BY deadline ASC');
         const [allWinners] = await db.query(
-            "SELECT * FROM award_winners ORDER BY award_id ASC, role ASC, id ASC"
+            `SELECT aw.*, m.image_path AS member_image
+             FROM award_winners aw
+             LEFT JOIN members m ON aw.member_id = m.member_id
+             ORDER BY aw.award_id ASC, aw.role ASC, aw.id ASC`
         );
 
         // Build a map: award_id -> { winners: [], runnerUps: [] }
@@ -43,13 +68,9 @@ app.get('/events', async (req, res) => {
             else                     winnersMap[w.award_id].runnerUps.push(w);
         });
 
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        res.render('events', {
-            active: 'events',
-            featured: events.find(e => e.is_featured),
-            upcoming: events.filter(e => new Date(e.event_date) >= today),
-            past:     events.filter(e => new Date(e.event_date) <  today).reverse(),
+        res.render('awards', {
+            active: 'about',
+            subActive: 'awards',
             awards,
             winnersMap,
             notice: req.query.notice || null,
@@ -114,11 +135,11 @@ app.post('/awards/:id/register', async (req, res) => {
     try {
         // Award must exist and deadline must not have passed
         const [[award]] = await db.query('SELECT * FROM awards WHERE id = ?', [award_id]);
-        if (!award) return res.redirect('/events#awards');
+        if (!award) return res.redirect('/awards');
 
         const today = new Date(); today.setHours(0, 0, 0, 0);
         if (new Date(award.deadline) < today) {
-            return res.redirect('/events?error=' + encodeURIComponent('The deadline for this award has passed.') + '#awards');
+            return res.redirect('/awards?error=' + encodeURIComponent('The deadline for this award has passed.'));
         }
 
         // Member ID must exist in members table OR accepted membership application
@@ -131,7 +152,7 @@ app.post('/awards/:id/register', async (req, res) => {
                 [memberId]
             );
             if (!inApps) {
-                return res.redirect('/events?error=' + encodeURIComponent('Member ID not found. Please check and try again.') + '#awards');
+                return res.redirect('/awards?error=' + encodeURIComponent('Member ID not found. Please check and try again.'));
             }
         }
 
@@ -141,7 +162,7 @@ app.post('/awards/:id/register', async (req, res) => {
             [award_id, memberId]
         );
         if (existing) {
-            return res.redirect('/events?error=' + encodeURIComponent('You have already registered for this award.') + '#awards');
+            return res.redirect('/awards?error=' + encodeURIComponent('You have already registered for this award.'));
         }
 
         await db.query(
@@ -149,10 +170,10 @@ app.post('/awards/:id/register', async (req, res) => {
             [award_id, memberId, full_name]
         );
 
-        res.redirect('/events?notice=' + encodeURIComponent(`Successfully registered for "${award.title}"!`) + '#awards');
+        res.redirect('/awards?notice=' + encodeURIComponent(`Successfully registered for "${award.title}"!`));
     } catch (err) {
         console.error(err);
-        res.redirect('/events?error=' + encodeURIComponent('Something went wrong. Please try again.') + '#awards');
+        res.redirect('/awards?error=' + encodeURIComponent('Something went wrong. Please try again.'));
     }
 });
 

@@ -1211,12 +1211,36 @@
 
 .award-card__result-person {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
+  align-items: center;
+  gap: 8px;
   padding: 3px 0;
   border-bottom: 1px solid #eee;
 }
 .award-card__result-person:last-child { border-bottom: none; }
+
+.award-card__result-avatar {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.award-card__result-avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #27247b, #96cdf6);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.award-card__result-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
 
 .award-card__result-name {
   font-size: 13px;
@@ -1452,6 +1476,208 @@
 .awards-grid--past .award-card:hover { opacity: 1; }
 
 /* ============================================================
+   WINNERS SHOWCASE (Featured Winners — podium panel + cards)
+   ============================================================ */
+
+.winners-panel {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #27247b 0%, #1a1856 100%);
+  border-radius: 20px;
+  margin: 0.5rem 60px 0;
+  padding: 3.5rem 2.5rem 2.75rem;
+}
+
+.winners-panel__shape {
+  position: absolute;
+  right: -90px;
+  top: -90px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.winners-panel__shape2 {
+  position: absolute;
+  left: -60px;
+  bottom: -110px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(255, 203, 5, 0.08);
+  pointer-events: none;
+}
+
+.winners-podium {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+}
+
+.winner-card {
+  position: relative;
+  flex: 1 1 230px;
+  max-width: 280px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem 1.75rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.winner-card--gold {
+  order: 2;
+  transform: translateY(-16px);
+  background: rgba(255, 203, 5, 0.1);
+  border-color: rgba(255, 203, 5, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+.winner-card--silver { order: 1; align-self: flex-end; }
+.winner-card--bronze { order: 3; align-self: flex-end; }
+.winner-card--neutral{ order: 4; }
+
+.winner-card__badge {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.winner-card--gold    .winner-card__badge { background: linear-gradient(135deg, #ffe08a, #ffcb05); color: #27247b; }
+.winner-card--silver  .winner-card__badge { background: linear-gradient(135deg, #f2f2f2, #cfcfcf); color: #333; }
+.winner-card--bronze  .winner-card__badge { background: linear-gradient(135deg, #e3a878, #b87333); color: #fff; }
+.winner-card--neutral .winner-card__badge { background: #fff; color: #27247b; }
+
+.winner-card__rank {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.winner-card--gold   .winner-card__rank { color: #ffcb05; }
+.winner-card--silver .winner-card__rank { color: #ececec; }
+.winner-card--bronze .winner-card__rank { color: #e3a878; }
+
+.winner-card__avatar {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 0.875rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.winner-card__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.winner-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.winner-card__hotel {
+  font-size: 0.825rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.runnerups {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.runnerups__label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 1rem;
+}
+
+.runnerups__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.runnerup-card {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 14px;
+  padding: 1.125rem 1.375rem;
+}
+
+.runnerup-card__avatar {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.runnerup-card__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.runnerup-card__name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.runnerup-card__hotel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.winners-empty {
+  padding: 0.5rem 100px 0;
+  color: #999;
+  font-size: 0.9375rem;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -1467,4 +1693,9 @@
   .flash                  { padding-left: 1.25rem; padding-right: 1.25rem; }
   .comp-overview          { grid-template-columns: 1fr; padding: 0 1.25rem 2rem; }
   .comp-card              { flex-direction: column; }
+  .winners-panel          { margin: 0.5rem 1.25rem 0; padding: 2.5rem 1.25rem 1.75rem; }
+  .winner-card            { max-width: none; }
+  .winner-card--gold, .winner-card--silver, .winner-card--bronze { align-self: stretch; transform: none; }
+  .runnerups__grid        { grid-template-columns: 1fr; }
+  .winners-empty          { padding: 0.5rem 1.25rem 0; }
 }

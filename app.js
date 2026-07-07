@@ -361,23 +361,30 @@ app.post('/enquiry', (req, res) => {
 });
 
 app.get('/contact', (req, res) => {
+    res.render('contactinfo', {
+        active: 'about',
+        subActive: 'contact'
+    });
+});
+
+app.get('/support', (req, res) => {
     res.render('contact', {
         active: 'about',
-        subActive: 'contact',
+        subActive: 'support',
         notice: req.query.notice || null,
         error: req.query.error || null,
         form: {}
     });
 });
 
-app.post('/contact', (req, res) => {
+app.post('/support', (req, res) => {
     const { full_name, email, phone, subject, message } = req.body;
     const form = { full_name, email, phone, subject, message };
 
     if (!full_name?.trim() || !email?.trim() || !message?.trim()) {
         return res.render('contact', {
             active: 'about',
-            subActive: 'contact',
+            subActive: 'support',
             error: 'Please provide your name, email address, and a message.',
             notice: null,
             form
@@ -385,7 +392,7 @@ app.post('/contact', (req, res) => {
     }
 
     const notice = 'Thanks! Your message has been received. We will respond shortly.';
-    res.redirect('/contact?notice=' + encodeURIComponent(notice));
+    res.redirect('/support?notice=' + encodeURIComponent(notice));
 });
 
 module.exports = app;

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <%- include('navbar', { active: 'about', subActive: 'contact' }) %>
+    <%- include('navbar', { active: 'about', subActive: (typeof subActive !== 'undefined' ? subActive : 'contact') }) %>
     <script src="/js/navbar.js"></script>
 
     <main>
@@ -59,7 +59,7 @@
                         <h2 class="form-heading">Send us a message</h2>
                         <p class="form-copy">We aim to respond within 1-2 business days.</p>
 
-                        <form action="/contact" method="POST" class="contact-form">
+                        <form action="/support" method="POST" class="contact-form">
                             <label for="full_name">Full Name</label>
                             <input id="full_name" name="full_name" type="text" value="<%= form?.full_name || '' %>" required>
 

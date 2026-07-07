@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDE | Contact Info</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+<body>
+
+    <%- include('navbar', { active: 'about', subActive: 'contact' }) %>
+    <script src="/js/navbar.js"></script>
+
+    <main>
+        <section class="banner-hero contact-hero">
+            <div class="hero-shape"></div>
+            <div class="hero-shape2"></div>
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">Contact ARDE</span>
+                    <h1 class="hero-heading">Connect with our community through email or social media.</h1>
+                    <p class="hero-sub">Stay updated with events, announcements, and member highlights from the ARDE community.</p>
+                    <a href="#socialChannels" class="btn-hero-primary">Explore Our Socials</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="section-container">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <span class="section-eyebrow">Contact Information</span>
+                        <h2 class="section-title">Reach out to the ARDE team</h2>
+                        <p class="section-subtitle">
+                            Whether you need support with membership, registration, or want to learn more about upcoming activities, our team is happy to help.
+                        </p>
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <span>Email</span>
+                                <strong><a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a></strong>
+                            </div>
+                            <div class="contact-detail">
+                                <span>Office</span>
+                                <strong>Association of Rooms Division Executives Singapore</strong>
+                            </div>
+                            <div class="contact-detail">
+                                <span>Preferred for general enquiries</span>
+                                <strong>Use email or connect through our social channels below.</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-card contact-social-card" id="socialChannels">
+                        <h2 class="form-heading">Follow us on social media</h2>
+                        <p class="form-copy">Keep up with ARDE news, events, and member stories across our channels.</p>
+
+                        <div class="social-links">
+                            <a href="https://x.com/AICRaustria" class="social-link" target="_blank" rel="noreferrer">
+                                <span class="social-icon-badge" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.6 8.6 0 0 1-2.72 1.04 4.28 4.28 0 0 0-7.3 3.9A12.15 12.15 0 0 1 3.15 4.6a4.27 4.27 0 0 0 1.33 5.71 4.24 4.24 0 0 1-1.94-.54v.05a4.28 4.28 0 0 0 3.43 4.19c-.44.12-.9.18-1.38.18-.34 0-.67-.03-.99-.1a4.29 4.29 0 0 0 4 2.98A8.58 8.58 0 0 1 2 19.54a12.1 12.1 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2v-.56A8.7 8.7 0 0 0 24 5.5a8.5 8.5 0 0 1-2.54.7z"/></svg>
+                                </span>
+                                <span class="social-link-content">
+                                    <strong>X / Twitter</strong>
+                                    <span>Follow for updates and announcements</span>
+                                </span>
+                            </a>
+                            <a href="https://www.instagram.com/aicrinternational/" class="social-link" target="_blank" rel="noreferrer">
+                                <span class="social-icon-badge" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16 11.37a4 4 0 1 1-4.37-4.37A4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="0.5"/></svg>
+                                </span>
+                                <span class="social-link-content">
+                                    <strong>Instagram</strong>
+                                    <span>See highlights from events and community moments</span>
+                                </span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/arde-singapore-92195a1a4/" class="social-link" target="_blank" rel="noreferrer">
+                                <span class="social-icon-badge" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.97V21h-4V9z"/></svg>
+                                </span>
+                                <span class="social-link-content">
+                                    <strong>LinkedIn</strong>
+                                    <span>Connect with professional updates and opportunities</span>
+                                </span>
+                            </a>
+                            <a href="/support" class="social-link">
+                                <span class="social-icon-badge" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+                                </span>
+                                <span class="social-link-content">
+                                    <strong>Contact</strong>
+                                    <span>Send us a message directly for enquiries</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
+</body>
+</html>

@@ -57,42 +57,60 @@
                 </div>
 
                 <div class="partners-grid">
-                    
-                    <!-- Republic Polytechnic -->
-                    <div class="partner-card">
-                        <div class="partner-logo-wrapper">
-                            <img src="/images/rp pic.gif" alt="Republic Polytechnic Logo">
+                    <% if (sponsors && sponsors.length > 0) { %>
+                        <% sponsors.forEach(sponsor => { %>
+                            <div class="partner-card">
+                                <% if (sponsor.logo_path) { %>
+                                    <div class="partner-logo-wrapper">
+                                        <img src="<%= sponsor.logo_path %>" alt="<%= sponsor.company_name %> Logo">
+                                    </div>
+                                <% } %>
+                                <h3><%= sponsor.company_name %></h3>
+                                <% if (sponsor.description) { %>
+                                    <p class="partner-description"><%= sponsor.description %></p>
+                                <% } %>
+                                <% if (sponsor.website) { %>
+                                    <a href="<%= sponsor.website %>" class="btn-partner-large" target="_blank" rel="noreferrer">Visit Website</a>
+                                <% } %>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div class="partner-card">
+                            <div class="partner-logo-wrapper">
+                                <img src="/images/rp pic.gif" alt="Republic Polytechnic Logo">
+                            </div>
+                            <h3>Republic Polytechnic (RP)</h3>
+                            <p class="partner-description">
+                                Collaboration on workshops and hospitality-related learning initiatives to support the 
+                                professional development of hospitality students and industry professionals.
+                            </p>
                         </div>
-                        <h3>Republic Polytechnic (RP)</h3>
-                        <p class="partner-description">
-                            Collaboration on workshops and hospitality-related learning initiatives to support the 
-                            professional development of hospitality students and industry professionals.
-                        </p>
-                    </div>
 
-                    <!-- Alcatel-Lucent -->
-                    <div class="partner-card">
-                        <div class="partner-logo-wrapper">
-                            <img src="/images/alcatel-lucent.webp" alt="Alcatel-Lucent Logo">
+                        <div class="partner-card">
+                            <div class="partner-logo-wrapper">
+                                <img src="/images/alcatel-lucent.webp" alt="Alcatel-Lucent Logo">
+                            </div>
+                            <h3>Alcatel-Lucent</h3>
+                            <p class="partner-description">
+                                Supporting online seminars and industry sharing sessions to keep hospitality professionals 
+                                informed on the latest communication technologies and industry trends.
+                            </p>
                         </div>
-                        <h3>Alcatel-Lucent</h3>
-                        <p class="partner-description">
-                            Supporting online seminars and industry sharing sessions to keep hospitality professionals 
-                            informed on the latest communication technologies and industry trends.
-                        </p>
-                    </div>
 
-                    <!-- SHATEC & RP -->
-                    <div class="partner-card">
-                        <div class="partner-logo-wrapper">
-                            <img src="/images/shatec.jpeg" alt="SHATEC Logo">
+                        <div class="partner-card">
+                            <div class="partner-logo-wrapper">
+                                <img src="/images/shatec.jpeg" alt="SHATEC Logo">
+                            </div>
+                            <h3>SHATEC &amp; Republic Polytechnic</h3>
+                            <p class="partner-description">
+                                Contributions and support for the Singapore Best Receptionist Competition (SBRC), 
+                                recognizing excellence in front-line hospitality services and professional standards.
+                            </p>
                         </div>
-                        <h3>SHATEC &amp; Republic Polytechnic</h3>
-                        <p class="partner-description">
-                            Contributions and support for the Singapore Best Receptionist Competition (SBRC), 
-                            recognizing excellence in front-line hospitality services and professional standards.
-                        </p>
-                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </section>
 
         <!-- BENEFITS OF PARTNERSHIP SECTION -->
         <section class="partnership-benefits-section">

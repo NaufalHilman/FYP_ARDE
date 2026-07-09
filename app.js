@@ -181,8 +181,24 @@ app.get('/about', (req, res) => {
     res.render('about', { active: 'about', subActive: 'about-us' });
 });
 
-app.get('/community', (req, res) => {
-    res.render('community', { active: 'about', subActive: 'community' });
+app.get('/community', async (req, res) => {
+    try {
+        const [entries] = await db.query('SELECT * FROM community_entries ORDER BY display_order ASC, created_at DESC');
+        const [images] = await db.query('SELECT * FROM community_images ORDER BY display_order ASC, id ASC');
+        const imagesByEntry = {};
+        images.forEach(image => {
+            if (!imagesByEntry[image.entry_id]) imagesByEntry[image.entry_id] = [];
+            imagesByEntry[image.entry_id].push(image);
+        });
+        const communityEntries = entries.map(entry => ({
+            ...entry,
+            images: imagesByEntry[entry.id] || []
+        }));
+        res.render('community', { active: 'about', subActive: 'community', communityEntries });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 //careers routes
@@ -328,8 +344,16 @@ app.get('/honorary', async (req, res) => {
 /* =====================================================
    SPONSORS & PARTNERS
 ===================================================== */
-app.get('/sponsors', (req, res) => {
-    res.render('sponsors', { active: 'about', subActive: 'sponsors' });
+app.get('/sponsors', async (req, res) => {
+    try {
+        const [sponsors] = await db.query(
+            "SELECT * FROM sponsors WHERE status = 'Active' ORDER BY created_at DESC"
+        );
+        res.render('sponsors', { active: 'about', subActive: 'sponsors', sponsors });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 app.get('/enquiry', (req, res) => {
@@ -360,11 +384,18 @@ app.post('/enquiry', (req, res) => {
     res.redirect('/enquiry?notice=' + encodeURIComponent(notice));
 });
 
-app.get('/contact', (req, res) => {
-    res.render('contactinfo', {
-        active: 'about',
-        subActive: 'contact'
-    });
+app.get('/contact', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM contact_settings ORDER BY id DESC LIMIT 1');
+        res.render('contactinfo', {
+            active: 'about',
+            subActive: 'contact',
+            settings: rows[0] || {}
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 app.get('/support', (req, res) => {

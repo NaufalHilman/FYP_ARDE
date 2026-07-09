@@ -22,6 +22,70 @@ app.set('views', [
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+async function ensureContactSettingsTable() {
+    try {
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS contact_settings (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                twitter_url VARCHAR(255) DEFAULT '',
+                instagram_url VARCHAR(255) DEFAULT '',
+                linkedin_url VARCHAR(255) DEFAULT '',
+                email_address VARCHAR(255) DEFAULT '',
+                phone_number VARCHAR(255) DEFAULT '',
+                address TEXT,
+                website_url VARCHAR(255) DEFAULT '',
+                map_url VARCHAR(255) DEFAULT '',
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            )
+        `);
+
+        const [columns] = await db.query(
+            "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'contact_settings'"
+        );
+        const existingColumns = new Set(columns.map(column => column.COLUMN_NAME));
+
+        const columnsToAdd = [
+            ['email_address', "VARCHAR(255) DEFAULT ''"],
+            ['phone_number', "VARCHAR(255) DEFAULT ''"],
+            ['address', 'TEXT'],
+            ['website_url', "VARCHAR(255) DEFAULT ''"],
+            ['map_url', "VARCHAR(255) DEFAULT ''"]
+        ];
+
+        for (const [columnName, columnDefinition] of columnsToAdd) {
+            if (!existingColumns.has(columnName)) {
+                await db.query(`ALTER TABLE contact_settings ADD COLUMN ${columnName} ${columnDefinition}`);
+            }
+        }
+
+        const [rows] = await db.query('SELECT COUNT(*) as count FROM contact_settings');
+        if (rows[0].count === 0) {
+            await db.query(
+                'INSERT INTO contact_settings (twitter_url, instagram_url, linkedin_url, email_address, phone_number, address, website_url, map_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                ['', '', '', '', '', '', '', '']
+            );
+        }
+    } catch (err) {
+        console.error('Error ensuring contact settings table:', err.message);
+    }
+}
+
+async function getContactSettings() {
+    const [rows] = await db.query('SELECT * FROM contact_settings ORDER BY id DESC LIMIT 1');
+    return rows[0] || {
+        twitter_url: '',
+        instagram_url: '',
+        linkedin_url: '',
+        email_address: '',
+        phone_number: '',
+        address: '',
+        website_url: '',
+        map_url: ''
+    };
+}
+
+ensureContactSettingsTable();
+
 // Routes
 app.get('/', (req, res) => {
     res.render('home', { active: 'home' });
@@ -386,11 +450,11 @@ app.post('/enquiry', (req, res) => {
 
 app.get('/contact', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM contact_settings ORDER BY id DESC LIMIT 1');
+        const settings = await getContactSettings();
         res.render('contactinfo', {
             active: 'about',
             subActive: 'contact',
-            settings: rows[0] || {}
+            settings
         });
     } catch (err) {
         console.error(err);
@@ -398,28 +462,55 @@ app.get('/contact', async (req, res) => {
     }
 });
 
-app.get('/support', (req, res) => {
-    res.render('contact', {
-        active: 'about',
-        subActive: 'support',
-        notice: req.query.notice || null,
-        error: req.query.error || null,
-        form: {}
-    });
+app.get('/support', async (req, res) => {
+    try {
+        const settings = await getContactSettings();
+        res.render('contact', {
+            active: 'about',
+            subActive: 'support',
+            notice: req.query.notice || null,
+            error: req.query.error || null,
+            form: {},
+            settings
+        });
+    } catch (err) {
+        console.error(err);
+        res.render('contact', {
+            active: 'about',
+            subActive: 'support',
+            notice: req.query.notice || null,
+            error: req.query.error || null,
+            form: {},
+            settings: {}
+        });
+    }
 });
 
-app.post('/support', (req, res) => {
+app.post('/support', async (req, res) => {
     const { full_name, email, phone, subject, message } = req.body;
     const form = { full_name, email, phone, subject, message };
 
     if (!full_name?.trim() || !email?.trim() || !message?.trim()) {
-        return res.render('contact', {
-            active: 'about',
-            subActive: 'support',
-            error: 'Please provide your name, email address, and a message.',
-            notice: null,
-            form
-        });
+        try {
+            const settings = await getContactSettings();
+            return res.render('contact', {
+                active: 'about',
+                subActive: 'support',
+                error: 'Please provide your name, email address, and a message.',
+                notice: null,
+                form,
+                settings
+            });
+        } catch (err) {
+            return res.render('contact', {
+                active: 'about',
+                subActive: 'support',
+                error: 'Please provide your name, email address, and a message.',
+                notice: null,
+                form,
+                settings: {}
+            });
+        }
     }
 
     const notice = 'Thanks! Your message has been received. We will respond shortly.';

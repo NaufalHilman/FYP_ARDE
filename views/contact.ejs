@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <%- include('navbar', { active: 'about', subActive: (typeof subActive !== 'undefined' ? subActive : 'contact') }) %>
+    <%- include('../components/navbar', { active: 'about', subActive: (typeof subActive !== 'undefined' ? subActive : 'contact') }) %>
     <script src="/js/navbar.js"></script>
 
     <main>
@@ -34,16 +34,20 @@
                         <span class="section-eyebrow">Contact Information</span>
                         <h2 class="section-title">Need help with registration?</h2>
                         <p class="section-subtitle">
-                            For the registration form or further information, please contact Raihan Abdullah at <a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a>.
+                            For the registration form or further information, please contact us at <a href="mailto:<%= settings.email_address || 'abdullaha.raihan@gmail.com' %>"><%= settings.email_address || 'abdullaha.raihan@gmail.com' %></a>.
                         </p>
                         <div class="contact-details">
                             <div class="contact-detail">
                                 <span>General enquiries</span>
-                                <strong><a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a></strong>
+                                <strong><a href="mailto:<%= settings.email_address || 'abdullaha.raihan@gmail.com' %>"><%= settings.email_address || 'abdullaha.raihan@gmail.com' %></a></strong>
                             </div>
                             <div class="contact-detail">
-                                <span>Office</span>
-                                <strong>Association of Rooms Division Executives Singapore</strong>
+                                <span>Address</span>
+                                <% if (settings.map_url) { %>
+                                    <strong><a href="<%= settings.map_url %>" target="_blank" rel="noreferrer"><%= settings.address || 'Association of Rooms Division Executives Singapore' %></a></strong>
+                                <% } else { %>
+                                    <strong><%= settings.address || 'Association of Rooms Division Executives Singapore' %></strong>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -84,6 +88,6 @@
 
     </main>
 
-    <%- include('footer') %>
+    <%- include('../components/footer') %>
 </body>
 </html>

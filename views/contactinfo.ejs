@@ -38,16 +38,28 @@
                         <div class="contact-details">
                             <div class="contact-detail">
                                 <span>Email</span>
-                                <strong><a href="mailto:abdullaha.raihan@gmail.com">abdullaha.raihan@gmail.com</a></strong>
+                                <strong><a href="mailto:<%= settings.email_address || 'abdullaha.raihan@gmail.com' %>"><%= settings.email_address || 'abdullaha.raihan@gmail.com' %></a></strong>
                             </div>
                             <div class="contact-detail">
-                                <span>Office</span>
-                                <strong>Association of Rooms Division Executives Singapore</strong>
+                                <span>Phone</span>
+                                <strong><%= settings.phone_number || '—' %></strong>
                             </div>
                             <div class="contact-detail">
-                                <span>Preferred for general enquiries</span>
-                                <strong>Use email or connect through our social channels below.</strong>
+                                <span>Address</span>
+                                <strong><%= settings.address || 'Association of Rooms Division Executives Singapore' %></strong>
                             </div>
+                            <% if (settings.website_url) { %>
+                                <div class="contact-detail">
+                                    <span>Website</span>
+                                    <strong><a href="<%= settings.website_url %>" target="_blank" rel="noreferrer"><%= settings.website_url %></a></strong>
+                                </div>
+                            <% } %>
+                            <% if (settings.map_url) { %>
+                                <div class="contact-detail">
+                                    <span>Map</span>
+                                    <strong><a href="<%= settings.map_url %>" target="_blank" rel="noreferrer">Open map location</a></strong>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
 

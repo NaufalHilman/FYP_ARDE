@@ -86,6 +86,30 @@ async function getContactSettings() {
 
 ensureContactSettingsTable();
 
+async function ensureEnquiriesTable() {
+    try {
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS enquiries (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                full_name VARCHAR(255) NOT NULL,
+                organization VARCHAR(255) DEFAULT '',
+                email VARCHAR(255) NOT NULL,
+                phone VARCHAR(100) DEFAULT '',
+                subject VARCHAR(255) DEFAULT '',
+                message TEXT NOT NULL,
+                source VARCHAR(100) DEFAULT 'support',
+                is_read TINYINT(1) DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+        console.log('Enquiries table ready (ARDE)');
+    } catch (err) {
+        console.error('Error ensuring enquiries table (ARDE):', err.message);
+    }
+}
+
+ensureEnquiriesTable();
+
 // Routes
 app.get('/', (req, res) => {
     res.render('home', { active: 'home' });
@@ -513,8 +537,30 @@ app.post('/support', async (req, res) => {
         }
     }
 
+    try {
+        await db.query(
+            'INSERT INTO enquiries (full_name, organization, email, phone, subject, message, source) VALUES (?, ?, ?, ?, ?, ?, ?)'
+            , [full_name, '', email, phone || '', subject || '', message, 'support']
+        );
+    } catch (err) {
+        console.error('Error saving support message:', err.message);
+        // proceed to redirect so user isn't blocked
+    }
+
     const notice = 'Thanks! Your message has been received. We will respond shortly.';
     res.redirect('/support?notice=' + encodeURIComponent(notice));
 });
 
 module.exports = app;
+
+// Debug route - only enabled when DEBUG_ENQUIRIES=1
+if (process.env.DEBUG_ENQUIRIES === '1') {
+    app.get('/_debug_enquiries', async (req, res) => {
+        try {
+            const [rows] = await db.query('SELECT * FROM enquiries ORDER BY created_at DESC LIMIT 50');
+            res.json({ count: rows.length, rows });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    });
+}

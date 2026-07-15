@@ -769,7 +769,7 @@
 
 .event-card--past {
   grid-template-columns: 1fr;
-  grid-template-rows: 140px auto;
+  grid-template-rows: 396px auto;   /* was 140px auto */
   width: 280px;
   height: auto;
   max-height: none;
@@ -778,7 +778,7 @@
 /* Photo area with dark overlay */
 .event-card--past .event-card__photo {
   position: relative;
-  height: 140px;
+  height: 396px;                    /* was 140px */;
   overflow: clip;
 }
 

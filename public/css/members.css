@@ -127,6 +127,18 @@
     color: #fff;
 }
 
+.member-tier-badge {
+    display: inline-block;
+    background: #27247B;
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
 .members-table tbody tr:hover {
     background: #fafaff;
 }

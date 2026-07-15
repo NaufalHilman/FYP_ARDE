@@ -337,12 +337,18 @@ app.get('/membership', (req, res) => {
 // membership application submit
 app.post('/membership/apply', async (req, res) => {
     const {
-        membership_type, title, full_name, nationality, nationality_other,
+        membership_type, membership_tier, title, full_name, nationality, nationality_other,
         date_of_birth, residential_address, personal_email, mobile_number,
         hotel_name, business_address, business_email, telephone_number,
         current_position, years_in_position, existing_member_id,
         opt_email_updates, opt_event_sms, opt_admin_responsibility, consent
     } = req.body;
+
+    // Server-side guard: tier must be one of the four public categories
+    const ALLOWED_TIERS = ['Ordinary', 'Associate', 'Junior', 'Corporate'];
+    if (!ALLOWED_TIERS.includes(membership_tier)) {
+        return res.status(400).send('Please select a valid membership category.');
+    }
 
     // If "Others" was picked, store the typed-in country instead
     const finalNationality = nationality === 'Others' ? nationality_other : nationality;
@@ -352,14 +358,14 @@ app.post('/membership/apply', async (req, res) => {
     try {
         await db.query(
             `INSERT INTO membership_applications
-              (membership_type, title, full_name, nationality, date_of_birth,
+              (membership_type, membership_tier, title, full_name, nationality, date_of_birth,
                residential_address, personal_email, mobile_number,
                hotel_name, business_address, business_email, telephone_number,
                current_position, years_in_position, existing_member_id,
                opt_email_updates, opt_event_sms, opt_admin_responsibility, consent)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-                membership_type, title, full_name, finalNationality, date_of_birth || null,
+                membership_type, membership_tier, title, full_name, finalNationality, date_of_birth || null,
                 residential_address, personal_email, mobile_number,
                 hotel_name, business_address, business_email, telephone_number,
                 current_position, years_in_position, existingId,

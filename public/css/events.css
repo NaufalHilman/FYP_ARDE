@@ -644,9 +644,9 @@
   flex-shrink: 0;
   scroll-snap-align: start;
   display: grid;
-  grid-template-columns: 230px 150px;
-  width: 380px;
-  max-width: 380px;
+  grid-template-columns: 230px 212px;   /* was 230px 150px */
+  width: 442px;                          /* was 380px  (230 + 212) */
+  max-width: 442px;                      /* was 380px */
   height: 300px;
   border-radius: 12px;
   overflow: clip;

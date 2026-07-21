@@ -15,7 +15,7 @@
         <% const managedEntries = typeof communityEntries !== 'undefined' ? communityEntries : []; %>
         <section class="community-hero">
             <div class="community-hero-overlay"></div>
-            <img src="<%= managedEntries[0] && managedEntries[0].images[0] ? managedEntries[0].images[0].image_path : '/images/committee/banner.jpg' %>" alt="ARDE community" class="community-hero-image">
+            <img src="/images/committee/banner.jpg" alt="ARDE community" class="community-hero-image">
             <div class="community-hero-content">
                 <p class="community-breadcrumb">Company / Our Community Says</p>
                 <h1>What Our Community Says</h1>
@@ -40,7 +40,6 @@
             </div>
         </section>
 
-        <% if (managedEntries.length > 0) { %>
         <section class="community-section community-stories">
             <div class="section-container">
                 <div class="section-heading">
@@ -49,7 +48,7 @@
                     <p>Explore the latest community highlights, stories, and updates managed by ARDE.</p>
                 </div>
 
-                <div class="community-entry-list">
+                <div class="community-stories-scroll" aria-label="Community stories">
                     <% managedEntries.forEach(entry => { %>
                     <article class="community-entry-card">
                         <% if (entry.images.length > 0) { %>
@@ -70,19 +69,6 @@
                         </div>
                     </article>
                     <% }) %>
-                </div>
-            </div>
-        </section>
-        <% } else { %>
-        <section class="community-section community-stories">
-            <div class="section-container">
-                <div class="section-heading">
-                    <span class="about-tag">COMMUNITY VOICES</span>
-                    <h2>Stories from the people who make ARDE special</h2>
-                    <p>From emerging leaders to seasoned professionals, our members value the network, recognition, and opportunities ARDE creates.</p>
-                </div>
-
-                <div class="community-grid">
                     <article class="community-card quote-card">
                         <p class="community-quote">“ARDE gave me a platform to connect with fellow professionals and grow beyond my own department. The relationships I built here continue to shape my career.”</p>
                         <div class="community-card-footer">
@@ -136,7 +122,6 @@
                 </div>
             </div>
         </section>
-        <% } %>
 
         <section class="community-section community-cta">
             <div class="section-container">

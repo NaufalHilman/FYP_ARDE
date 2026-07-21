@@ -158,17 +158,31 @@
     font-size: 0.95rem;
 }
 
-.community-entry-list {
-    display: grid;
-    gap: 28px;
+.community-stories-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 4px 4px 20px;
+    scroll-snap-type: x proximity;
+    scrollbar-color: var(--primary) #edf2ff;
 }
 
-.community-entry-card {
+.community-entry-card,
+.community-stories-scroll .community-card {
     background: #fff;
     border: 1px solid #edf2ff;
     border-radius: 24px;
-    overflow: hidden;
     box-shadow: 0 18px 45px rgba(39, 36, 123, 0.08);
+    flex: 0 0 min(360px, calc(100vw - 56px));
+    scroll-snap-align: start;
+}
+
+.community-entry-card {
+    overflow: hidden;
+}
+
+.community-stories-scroll .community-card {
+    padding: 28px;
 }
 
 .community-entry-gallery {

@@ -289,20 +289,62 @@
     .highlights-grid {
         grid-template-columns: 1fr;
     }
+
+    .community-entry-gallery {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 600px) {
     .community-section {
-        padding: 64px 16px;
+        padding: 48px 16px;
     }
 
     .community-hero-content {
-        padding: 64px 16px;
+        padding: 44px 16px;
+        text-align: center;
+    }
+
+    .community-hero h1 {
+        font-size: 2rem;
+    }
+
+    .community-hero-stats {
+        justify-content: center;
     }
 
     .community-card,
     .highlight-content-card,
     .cta-panel {
         padding: 24px;
+    }
+
+    .community-stories-scroll {
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+
+    .community-entry-card,
+    .community-stories-scroll .community-card {
+        flex-basis: calc(100vw - 32px);
+    }
+
+    .community-entry-gallery img,
+    .highlight-image-card img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 0;
+    }
+
+    .community-entry-content {
+        padding: 24px;
+    }
+
+    .cta-panel .btn-join-arde {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
     }
 }

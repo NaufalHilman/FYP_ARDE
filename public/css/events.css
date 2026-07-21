@@ -1699,3 +1699,139 @@
   .runnerups__grid        { grid-template-columns: 1fr; }
   .winners-empty          { padding: 0.5rem 1.25rem 0; }
 }
+
+@media (max-width: 900px) {
+  .awards-hero__inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  .featured-event__header,
+  .awards-section__header {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .featured-event__container {
+    margin-right: 32px;
+    margin-left: 32px;
+  }
+
+  .events-section__header {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .awards-grid,
+  .comp-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .events-hero .hero-image-wrap img {
+    height: 280px;
+  }
+
+  .awards-hero__inner {
+    gap: 24px;
+  }
+
+  .awards-hero__podium,
+  .runnerups__grid,
+  .awards-grid,
+  .comp-overview {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-hero__card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .featured-event {
+    padding: 40px 0;
+  }
+
+  .featured-event__header,
+  .events-section__header,
+  .awards-section__header,
+  .awards-section__header--left {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .featured-event__heading,
+  .events-section__title,
+  .awards-section__title {
+    font-size: 1.8rem;
+  }
+
+  .featured-event__container,
+  .winners-panel {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .featured-event__info {
+    padding: 24px 20px;
+  }
+
+  .featured-event__bottom-row,
+  .award-card__footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .featured-event__cta,
+  .award-card__btn {
+    width: 100%;
+    margin-left: 0;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  .featured-event__photo {
+    min-height: 220px;
+  }
+
+  .featured-event__img,
+  .award-card__img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .events-section,
+  .awards-section {
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .awards-grid,
+  .comp-overview {
+    gap: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .comp-card,
+  .award-card,
+  .winner-card,
+  .runnerup-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .comp-card {
+    padding: 24px 20px;
+  }
+
+  .section-tabs,
+  .filter-tabs {
+    overflow-x: auto;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

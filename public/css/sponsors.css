@@ -696,3 +696,470 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 900px), (max-device-width: 900px) {
+    .sponsors-hero-inner {
+        padding: 32px 20px;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .sponsors-intro-section,
+    .partners-section,
+    .partnership-benefits-section,
+    .partnership-tiers-section,
+    .sponsors-cta-section {
+        padding: 56px 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .sponsors-intro-container,
+    .partners-grid,
+    .benefits-grid,
+    .tiers-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        max-width: 100%;
+        gap: 28px;
+    }
+
+    .sponsors-intro-container {
+        grid-template-columns: 1fr !important;
+        gap: 32px;
+    }
+
+    .cta-container,
+    .partner-card,
+    .benefit-card,
+    .tier-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .cta-container {
+        padding: 30px 22px 22px;
+    }
+
+    .btn-partner-large {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .partner-card {
+        padding: 36px 24px;
+        max-width: 100%;
+    }
+
+    .partner-logo-wrapper {
+        width: 100%;
+        min-height: 170px;
+        height: auto;
+    }
+
+    .partner-logo-wrapper img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .partner-card h3 {
+        font-size: 1.45rem;
+    }
+
+    .partner-description {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+}
+
+@media (max-width: 600px) {
+    .sponsors-hero {
+        min-height: auto;
+        overflow-x: hidden;
+    }
+
+    .sponsors-hero-inner {
+        padding: 28px 16px 30px;
+        text-align: center;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .sponsors-hero-inner h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+
+    .sponsors-hero-inner .hero-desc {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .sponsors-hero .hero-shape {
+        top: -90px;
+        left: -100px;
+        width: 240px;
+        height: 240px;
+    }
+
+    .sponsors-hero .hero-shape2 {
+        left: auto;
+        right: -60px;
+        bottom: -80px;
+        width: 160px;
+        height: 160px;
+    }
+
+    .sponsors-intro-section,
+    .partners-section,
+    .partnership-benefits-section,
+    .partnership-tiers-section,
+    .sponsors-cta-section {
+        padding: 32px 16px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .sponsors-intro-container,
+    .partners-grid,
+    .benefits-grid,
+    .tiers-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        max-width: 100%;
+        gap: 22px;
+    }
+
+    .sponsors-intro-container {
+        gap: 28px;
+    }
+
+    .section-header,
+    .benefits-header,
+    .tiers-header {
+        margin-bottom: 28px;
+        padding: 0 4px;
+    }
+
+    .section-header h2,
+    .benefits-header h2,
+    .tiers-header h2,
+    .cta-inner h2 {
+        font-size: 1.55rem;
+    }
+
+    .cta-container,
+    .partner-card,
+    .benefit-card,
+    .tier-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 30px 20px;
+    }
+
+    .cta-container {
+        padding: 28px 20px 24px;
+    }
+
+    .btn-partner-large {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        min-height: 52px;
+        padding: 14px 20px;
+    }
+
+    .partners-grid {
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: 1fr !important;
+        gap: 22px;
+    }
+
+    .partner-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 34px 24px;
+    }
+
+    .partner-logo-wrapper {
+        width: 100%;
+        min-height: 180px;
+        margin-bottom: 18px;
+    }
+
+    .partner-logo-wrapper img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .partner-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 14px;
+    }
+
+    .partner-description {
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .benefits-grid,
+    .tiers-grid {
+        gap: 18px;
+    }
+
+    .benefit-card,
+    .tier-card {
+        padding: 28px 18px;
+    }
+
+    .tier-features li {
+        padding: 10px 0 10px 28px;
+    }
+
+    .tier-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .partners-container,
+    .benefits-container,
+    .tiers-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .sponsors-cta-section::before,
+    .sponsors-cta-section::after {
+        transform: scale(.7);
+    }
+}
+
+/* Strong mobile layout overrides for Sponsors page */
+@media (max-width: 900px) {
+    .sponsors-hero,
+    .sponsors-hero-inner,
+    .sponsors-intro-section,
+    .partners-section,
+    .partnership-benefits-section,
+    .partnership-tiers-section,
+    .sponsors-cta-section,
+    .partners-container,
+    .benefits-container,
+    .tiers-container,
+    .sponsors-intro-container,
+    .partners-grid,
+    .benefits-grid,
+    .tiers-grid,
+    .cta-container,
+    .partner-card,
+    .benefit-card,
+    .tier-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .sponsors-intro-container,
+    .partners-grid,
+    .benefits-grid,
+    .tiers-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+    }
+
+    .sponsors-hero-inner {
+        padding: 32px 20px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+
+    .sponsors-intro-section,
+    .partners-section,
+    .partnership-benefits-section,
+    .partnership-tiers-section,
+    .sponsors-cta-section {
+        padding: 56px 20px !important;
+    }
+
+    .partner-logo-wrapper {
+        width: 100% !important;
+        min-height: 170px !important;
+        height: auto !important;
+    }
+
+    .partner-logo-wrapper img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+
+    .btn-partner-large {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .sponsors-hero {
+        min-height: auto !important;
+        overflow-x: hidden !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .sponsors-hero-inner {
+        padding: 28px 16px 30px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+
+    .sponsors-hero-inner h1 {
+        font-size: 1.6rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .sponsors-hero-inner .hero-desc {
+        font-size: 0.95rem !important;
+        line-height: 1.8 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .sponsors-hero .hero-shape {
+        top: -90px !important;
+        left: -100px !important;
+        width: 240px !important;
+        height: 240px !important;
+    }
+
+    .sponsors-hero .hero-shape2 {
+        right: -60px !important;
+        bottom: -80px !important;
+        width: 160px !important;
+        height: 160px !important;
+    }
+
+    .sponsors-intro-section,
+    .partners-section,
+    .partnership-benefits-section,
+    .partnership-tiers-section,
+    .sponsors-cta-section {
+        padding: 32px 16px !important;
+    }
+
+    .sponsors-intro-container,
+    .partners-grid,
+    .benefits-grid,
+    .tiers-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 24px !important;
+    }
+
+    .sponsors-intro-container {
+        gap: 28px !important;
+    }
+
+    .cta-container,
+    .partner-card,
+    .benefit-card,
+    .tier-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 30px 18px !important;
+    }
+
+    .cta-container {
+        padding: 28px 18px 24px !important;
+    }
+
+    .btn-partner-large {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 52px !important;
+        padding: 14px 18px !important;
+    }
+
+    .partners-grid {
+        grid-template-columns: 1fr !important;
+        gap: 22px !important;
+    }
+
+    .partner-card {
+        margin: 0 auto !important;
+        padding: 34px 22px !important;
+    }
+
+    .partner-logo-wrapper {
+        width: 100% !important;
+        min-height: 180px !important;
+        margin-bottom: 18px !important;
+    }
+
+    .partner-logo-wrapper img {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+
+    .partner-card h3 {
+        font-size: 1.5rem !important;
+        margin-bottom: 14px !important;
+    }
+
+    .partner-description {
+        font-size: 1rem !important;
+        line-height: 1.8 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .benefits-grid,
+    .tiers-grid {
+        gap: 18px !important;
+    }
+
+    .benefit-card,
+    .tier-card {
+        padding: 28px 18px !important;
+    }
+
+    .tier-features li {
+        padding: 10px 0 10px 28px !important;
+    }
+
+    .tier-card {
+        width: 100% !important;
+    }
+
+    .partners-container,
+    .benefits-container,
+    .tiers-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+}

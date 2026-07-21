@@ -606,3 +606,110 @@
     padding: 7px 16px; border-radius: 6px;
 }
 .btn-back:hover { background: #27247B; color: #fff; }
+
+@media (max-width: 900px) {
+    .career-hero-inner,
+    .career-intro-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .career-hero-inner {
+        padding: 52px 32px;
+    }
+
+    .career-intro-inner,
+    .career-support-inner,
+    .career-jobs-inner {
+        padding: 0 32px;
+    }
+
+    .hero-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .support-grid,
+    .jobs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .career-hero-inner {
+        padding: 40px 16px;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero-desc {
+        font-size: .95rem;
+    }
+
+    .hero-cta,
+    .apply-btn {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 46px;
+        text-align: center;
+    }
+
+    .hero-cards,
+    .support-grid,
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .career-intro,
+    .career-support,
+    .career-jobs,
+    .job-detail-section,
+    .apply-section {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .career-intro-inner,
+    .career-support-inner,
+    .career-jobs-inner,
+    .job-detail-section {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .support-card,
+    .job-card,
+    .application-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .job-card-img img,
+    .job-detail-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+
+    .applicant-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .app-date {
+        width: 100%;
+        margin-left: 0;
+    }
+}

@@ -713,3 +713,88 @@
         margin-left: 0;
     }
 }
+
+/* =====================================================
+   CAREER DETAIL PAGE — MOBILE REFINEMENTS
+   (additive; desktop layout unchanged)
+===================================================== */
+
+/* Guard against horizontal overflow from long words/URLs in copy.
+   Safe on desktop: only affects wrapping of otherwise-unbreakable text. */
+.job-detail-description p,
+.apply-container > p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Keep media boxed inside their containers at every width. */
+.job-detail-img {
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    /* Consistent left/right padding matching the site's mobile gutter (16px). */
+    .apply-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* Hero/banner image scales without stretching or overflowing. */
+    .job-detail-img {
+        max-height: 240px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    /* Title + meta alignment and comfortable spacing. */
+    .job-detail-container h1 {
+        font-size: 24px;
+        line-height: 1.25;
+        word-break: break-word;
+    }
+
+    .job-detail-meta {
+        gap: 8px 16px;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+    }
+
+    /* Breathing room between the About and Apply sections. */
+    .job-detail-description h3 {
+        margin-bottom: 10px;
+    }
+
+    .apply-container h2 {
+        font-size: 22px;
+    }
+
+    .apply-container > p {
+        margin-bottom: 22px;
+    }
+
+    /* Form spacing + full-width, non-overflowing controls. */
+    .apply-form {
+        gap: 16px;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        max-width: 100%;
+    }
+
+    /* Resume/CV upload box stays aligned and inside the viewport. */
+    .file-upload-box {
+        padding: 22px 16px;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    /* Submit button spans full width, consistent with site button sizing. */
+    .apply-btn {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 48px;
+        text-align: center;
+    }
+}

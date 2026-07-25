@@ -69,19 +69,6 @@
                         </div>
                     </article>
                     <% }) %>
-                    <% const testimonialList = typeof testimonials !== 'undefined' ? testimonials : []; %>
-                    <% if (testimonialList.length === 0) { %>
-                    <p>No testimonials available.</p>
-                    <% } %>
-                    <% testimonialList.forEach(testimonial => { %>
-                    <article class="community-card quote-card">
-                        <p class="community-quote"><%= testimonial.quote %></p>
-                        <div class="community-card-footer">
-                            <strong><%= testimonial.name %></strong>
-                            <span><%= testimonial.role %></span>
-                        </div>
-                    </article>
-                    <% }) %>
                 </div>
             </div>
         </section>

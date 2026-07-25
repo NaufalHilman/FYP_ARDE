@@ -273,7 +273,6 @@ app.get('/community', async (req, res) => {
     try {
         const [entries] = await db.query('SELECT * FROM community_entries ORDER BY display_order ASC, created_at DESC');
         const [images] = await db.query('SELECT * FROM community_images ORDER BY display_order ASC, id ASC');
-        const [testimonials] = await db.query('SELECT * FROM testimonials ORDER BY display_order ASC, created_at DESC');
         const imagesByEntry = {};
         images.forEach(image => {
             if (!imagesByEntry[image.entry_id]) imagesByEntry[image.entry_id] = [];
@@ -283,7 +282,7 @@ app.get('/community', async (req, res) => {
             ...entry,
             images: imagesByEntry[entry.id] || []
         }));
-        res.render('community', { active: 'about', subActive: 'community', communityEntries, testimonials });
+        res.render('community', { active: 'about', subActive: 'community', communityEntries });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server Error');

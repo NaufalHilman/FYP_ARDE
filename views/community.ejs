@@ -69,29 +69,19 @@
                         </div>
                     </article>
                     <% }) %>
+                    <% const testimonialList = typeof testimonials !== 'undefined' ? testimonials : []; %>
+                    <% if (testimonialList.length === 0) { %>
+                    <p>No testimonials available.</p>
+                    <% } %>
+                    <% testimonialList.forEach(testimonial => { %>
                     <article class="community-card quote-card">
-                        <p class="community-quote">“ARDE gave me a platform to connect with fellow professionals and grow beyond my own department. The relationships I built here continue to shape my career.”</p>
+                        <p class="community-quote"><%= testimonial.quote %></p>
                         <div class="community-card-footer">
-                            <strong>Ms. Aisha Rahman</strong>
-                            <span>Front Office Supervisor</span>
+                            <strong><%= testimonial.name %></strong>
+                            <span><%= testimonial.role %></span>
                         </div>
                     </article>
-
-                    <article class="community-card quote-card">
-                        <p class="community-quote">“What I appreciate most is how ARDE brings together people who genuinely want to learn, support one another, and raise the standard of hospitality service.”</p>
-                        <div class="community-card-footer">
-                            <strong>Mr. Daniel Lim</strong>
-                            <span>Rooms Division Executive</span>
-                        </div>
-                    </article>
-
-                    <article class="community-card quote-card">
-                        <p class="community-quote">“The events and professional conversations have helped me build confidence, gain visibility, and expand my network in ways that feel both meaningful and lasting.”</p>
-                        <div class="community-card-footer">
-                            <strong>Ms. Charmaine Lee</strong>
-                            <span>Hospitality Operations Lead</span>
-                        </div>
-                    </article>
+                    <% }) %>
                 </div>
             </div>
         </section>
@@ -135,5 +125,6 @@
     </main>
 
     <%- include('../components/footer') %>
+    <script src="/js/community-slider.js"></script>
 </body>
 </html>

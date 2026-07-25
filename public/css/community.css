@@ -348,3 +348,53 @@
         text-align: center;
     }
 }
+
+/* Multi-image community gallery slider (added by community-slider.js).
+   Only applies once JS adds the --slider class; single-image galleries and
+   the no-JS fallback keep the original grid styling above. */
+.community-entry-gallery--slider {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.community-entry-gallery--slider .community-slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.community-entry-gallery--slider .community-slider-track img {
+    flex: 0 0 100%;
+    width: 100%;
+}
+
+.community-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--primary);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.community-slider-arrow:hover {
+    background: #fff;
+}
+
+.community-slider-prev {
+    left: 10px;
+}
+
+.community-slider-next {
+    right: 10px;
+}

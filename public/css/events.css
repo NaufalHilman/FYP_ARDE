@@ -1001,7 +1001,7 @@
 
 .award-card__img-wrap {
   position: relative;
-  height: 180px;
+  aspect-ratio: 280 / 396;   /* poster-style portrait, matches events past-gallery photos */
   overflow: clip;
 }
 
@@ -1849,8 +1849,7 @@
     min-height: 220px;
   }
 
-  .featured-event__img,
-  .award-card__img {
+  .featured-event__img {
     width: 100%;
     max-width: 100%;
     height: auto;

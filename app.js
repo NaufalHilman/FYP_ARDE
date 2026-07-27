@@ -189,13 +189,21 @@ app.post('/events/:id/register', async (req, res) => {
     const memberId = (member_id || '').trim().padStart(5, '0');
 
     try {
-        // The ID must belong to an accepted member
-        const [members] = await db.query(
-            "SELECT member_id FROM membership_applications WHERE member_id = ? AND status = 'accepted'",
+        // The ID must belong to a member in the members table OR an accepted application
+        const [[inMembers]] = await db.query(
+            'SELECT id FROM members WHERE member_id = ?',
             [memberId]
         );
+        let isValidMember = !!inMembers;
+        if (!isValidMember) {
+            const [[inApps]] = await db.query(
+                "SELECT id FROM membership_applications WHERE member_id = ? AND status = 'accepted'",
+                [memberId]
+            );
+            isValidMember = !!inApps;
+        }
 
-        if (members.length === 0) {
+        if (!isValidMember) {
             const [[event]] = await db.query('SELECT * FROM events WHERE id = ?', [event_id]);
             return res.status(400).render('event-detail', {
                 event,
